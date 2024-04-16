@@ -17,7 +17,7 @@ const Callback = () => {
     if (response.isRegistered) {
       router.push('/')
     } else {
-      router.push('/register')
+      router.push('/signup')
     }
   }
   const handleError = (error: AxiosError) => {
@@ -35,7 +35,7 @@ const Callback = () => {
       )
     }
   }, [])
-  return <div>처리중입니다.</div>
+  return <></>
 }
 
 export default Callback
