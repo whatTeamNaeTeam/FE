@@ -1,6 +1,6 @@
 'use client'
 
-import Button from '@/_components/Button'
+import Button from '@/_components/ui/Button'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
