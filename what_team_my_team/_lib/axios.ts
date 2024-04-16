@@ -8,11 +8,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   function (config) {
-    // config.headers['from'] = 'web'
-    // if (config.headers['count']) {
-    //   return
-    // }
-    // config.headers['count'] = '1'
+    config.headers['X-from'] = 'web'
     config.withCredentials = true
     return config
   },
