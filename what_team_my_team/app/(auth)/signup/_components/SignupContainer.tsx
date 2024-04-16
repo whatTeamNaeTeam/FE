@@ -3,9 +3,9 @@
 import AuthFormInput from '@/_components/AuthFormInput'
 import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import SubmitBtn from './SubmitBtn'
 import useSignup from '@/_services/mutations/useSignup'
 import SignupModal from '@/_components/SignupModal'
+import Button from '@/_components/ui/Button'
 
 interface FormValueType {
   studentNum: string
@@ -57,7 +57,7 @@ const SignupContainer = () => {
           maxLength={9}
           errors={errors}
         />
-        <SubmitBtn />
+        <Button type="submit">확인 완료</Button>
       </form>
       {isModalOpen && (
         <SignupModal open={isModalOpen} setOpen={setIsModalOpen} />
