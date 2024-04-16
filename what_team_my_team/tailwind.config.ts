@@ -34,6 +34,58 @@ const config: Config = {
         lime: generateColorShades('lime', 10),
         yellow: generateColorShades('yellow', 10),
         orange: generateColorShades('orange', 10),
+        dialog: 'var(--dialog-overlay)',
+      },
+      keyframes: {
+        overlayShow: {
+          from: {
+            opacity: '0',
+          },
+          to: {
+            opacity: '1',
+          },
+        },
+        contentShow: {
+          from: {
+            opacity: '0',
+            transform: 'translate(-50%, -48%) scale(0.96)',
+          },
+          to: {
+            opacity: '1',
+            transform: 'translate(-50%, -50%) scale(1)',
+          },
+        },
+        loaderDots1: {
+          '0%': {
+            transform: 'scale(0)',
+          },
+          '100%': {
+            transform: 'scale(1)',
+          },
+        },
+        loaderDots2: {
+          '0%': {
+            transform: 'translate(0,0)',
+          },
+          '100%': {
+            transform: 'translate(24px,0)',
+          },
+        },
+        loaderDots3: {
+          '0%': {
+            transform: 'scale(1)',
+          },
+          '100%': {
+            transform: 'scale(0)',
+          },
+        },
+      },
+      animation: {
+        overlay: 'overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+        content: 'contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+        loaderDot1: 'loaderDot1 0.6s infinite',
+        loaderDot2: 'loaderDot2 0.6s infinite',
+        loaderDot3: 'loaderDot3 0.6s infinite',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
