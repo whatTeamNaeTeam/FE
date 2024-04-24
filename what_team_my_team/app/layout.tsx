@@ -1,3 +1,4 @@
+import JotaiProvider from '@/_lib/JotaiProvider'
 import Providers from '@/_lib/Provider'
 import '@/styles/global.css'
 
@@ -9,7 +10,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Providers>
-        <body>{children}</body>
+        <JotaiProvider>
+          <body>{children}</body>
+        </JotaiProvider>
       </Providers>
     </html>
   )
