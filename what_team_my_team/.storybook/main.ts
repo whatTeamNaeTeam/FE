@@ -5,7 +5,11 @@ const config: StorybookConfig = {
   stories: [
     '../stories/**/*.mdx',
     '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    // '../app/**/*.stories.tsx'
   ],
+  features:{
+    experimentalRSC: true,
+  },
   addons: [
     '@storybook/addon-onboarding',
     '@storybook/addon-links',
