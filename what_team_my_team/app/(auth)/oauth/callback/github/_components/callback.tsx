@@ -14,7 +14,7 @@ const Callback = () => {
   const { mutate } = useSocialLogin()
 
   const handleSuccess = (response: SocialLoginApiResponse) => {
-    if (response.isRegistered) {
+    if (response.registered) {
       router.push('/')
     } else {
       router.push('/signup')
