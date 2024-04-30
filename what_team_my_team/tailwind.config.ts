@@ -55,6 +55,7 @@ const config: Config = {
             transform: 'translate(-50%, -50%) scale(1)',
           },
         },
+        // wait loader
         loaderDots1: {
           '0%': {
             transform: 'scale(0)',
@@ -79,19 +80,30 @@ const config: Config = {
             transform: 'scale(0)',
           },
         },
-      },
-      // Dropdown menu
-      'scale-in': {
-        '0%': { opacity: 0, transform: 'scale(0)' },
-        '100%': { opacity: 1, transform: 'scale(1)' },
-      },
-      'slide-down': {
-        '0%': { opacity: 0, transform: 'translateY(-10px)' },
-        '100%': { opacity: 1, transform: 'translateY(0)' },
-      },
-      'slide-up': {
-        '0%': { opacity: 0, transform: 'translateY(10px)' },
-        '100%': { opacity: 1, transform: 'translateY(0)' },
+        // Dropdown menu
+        'scale-in': {
+          '0%': { opacity: '0', transform: 'scale(0)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        'slide-down': {
+          '0%': { opacity: '0', transform: 'translateY(-10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'slide-up': {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        // accordion
+        'accordion-slide-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+          // to: { height: '48px' },
+        },
+        'accordion-slide-up': {
+          // from: { height: '48px' },
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
+        },
       },
       animation: {
         // loading modal
@@ -104,6 +116,11 @@ const config: Config = {
         'scale-in': 'scale-in 0.2s ease-in-out',
         'slide-down': 'slide-down 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
         'slide-up': 'slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+        // accordion
+        'accordion-slide-down':
+          'accordion-slide-down 300ms cubic-bezier(0.87, 0, 0.13, 1)',
+        'accordion-slide-up':
+          'accordion-slide-up 300ms cubic-bezier(0.87, 0, 0.13, 1)',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
