@@ -6,7 +6,13 @@ interface SocialLoginVariablesType {
   code: string
 }
 export interface SocialLoginApiResponse {
-  isRegistered: boolean
+  registered: boolean
+  user: {
+    id: number
+    image: string
+    name: string
+    student_num: number
+  }
 }
 
 const socialLoginApi = (data: string) => {
