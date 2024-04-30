@@ -1,3 +1,4 @@
+import { MswComponent } from '@/_components/MSWComponents'
 import JotaiProvider from '@/_lib/JotaiProvider'
 import Providers from '@/_lib/Provider'
 import '@/styles/global.css'
@@ -9,6 +10,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <MswComponent />
       <Providers>
         <JotaiProvider>
           <body>{children}</body>
