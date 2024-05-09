@@ -2,7 +2,7 @@ import axiosInstance from '@/_lib/axios'
 import { getDate } from '@/_lib/day'
 import { useQuery } from '@tanstack/react-query'
 
-interface AssignMember {
+export interface AssignMember {
   name: string
   student_num: string
   id: number
@@ -30,7 +30,7 @@ const useAssignMemberList = () => {
     SelectedAssignMember[]
   >({
     queryFn: associateMemberListApi,
-    queryKey: ['associateMember'],
+    queryKey: ['assignMember'],
     select: (data) => {
       const selectedData: SelectedAssignMember[] = []
 
