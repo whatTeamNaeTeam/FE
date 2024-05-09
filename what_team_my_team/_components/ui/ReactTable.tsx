@@ -80,6 +80,13 @@ const ReactTable = <T extends TableType>({ table, footer }: TableProps<T>) => {
         ))}
       </thead>
       <tbody>
+        {table.getRowModel().rows.length === 0 && (
+          <tr>
+            <th colSpan={table.getCenterLeafColumns().length} align="center">
+              <div className="py-40">더이상 불러올 데이터가 없습니다.</div>
+            </th>
+          </tr>
+        )}
         {table.getRowModel().rows.map((row) => (
           <tr key={row.id} className="h-12 hover:bg-gray-2">
             {row.getVisibleCells().map((cell) => (
