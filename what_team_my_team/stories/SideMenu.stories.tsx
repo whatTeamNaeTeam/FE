@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import SideMenu from '@/app/(admin)/(user)/user/_components/SideMenu'
+import AdminSideMenu from '@/_components/AdminSideMenu'
 
 const meta = {
   title: 'Components/SideMenu',
-  component: SideMenu,
-} satisfies Meta<typeof SideMenu>
+  component: AdminSideMenu,
+} satisfies Meta<typeof AdminSideMenu>
 
 export default meta
 
