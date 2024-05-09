@@ -22,8 +22,7 @@ export const getDiff = (date: string) => {
 }
 
 export const getDate = (date: string) => {
-  const dateAfter = dayjs(date).format('YYYY/MM/DD')
-  console.log(dateAfter)
+  const dateAfter = dayjs(date).format('YYYY-MM-DD')
 
   return dateAfter
 }

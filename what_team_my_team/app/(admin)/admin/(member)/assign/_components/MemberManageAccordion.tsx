@@ -18,7 +18,7 @@ const memberManageAccordionItem = [
     header: '멤버 관리',
     contents: [
       { key: 'assign', content: '멤버 승인' },
-      { key: 'list', content: '멤버 목록' },
+      { key: 'entire', content: '멤버 목록' },
     ],
   },
 ]

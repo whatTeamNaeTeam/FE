@@ -6,7 +6,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/_components/ui/Dropdown'
+} from '@/_components/ui/DropdownMenu'
 import { Control, useController } from 'react-hook-form'
 import { TeamAddFormValueType } from './FormContainer'
 import { SetStateAction } from 'jotai'

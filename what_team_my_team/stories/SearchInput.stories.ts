@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import AdminSideMenu from '@/_components/AdminSideMenu'
+import SearchInput from '@/_components/SearchInput'
 
 const meta = {
-  title: 'Components/SideMenu',
-  component: AdminSideMenu,
-} satisfies Meta<typeof AdminSideMenu>
+  title: 'Components/SearchInput',
+  component: SearchInput,
+} satisfies Meta<typeof SearchInput>
 
 export default meta
 

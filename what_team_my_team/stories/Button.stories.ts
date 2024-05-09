@@ -5,10 +5,6 @@ import Button from '@/_components/ui/Button'
 const meta = {
   title: 'Example/Button',
   component: Button,
-  parameters: {
-    layout: 'centered',
-  },
-  tags: ['autodocs'],
   args: { onClick: fn() },
 } satisfies Meta<typeof Button>
 

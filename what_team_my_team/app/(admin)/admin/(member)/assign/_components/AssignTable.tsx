@@ -1,101 +1,57 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from '@tanstack/react-table'
-import { FaSort, FaSortDown, FaSortUp } from 'react-icons/fa'
-import { AssignData } from './TableContainer'
+import React from 'react'
+import { ReactTable } from '@/_components/ui/ReactTable'
+import useTable from '@/_hook/useTable'
+import { TableCell } from '@/_components/ui/ReactTable'
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
+import { AssignData } from '@/_types/table'
+import AssignCell from './AssignCell'
+import { SelectedAssignMember } from '@/_services/queries/useAssignMemberList'
 
-interface ReactTableProps<T> {
-  tableData: T[]
-  columns: ColumnDef<T, unknown>[]
+interface AssignTableProps {
+  data: SelectedAssignMember[]
 }
 
-const AssignTable = ({ tableData, columns }: ReactTableProps<AssignData>) => {
-  const [data, setData] = useState<AssignData[]>(() => [...tableData])
+const columnHelper = createColumnHelper<AssignData>()
 
-  useEffect(() => {
-    setData(tableData)
-  }, [tableData])
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const assignTableColumns: ColumnDef<AssignData, any>[] = [
+  columnHelper.accessor('name', {
+    header: '이름',
+    cell: TableCell,
+    size: 100,
+  }),
+  columnHelper.accessor('studentNum', {
+    header: '학번',
+    cell: TableCell,
+    size: 100,
+  }),
+  columnHelper.accessor('createdAt', {
+    header: '신청날짜',
+    cell: TableCell,
+    size: 100,
+  }),
+  columnHelper.accessor('id', {
+    header: '',
+    cell: AssignCell,
+    enableSorting: false,
+    size: 120,
+  }),
+]
 
-  const table = useReactTable({
-    columns,
-    data,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    debugTable: true,
-    meta: {
-      removeRow: (rowIndex: number) => {
-        const setFilterFunc = (old: AssignData[]) =>
-          old.filter((_row: AssignData, index: number) => index !== rowIndex)
-        setData(setFilterFunc)
-      },
-    },
+const AssignTable = ({ data }: AssignTableProps) => {
+  const table = useTable({
+    columns: assignTableColumns,
+    tableData: data,
   })
 
   return (
-    <div className="w-full p-10 bg-white border-gray-6 shadow-md">
+    <div className="w-full p-4 bg-white border-gray-6 shadow-md">
       <span>
         대기인원 <span className="text-indigo-4">{data.length ?? 0}</span>명
       </span>
-      <table className="w-full">
-        <thead className="h-12 border-b-2">
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th
-                  key={header.id}
-                  style={{
-                    width: header.getSize(),
-                    cursor: header.column.getCanSort() ? 'pointer' : 'default',
-                  }}
-                  onClick={header.column.getToggleSortingHandler()}
-                  className="text-gray-6"
-                >
-                  <div className="flex justify-center items-center gap-2">
-                    {header.isPlaceholder ? null : (
-                      <div>
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
-                      </div>
-                    )}
-                    <div className="items-center">
-                      {
-                        {
-                          asc: <FaSortUp />,
-                          desc: <FaSortDown />,
-                        }[(header.column.getIsSorted() as string) ?? null]
-                      }
-                      {header.column.getCanSort() &&
-                      !header.column.getIsSorted() ? (
-                        <FaSort />
-                      ) : null}
-                    </div>
-                  </div>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="h-12 hover:bg-gray-2">
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="text-center">
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ReactTable table={table} />
     </div>
   )
 }
