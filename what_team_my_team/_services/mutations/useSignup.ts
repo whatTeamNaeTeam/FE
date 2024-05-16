@@ -20,7 +20,7 @@ const signup = (data: SignupVariables) => {
     student_num: data.studentNum,
     name: data.name,
   }
-  console.log(body)
+
   const response = axiosInstance
     .post<SignupResponse>('/auth/github/finish', body)
     .then(({ data }) => data)
