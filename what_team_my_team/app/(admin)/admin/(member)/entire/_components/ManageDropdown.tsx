@@ -21,7 +21,7 @@ import useDeleteMember from '@/_services/mutations/useDeleteMember'
 import useEntireMemberList from '@/_services/queries/useEntireMemberList'
 
 interface ManageDropdownProps {
-  userId: string
+  userId: number
 }
 
 const ManageDropdown = ({ userId }: ManageDropdownProps) => {
