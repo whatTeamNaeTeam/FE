@@ -13,6 +13,7 @@ axiosInstance.interceptors.request.use(
   function (config) {
     config.headers['X-from'] = 'web'
     config.withCredentials = true
+
     return config
   },
   function (error) {
