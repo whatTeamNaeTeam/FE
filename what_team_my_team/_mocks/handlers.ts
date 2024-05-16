@@ -1,5 +1,5 @@
 import { HttpResponse, http } from 'msw'
-import { AssignData, EntireData } from './datas'
+import { AssignData, EntireData, ProfileData } from './datas'
 
 export const handlers = [
   http.get(`*/admin/user/manage`, () => {
@@ -16,5 +16,8 @@ export const handlers = [
   }),
   http.delete(`*/admin/user/list`, () => {
     return HttpResponse.json({ success: true })
+  }),
+  http.get(`*/user/profile/*`, () => {
+    return HttpResponse.json(ProfileData)
   }),
 ]
