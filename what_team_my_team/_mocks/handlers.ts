@@ -1,5 +1,11 @@
 import { HttpResponse, http } from 'msw'
-import { AssignData, EntireData, ProfileData } from './datas'
+import {
+  ApplyResponseData,
+  AssignData,
+  EntireData,
+  ProfileData,
+  ProjectDetailData,
+} from './datas'
 
 export const handlers = [
   http.get(`*/admin/user/manage`, () => {
@@ -19,5 +25,11 @@ export const handlers = [
   }),
   http.get(`*/user/profile/*`, () => {
     return HttpResponse.json(ProfileData)
+  }),
+  http.get(`*/team/detail/*`, () => {
+    return HttpResponse.json(ProjectDetailData)
+  }),
+  http.post(`*/team/apply/*`, () => {
+    return HttpResponse.json(ApplyResponseData)
   }),
 ]
