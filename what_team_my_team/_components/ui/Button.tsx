@@ -6,24 +6,21 @@ import { cn } from '@/_lib/utils'
 
 const ButtonVariants = cva(
   `
-  flex items-center justify-center py-2 px-4 rounded-md
+  inline-flex items-center justify-center py-2 px-4 rounded-md
 `,
   {
     variants: {
       variant: {
-        default: 'bg-indigo-4 text-white hover:bg-indigo-8',
+        primary:
+          'bg-indigo-4 text-white hover:bg-indigo-8 disabled:bg-indigo-4 disabled:opacity-30',
         lined:
-          'bg-white text-indigo-4 border border-indigo-4 hover:bg-indigo-0 border-indigo-8 text-indigo-8',
-        filledDisabled:
-          'bg-indigo-4 text-white opacity-30 hover:cursor-not-allowed',
-        linedDisabled:
-          'bg-white text-indigo-4 border border-indigo-4 opacity-30 hover:cursor-not-allowed',
+          'bg-white text-indigo-4 border border-indigo-4 hover:bg-indigo-0 border-indigo-8 text-indigo-8 disabled:opacity-30',
       },
       size: {
-        default: 'py-2 px-4',
-        sm: 'py-1 px-2',
-        lg: 'py-4 px-8',
-        full: 'w-full',
+        default: 'px-4 text-base h-[32px]',
+        sm: 'px-2 text-sm h-[24px]',
+        lg: 'px-8 text-lg',
+        full: 'w-full text-lg',
         icon: 'h-10 w-10',
       },
       weight: {
@@ -33,7 +30,7 @@ const ButtonVariants = cva(
       },
     },
     defaultVariants: {
-      variant: 'default',
+      variant: 'primary',
       size: 'default',
       weight: 'normal',
     },
@@ -53,7 +50,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <Comp
-        className={cn(ButtonVariants({ variant, size, weight }), className)}
+        className={cn(ButtonVariants({ variant, size, weight }), className, '')}
         ref={ref}
         {...props}
       />

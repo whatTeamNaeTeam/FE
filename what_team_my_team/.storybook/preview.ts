@@ -4,13 +4,6 @@ import '../styles/global.css'
 import Layout from '../app/layout'
 
 const preview: Preview = {
-  decorators:[
-    (Story) => {
-      return React.createElement(Layout,{
-        children:React.createElement(Story)
-      })
-    }
-  ],
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
@@ -24,5 +17,13 @@ const preview: Preview = {
     },
   },
 }
+
+// export const decorators = [
+//   (Story) => {
+//     return React.createElement(Layout,{
+//       children:React.createElement(Story)
+//     })
+//   }
+// ]
 
 export default preview

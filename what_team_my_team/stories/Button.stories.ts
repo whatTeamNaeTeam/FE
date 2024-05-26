@@ -3,9 +3,32 @@ import { fn } from '@storybook/test'
 import Button from '@/_components/ui/Button'
 
 const meta = {
-  title: 'Example/Button',
+  title: 'Components/Ui/Button',
   component: Button,
-  args: { onClick: fn() },
+  tags: ['autodocs'],
+  parameters: { layout: 'padded' },
+  args: { onClick: fn(), children: 'Button' },
+
+  argTypes: {
+    disabled: {
+      control: 'boolean',
+      description: 'Disable the button',
+      defaultValue: false,
+    },
+    variant: {
+      control: 'select',
+      options: ['primary', 'lined'],
+      defaultValue: 'primary',
+    },
+    size: {
+      control: 'select',
+      options: ['default', 'sm', 'lg', 'full', 'icon'],
+    },
+    children: {
+      defaultValue: 'Button',
+      description: '버튼 안의 내용',
+    },
+  },
 } satisfies Meta<typeof Button>
 
 export default meta
@@ -14,45 +37,12 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
-    variant: 'default',
-    size: 'default',
-    weight: 'bold',
-    children: '버튼입니다',
+    variant: 'primary',
   },
 }
 
-export const Secondary: Story = {
+export const Lined: Story = {
   args: {
     variant: 'lined',
-    size: 'default',
-    weight: 'bold',
-    children: '버튼입니다',
-  },
-}
-
-export const Third: Story = {
-  args: {
-    variant: 'filledDisabled',
-    size: 'default',
-    weight: 'bold',
-    children: '버튼입니다',
-  },
-}
-
-export const LinedDisabled: Story = {
-  args: {
-    variant: 'linedDisabled',
-    size: 'default',
-    weight: 'bold',
-    children: '버튼입니다',
-  },
-}
-
-export const IconBtn: Story = {
-  args: {
-    variant: 'default',
-    size: 'icon',
-    weight: 'bold',
-    children: '버튼입니다',
   },
 }
