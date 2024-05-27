@@ -17,7 +17,7 @@ const ButtonVariants = cva(
           'bg-white text-indigo-4 border border-indigo-4 hover:bg-indigo-0 border-indigo-8 text-indigo-8 disabled:opacity-30',
       },
       size: {
-        default: 'px-4 text-base h-[32px]',
+        default: 'px-4 text-base h-[36px]',
         sm: 'px-2 text-sm h-[24px]',
         lg: 'px-8 text-lg',
         full: 'w-full text-lg',
