@@ -8,6 +8,7 @@ import {
   REGISTER_FIELD_NAMES,
   UserRegisterFormValueType,
 } from './SignupContainer'
+import { FaCheckCircle } from 'react-icons/fa'
 
 interface ValidCodeInputProps {
   control: Control<UserRegisterFormValueType>
@@ -41,7 +42,9 @@ const ValidCodeInput = ({
           field={field}
           placeholder="인증코드 6자리를 압력해주세요."
           disabled={isValidChecked}
-        />
+        >
+          {isValidChecked && <FaCheckCircle className="text-green-6" />}
+        </AuthFormInput>
         <Button
           type="button"
           size={'sm'}
