@@ -8,9 +8,9 @@ interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   field: ControllerRenderProps<UserRegisterFormValueType>
 }
 
-const AuthFormInput = ({ field, ...props }: FormInputProps) => {
+const AuthFormInput = ({ field, children, ...props }: FormInputProps) => {
   return (
-    <div className="flex justify-between p-2 border focus-within:border-gray-6 rounded-md w-60">
+    <div className="flex justify-between items-center p-2 border focus-within:border-gray-6 rounded-md w-60">
       <input
         value={field.value}
         onChange={field.onChange}
@@ -18,6 +18,7 @@ const AuthFormInput = ({ field, ...props }: FormInputProps) => {
         className="w-full text-sm outline-none disabled:bg-inherit disabled:text-gray-6"
         {...props}
       />
+      {children}
     </div>
   )
 }
