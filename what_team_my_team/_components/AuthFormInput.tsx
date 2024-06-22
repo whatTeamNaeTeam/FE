@@ -1,32 +1,23 @@
+'use client'
+
+import { UserRegisterFormValueType } from '@/app/(auth)/signup/_components/SignupContainer'
 import React from 'react'
-import { FieldErrors, UseFormRegisterReturn } from 'react-hook-form'
+import { ControllerRenderProps } from 'react-hook-form'
 
 interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  type: string
-  id: string
-  label: string
-  register: UseFormRegisterReturn
-  errors: FieldErrors
+  field: ControllerRenderProps<UserRegisterFormValueType>
 }
 
-const AuthFormInput = ({
-  id,
-  label,
-  register,
-  errors,
-  ...props
-}: FormInputProps) => {
+const AuthFormInput = ({ field, ...props }: FormInputProps) => {
   return (
-    <div className="flex flex-col w-full mb-4">
-      <label htmlFor={id} className="text-sm mb-2 font-bold">
-        {label}
-      </label>
-      <div className="w-full p-2 border focus-within:border-gray-6 rounded-md mb-2">
-        <input id={id} {...register} className="outline-none" {...props} />
-      </div>
-      {errors[id]?.message && (
-        <p className="text-red-8 text-sm">{`${errors[id]?.message}`}</p>
-      )}
+    <div className="flex justify-between p-2 border focus-within:border-gray-6 rounded-md w-60">
+      <input
+        value={field.value}
+        onChange={field.onChange}
+        ref={field.ref}
+        className="w-full text-sm outline-none disabled:bg-inherit disabled:text-gray-6"
+        {...props}
+      />
     </div>
   )
 }
