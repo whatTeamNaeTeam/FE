@@ -32,4 +32,10 @@ export const handlers = [
   http.post(`*/team/apply/*`, () => {
     return HttpResponse.json(ApplyResponseData)
   }),
+  http.post(`*/auth/email`, () => {
+    return HttpResponse.json({ detail: 'Success to Send Email' })
+  }),
+  http.patch(`*/auth/email`, () => {
+    return HttpResponse.json({ detail: 'Success to Send Email' })
+  }),
 ]
