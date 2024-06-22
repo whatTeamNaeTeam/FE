@@ -13,12 +13,16 @@ interface SignupResponse {
 interface SignupVariables {
   studentNum: string
   name: string
+  email: string
+  validCode: string
 }
 
 const signup = (data: SignupVariables) => {
   const body = {
     student_num: data.studentNum,
     name: data.name,
+    email: data.email,
+    code: data.validCode,
   }
 
   const response = axiosInstance
@@ -29,11 +33,15 @@ const signup = (data: SignupVariables) => {
 }
 
 const useSignup = () => {
-  const { mutate } = useMutation<SignupResponse, AxiosError, SignupVariables>({
+  const signupMutation = useMutation<
+    SignupResponse,
+    AxiosError,
+    SignupVariables
+  >({
     mutationFn: signup,
   })
 
-  return { mutate }
+  return { signupMutation }
 }
 
 export default useSignup
