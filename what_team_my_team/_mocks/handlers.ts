@@ -1,8 +1,10 @@
 import { HttpResponse, http } from 'msw'
 import {
+  AccomplishedData,
   ApplyResponseData,
   AssignData,
   EntireData,
+  InprogressProjectData,
   ProfileData,
   ProjectDetailData,
 } from './datas'
@@ -22,6 +24,21 @@ export const handlers = [
   }),
   http.delete(`*/admin/user/list`, () => {
     return HttpResponse.json({ success: true })
+  }),
+  http.get(`*/user/profile/activity/:id`, ({ request }) => {
+    const url = new URL(request.url)
+    const projectKeyword = url.searchParams.get('keyword')
+
+    if (!projectKeyword) {
+      return new HttpResponse(null, { status: 404 })
+    }
+
+    if (projectKeyword === 'inprogress') {
+      return HttpResponse.json(InprogressProjectData)
+    }
+    if (projectKeyword === 'accomplished') {
+      return HttpResponse.json(AccomplishedData)
+    }
   }),
   http.get(`*/user/profile/*`, () => {
     return HttpResponse.json(ProfileData)
