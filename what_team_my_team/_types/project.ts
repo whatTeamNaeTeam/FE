@@ -12,20 +12,23 @@ export type Project = {
   image: string
   category: Category[]
   leader_info: LeaderInfo
-  like: number
-  version: number
   view: number
   genre: string
-  is_like: boolean
-}
+} & Like
 export type LeaderInfo = {
   id: number
   name: string
+}
+export type Like = {
+  like: number
+  is_like: boolean
+  version: number
 }
 
 export type CategoryCamel = ConvertSnakeToCamel<Category>
 export type ProjectCamel = ConvertSnakeToCamel<Project>
 export type LeaderInfoCamel = ConvertSnakeToCamel<LeaderInfo>
+export type LikeCamel = ConvertSnakeToCamel<Like>
 
 export type ProjectResponse = {
   next: string
