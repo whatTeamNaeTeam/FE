@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   images: {
-    domains: [process.env.NEXT_REPUBLIC_ALLOWED_IMAGE_DOMAIN],
+    domains: ['wtnt-bucket.s3.ap-northeast-2.amazonaws.com'],
   },
 }
 
