@@ -5,12 +5,13 @@ import ProjectCardSkeleton from '@/_components/ProjectCardSkeleton'
 import useProjectCard from '@/_services/queries/useProjectCard'
 import React from 'react'
 
-interface CompledtedContainerProps {
+interface CompletedContainerProps {
   userId: string
 }
 
-const CompletedContainer = ({ userId }: CompledtedContainerProps) => {
+const CompletedContainer = ({ userId }: CompletedContainerProps) => {
   const { data, isLoading } = useProjectCard(userId, 'accomplished')
+
   return (
     <div className="w-full">
       {isLoading && (
