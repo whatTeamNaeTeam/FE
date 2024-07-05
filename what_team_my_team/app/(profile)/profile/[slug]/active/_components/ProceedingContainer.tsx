@@ -11,6 +11,7 @@ interface ProceedingContainerProps {
 
 const ProceedingContainer = ({ userId }: ProceedingContainerProps) => {
   const { data, isLoading } = useProjectCard(userId, 'inprogress')
+
   return (
     <div className="w-full">
       {isLoading && (
