@@ -158,7 +158,7 @@ const InprogressProjectData = {
       is_like: false,
     },
     {
-      id: 22,
+      id: 23,
       title: '안티호정카페',
       image:
         'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/안티호정카페/image.jpg',
@@ -187,36 +187,7 @@ const InprogressProjectData = {
       is_like: false,
     },
     {
-      id: 22,
-      title: '안티호정카페',
-      image:
-        'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/안티호정카페/image.jpg',
-      category: [
-        {
-          id: 38,
-          tech: '자바',
-          need_num: 2,
-          current_num: 0,
-        },
-        {
-          id: 37,
-          tech: '웹프론트엔드',
-          need_num: 3,
-          current_num: 0,
-        },
-      ],
-      leader_info: {
-        id: 1112,
-        name: '강태원',
-      },
-      like: 0,
-      version: 0,
-      view: 0,
-      genre: '웹',
-      is_like: false,
-    },
-    {
-      id: 22,
+      id: 24,
       title: '안티호정카페',
       image:
         'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/안티호정카페/image.jpg',
