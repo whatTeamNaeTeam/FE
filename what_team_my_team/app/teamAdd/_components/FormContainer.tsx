@@ -62,7 +62,7 @@ const FormContainer = () => {
 
     const formData = new FormData()
 
-    formData.append('name', title)
+    formData.append('title', title)
     if (genre) {
       formData.append('genre', genre)
     }
