@@ -1,8 +1,9 @@
 import axiosInstance from '@/_lib/axios'
-import { Project, ProjectCamel } from '@/_types/project'
+import { LikeCamel, Project, ProjectCamel } from '@/_types/project'
 import { convertSnakeToCamel } from '@/_utils/convertSnakeToCamel'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
+import { LIKE_STATE_KEY } from '../mutations/useLikeState'
 
 export interface ProjectCardReturn {
   team: Project[]
@@ -35,6 +36,28 @@ const useProjectCard = (
   userId: string,
   keyword: 'inprogress' | 'accomplished' | 'apply',
 ) => {
+  const queryClient = useQueryClient()
+
+  const convertAndCacheData = (data: ProjectCardReturn) => {
+    const camelData = convertSnakeToCamel(data) as ProjectCardCamel
+
+    // Dev Tools에 변환된 데이터 반영
+    queryClient.setQueryData([PROJECT_CARD_KEY, keyword], camelData)
+
+    // 최초 좋아요 상태 캐시에 저장
+    camelData.team.forEach((team) => {
+      const likeData: LikeCamel = {
+        isLike: team.isLike,
+        version: team.version,
+        like: team.like,
+      }
+
+      queryClient.setQueryData([LIKE_STATE_KEY, team.id], likeData)
+    })
+
+    return camelData
+  }
+
   const projectCardQuery = useQuery<
     ProjectCardReturn,
     AxiosError,
@@ -42,11 +65,7 @@ const useProjectCard = (
   >({
     queryFn: () => getProjectCard(userId, keyword),
     queryKey: [PROJECT_CARD_KEY, keyword],
-    select: (data) => {
-      const selectedData = convertSnakeToCamel(data) as ProjectCardCamel
-
-      return selectedData
-    },
+    select: convertAndCacheData,
   })
 
   return projectCardQuery
