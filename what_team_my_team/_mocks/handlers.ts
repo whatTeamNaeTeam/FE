@@ -27,6 +27,7 @@ export const handlers = [
   }),
   http.get(`*/user/profile/activity/:id`, ({ request }) => {
     const url = new URL(request.url)
+
     const projectKeyword = url.searchParams.get('keyword')
 
     if (!projectKeyword) {
@@ -54,5 +55,14 @@ export const handlers = [
   }),
   http.patch(`*/auth/email`, () => {
     return HttpResponse.json({ detail: 'Success to Send Email' })
+  }),
+  http.post(`*/like/:projectId`, () => {
+    return HttpResponse.json(
+      {
+        like: { is_like: true, like_count: 1 },
+        version: 1,
+      },
+      { status: 200 },
+    )
   }),
 ]
