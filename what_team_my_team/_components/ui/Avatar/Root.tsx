@@ -7,6 +7,7 @@ import { type VariantProps, cva } from 'class-variance-authority'
 const AvatarRootVariants = cva(`inline-flex items-center justify-center`, {
   variants: {
     size: {
+      'x-small': 'w-6 h-6',
       small: 'w-8 h-8',
       large: 'w-20 h-20',
       link: 'w-6 h-6',
