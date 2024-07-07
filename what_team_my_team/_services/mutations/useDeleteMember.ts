@@ -6,9 +6,9 @@ interface DeleteMemberResponse {
   success: boolean
 }
 
-const deleteMember = (userIds: number) => {
-  console.log(userIds)
-  const body = { ids: userIds.toLocaleString() }
+const deleteMember = (userIds: string) => {
+  const body = { ids: userIds }
+
   const response = axiosInstance
     .delete('/admin/user/list', { data: body })
     .then(({ data }) => data)
@@ -17,7 +17,7 @@ const deleteMember = (userIds: number) => {
 }
 
 const useDeleteMember = () => {
-  const { mutate } = useMutation<DeleteMemberResponse, AxiosError, number>({
+  const { mutate } = useMutation<DeleteMemberResponse, AxiosError, string>({
     mutationFn: deleteMember,
   })
 
