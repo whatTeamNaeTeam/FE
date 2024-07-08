@@ -9,6 +9,17 @@ const axiosInstance = axios.create({
   baseURL,
 })
 
+const getNewAccessToken = async () => {
+  try {
+    const response = await axiosInstance.post('/auth/token/refresh')
+
+    return response.data
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
+}
+
 axiosInstance.interceptors.request.use(
   function (config) {
     config.headers['X-from'] = 'web'
@@ -23,18 +34,20 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   function (response) {
-    if (response.data === 'jwt expired' || response.data === 'jwt malformed') {
-      localStorage.removeItem('accessToken')
-      window.alert('로그인 세션이 만료되었습니다.')
-      return Promise.reject(response.data)
-    }
     return response
   },
-  function (error) {
-    console.log(error)
-    if (error.response.data === 'jwt expired') {
-      window.location.reload()
+  async function (error) {
+    if (error.response.status === 401 || error.response.status === 403) {
+      try {
+        await getNewAccessToken()
+        const originalRequest = error.config
+
+        return await axiosInstance(originalRequest)
+      } catch (oError) {
+        throw oError
+      }
     }
+
     return Promise.reject(error)
   },
 )
