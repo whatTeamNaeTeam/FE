@@ -1,7 +1,7 @@
 import React from 'react'
 import LoginContainer from './_components/LoginContainer'
 
-const page = () => {
+const SigninPage = () => {
   return (
     <div className="flex justify-center items-center">
       <LoginContainer />
@@ -9,4 +9,4 @@ const page = () => {
   )
 }
 
-export default page
+export default SigninPage
