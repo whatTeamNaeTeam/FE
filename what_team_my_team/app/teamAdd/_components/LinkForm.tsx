@@ -2,7 +2,7 @@
 
 import Button from '@/_components/ui/Button'
 import React from 'react'
-import LinkItem from './LinkItem'
+import LinkItem from './LinkInput'
 import { defaultLink } from '@/_constants/teamAdd'
 import { Control, useFieldArray } from 'react-hook-form'
 import { TeamAddFormValueType } from './FormContainer'

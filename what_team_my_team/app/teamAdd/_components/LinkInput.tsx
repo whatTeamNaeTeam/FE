@@ -5,12 +5,12 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import { Control, useController } from 'react-hook-form'
 import { TeamAddFormValueType } from './FormContainer'
 
-interface LinkItemProps {
+interface LinkInputProps {
   index: number
   control: Control<TeamAddFormValueType>
 }
 
-const LinkItem = ({ index, control }: LinkItemProps) => {
+const LinkInput = ({ index, control }: LinkInputProps) => {
   const { field } = useController({
     name: `linkList.${index}`,
     control,
@@ -61,4 +61,4 @@ const LinkItem = ({ index, control }: LinkItemProps) => {
   )
 }
 
-export default LinkItem
+export default LinkInput
