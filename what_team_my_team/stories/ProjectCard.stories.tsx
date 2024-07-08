@@ -15,26 +15,26 @@ type Story = StoryObj<typeof meta>
 
 const example: ProjectCardProps = {
   project: {
-    id: '3',
+    id: 3,
     title: 'test3',
     image:
       'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/test3/image.jpg',
     category: [
       {
-        id: '6',
+        id: 6,
         tech: '자바스프링',
         needNum: 2,
         currentNum: 0,
       },
       {
-        id: '5',
+        id: 5,
         tech: '크로스플랫폼',
         needNum: 3,
         currentNum: 0,
       },
     ],
     leaderInfo: {
-      id: '2',
+      id: 2,
       name: '강태원',
     },
     like: 1,

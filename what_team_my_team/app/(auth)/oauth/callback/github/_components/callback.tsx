@@ -5,21 +5,20 @@ import useGetSearchParam from '@/_hook/useGetSearchParam'
 import useSocialLogin, {
   SocialLoginApiResponse,
 } from '@/_services/mutations/useSocialLogin'
-import { useRouter } from 'next/navigation'
 import { AxiosError } from 'axios'
 
 const Callback = () => {
-  const router = useRouter()
   const codeParam = useGetSearchParam('code')
   const { mutate } = useSocialLogin()
 
   const handleSuccess = (response: SocialLoginApiResponse) => {
     if (response.registered) {
-      router.push('/')
+      window.location.href = '/'
     } else {
-      router.push('/signup')
+      window.location.href = '/signup'
     }
   }
+
   const handleError = (error: AxiosError) => {
     console.log(error)
   }
@@ -33,8 +32,11 @@ const Callback = () => {
           onError: handleError,
         },
       )
+
+      return
     }
   }, [])
+
   return <></>
 }
 

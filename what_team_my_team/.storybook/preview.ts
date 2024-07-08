@@ -2,10 +2,11 @@ import React from 'react'
 import { Preview } from '@storybook/react'
 import '../styles/global.css'
 import Layout from '../app/layout'
+import {fn} from '@storybook/test'
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
+    actions: { handleClick: fn()},
     controls: {
       matchers: {
         color: /(background|color)$/i,

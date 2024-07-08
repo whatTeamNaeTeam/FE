@@ -132,7 +132,7 @@ const InprogressProjectData = {
       id: 22,
       title: '안티호정카페',
       image:
-        'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/안티호정카페/image.jpg',
+        'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/b6aff390-d0b5-4c97-a910-0e10be99f39f/image.jpg',
       category: [
         {
           id: 38,
