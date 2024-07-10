@@ -9,7 +9,7 @@ export type Category = {
 export type Project = {
   id: number
   title: string
-  image: string
+  image_url: string
   category: Category[]
   leader_info: LeaderInfo
   view: number
