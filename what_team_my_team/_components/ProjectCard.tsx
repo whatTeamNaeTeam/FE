@@ -14,7 +14,7 @@ export interface ProjectCardProps {
 }
 
 const ProjectCard = ({
-  project: { id, title, image, category, leaderInfo, version, isLike },
+  project: { id, title, imageUrl, category, leaderInfo, version, isLike },
 }: ProjectCardProps) => {
   return (
     <Link
@@ -27,7 +27,7 @@ const ProjectCard = ({
         isLike={isLike}
         className="absolute top-2 right-2 z-30"
       />
-      <ImageSection image={image} />
+      <ImageSection image={imageUrl} />
       <DetailSection
         leaderInfo={leaderInfo}
         title={title}
