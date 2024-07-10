@@ -17,7 +17,7 @@ const example: ProjectCardProps = {
   project: {
     id: 3,
     title: 'test3',
-    image:
+    imageUrl:
       'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/test3/image.jpg',
     category: [
       {
