@@ -1,4 +1,4 @@
-import { HttpResponse, http } from 'msw'
+import { HttpResponse, delay, http } from 'msw'
 import {
   AccomplishedData,
   ApplyResponseData,
@@ -7,6 +7,7 @@ import {
   InprogressProjectData,
   ProfileData,
   ProjectDetailData,
+  MainPageProjectListData,
 } from './datas'
 
 export const handlers = [
@@ -64,5 +65,9 @@ export const handlers = [
       },
       { status: 200 },
     )
+  }),
+  http.get(`*/team/*`, async () => {
+    await delay(1000)
+    return HttpResponse.json(MainPageProjectListData)
   }),
 ]
