@@ -127,130 +127,76 @@ const ApplyResponseData = {
   tech: '웹프론트엔드',
 }
 const InprogressProjectData = {
-  team: [
-    {
-      id: 22,
-      title: '안티호정카페',
-      image:
-        'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/b6aff390-d0b5-4c97-a910-0e10be99f39f/image.jpg',
-      category: [
-        {
-          id: 38,
-          tech: '자바',
-          need_num: 2,
-          current_num: 0,
-        },
-        {
-          id: 37,
-          tech: '웹프론트엔드',
-          need_num: 3,
-          current_num: 0,
-        },
-      ],
-      leader_info: {
-        id: 1112,
-        name: '강태원',
+  team: Array.from({ length: 3 }, (_, idx) => ({
+    id: idx,
+    title: '안티호정카페',
+    image:
+      'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/b6aff390-d0b5-4c97-a910-0e10be99f39f/image.jpg',
+    category: [
+      {
+        id: 38,
+        tech: '자바',
+        need_num: 2,
+        current_num: 0,
       },
-      like: 0,
-      version: 0,
-      view: 0,
-      genre: '웹',
-      is_like: false,
-    },
-    {
-      id: 23,
-      title: '안티호정카페',
-      image:
-        'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/안티호정카페/image.jpg',
-      category: [
-        {
-          id: 38,
-          tech: '자바',
-          need_num: 2,
-          current_num: 0,
-        },
-        {
-          id: 37,
-          tech: '웹프론트엔드',
-          need_num: 3,
-          current_num: 0,
-        },
-      ],
-      leader_info: {
-        id: 1112,
-        name: '강태원',
+      {
+        id: 37,
+        tech: '웹프론트엔드',
+        need_num: 3,
+        current_num: 0,
       },
-      like: 0,
-      version: 0,
-      view: 0,
-      genre: '웹',
-      is_like: false,
+    ],
+    leader_info: {
+      id: 1112,
+      name: '강태원',
     },
-    {
-      id: 24,
-      title: '안티호정카페',
-      image:
-        'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/안티호정카페/image.jpg',
-      category: [
-        {
-          id: 38,
-          tech: '자바',
-          need_num: 2,
-          current_num: 0,
-        },
-        {
-          id: 37,
-          tech: '웹프론트엔드',
-          need_num: 3,
-          current_num: 0,
-        },
-      ],
-      leader_info: {
-        id: 1112,
-        name: '강태원',
-      },
-      like: 0,
-      version: 0,
-      view: 0,
-      genre: '웹',
-      is_like: false,
-    },
-  ],
+    like: 0,
+    version: 0,
+    view: 0,
+    genre: '웹',
+    is_like: false,
+  })),
   is_owner: false,
 }
 const AccomplishedData = {
-  team: [
-    // {
-    //   id: 22,
-    //   title: '왓냥',
-    //   image:
-    //     'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/안티호정카페/image.jpg',
-    //   category: [
-    //     {
-    //       id: 38,
-    //       tech: '자바',
-    //       need_num: 2,
-    //       current_num: 0,
-    //     },
-    //     {
-    //       id: 37,
-    //       tech: '웹프론트엔드',
-    //       need_num: 3,
-    //       current_num: 0,
-    //     },
-    //   ],
-    //   leader_info: {
-    //     id: 1112,
-    //     name: '장호정',
-    //   },
-    //   like: 0,
-    //   version: 0,
-    //   view: 0,
-    //   genre: '웹',
-    //   is_like: false,
-    // },
-  ],
+  team: [],
   is_owner: false,
+}
+
+const MainPageProjectListData = {
+  next: 'http://localhost:9090/api/team/list',
+  previous: null,
+  results: Array.from({ length: 8 }, (_, idx) => ({
+    id: idx,
+    title: '오빠와치4',
+    image_url:
+      'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/19a2fc92-c951-4d9d-a409-c055ce124d0e/thumnail.jpg',
+    category: [
+      {
+        id: 50,
+        tech: '스토리개발',
+        need_num: 2,
+        current_num: 0,
+      },
+      {
+        id: 51,
+        tech: '언리얼엔진',
+        need_num: 2,
+        current_num: 0,
+      },
+    ],
+    leader_info: {
+      id: 1112,
+      name: '강태원',
+      image_url:
+        'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/user/1112/thumnail.jpg',
+    },
+    like: 0,
+    version: 0,
+    view: 1,
+    genre: '게임',
+    is_like: false,
+  })),
 }
 
 export {
@@ -261,4 +207,5 @@ export {
   ApplyResponseData,
   InprogressProjectData,
   AccomplishedData,
+  MainPageProjectListData,
 }
