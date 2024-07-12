@@ -5,6 +5,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuPortal,
   DropdownMenuTrigger,
 } from '@/_components/ui/DropdownMenu'
 import { Control, useController } from 'react-hook-form'
@@ -55,13 +56,15 @@ const MainCategory = ({
           />
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        {mainCategoryData.map((item, idx) => (
-          <DropdownMenuItem key={`${item}${idx}`} onClick={handleChangeValue}>
-            {item}
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
+      <DropdownMenuPortal>
+        <DropdownMenuContent>
+          {mainCategoryData.map((item, idx) => (
+            <DropdownMenuItem key={`${item}${idx}`} onClick={handleChangeValue}>
+              {item}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenuPortal>
     </DropdownMenu>
   )
 }

@@ -5,6 +5,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuPortal,
   DropdownMenuTrigger,
 } from '@/_components/ui/DropdownMenu'
 import { Control, useController } from 'react-hook-form'
@@ -63,19 +64,21 @@ const SubCategory = ({ control, index, selectedMain }: SubCategoryProps) => {
         </div>
         {/* <input disabled value={selectedValue} /> */}
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        {subCategoryData
-          .filter((item) => item.type === selectedMain)
-          .map((item) =>
-            item.tags.map((tag, idx) => (
-              <DropdownMenuItem key={idx} onClick={handleChangeValue}>
-                {tag}
-              </DropdownMenuItem>
-            )),
-          )}
+      <DropdownMenuPortal>
+        <DropdownMenuContent>
+          {subCategoryData
+            .filter((item) => item.type === selectedMain)
+            .map((item) =>
+              item.tags.map((tag, idx) => (
+                <DropdownMenuItem key={idx} onClick={handleChangeValue}>
+                  {tag}
+                </DropdownMenuItem>
+              )),
+            )}
 
-        <DropdownMenuItem onClick={handleChangeValue}>기타</DropdownMenuItem>
-      </DropdownMenuContent>
+          {/* <DropdownMenuItem onClick={handleChangeValue}>기타</DropdownMenuItem> */}
+        </DropdownMenuContent>
+      </DropdownMenuPortal>
     </DropdownMenu>
   )
 }
