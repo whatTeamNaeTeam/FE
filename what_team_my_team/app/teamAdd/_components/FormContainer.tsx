@@ -74,12 +74,22 @@ const FormContainer = () => {
     // category
     category.forEach((item) => {
       Object.entries(item).forEach(([key, value]) => {
-        formData.append(key, value)
+        if (key !== 'mainCategory') {
+          formData.append(key, value)
+        }
       })
     })
-    linkList.forEach((item) => {
-      formData.append('urls', item.link)
-    })
+
+    // 공백인 url은 추가하지 않음
+    const urls = linkList
+      .filter((item) => item.link !== '')
+      .map((item) => item.link)
+      .join(',')
+
+    if (urls) {
+      console.log(urls)
+      formData.append('urls', urls)
+    }
 
     mutate(formData)
   }
