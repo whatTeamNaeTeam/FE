@@ -37,9 +37,14 @@ axiosInstance.interceptors.response.use(
     return response
   },
   async function (error) {
+    if (error.config.url === '/auth/token/refresh') {
+      return Promise.reject(error)
+    }
+
     if (error.response.status === 401 || error.response.status === 403) {
       try {
         await getNewAccessToken()
+
         const originalRequest = error.config
 
         return await axiosInstance(originalRequest)
