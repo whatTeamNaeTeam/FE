@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import ProfileAvatar from './ProfileAvatar'
 import { CategoryCamel, ProjectCamel } from '@/_types/project'
 import { FaChevronDown } from 'react-icons/fa'
@@ -8,14 +8,24 @@ import LikeBtn from './LikeBtn'
 import Link from 'next/link'
 import Img from './ui/Img'
 import useCategoryCounts from '@/_hook/useCategoryCounts'
+import { useQueryClient } from '@tanstack/react-query'
+import { LIKE_STATE_KEY } from '@/_services/mutations/useLikeState'
 
 export interface ProjectCardProps {
   project: ProjectCamel
 }
 
 const ProjectCard = ({
-  project: { id, title, imageUrl, category, leaderInfo, version, isLike },
+  project: { id, title, imageUrl, category, leaderInfo, version, isLike, like },
 }: ProjectCardProps) => {
+  const queryClient = useQueryClient()
+
+  useEffect(() => {
+    const isLikeCacheData = queryClient.getQueryData([LIKE_STATE_KEY, id])
+    if (!isLikeCacheData) {
+      queryClient.setQueryData([LIKE_STATE_KEY, id], { like, isLike, version })
+    }
+  }, [like, isLike, version])
   return (
     <Link
       href={`/project/${id}`}

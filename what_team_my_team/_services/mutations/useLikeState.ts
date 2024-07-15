@@ -93,7 +93,7 @@ const useLikeState = () => {
     onSettled: (_, __, { projectId }) => {
       queryClient.invalidateQueries({ queryKey: [LIKE_STATE_KEY, projectId] })
       queryClient.invalidateQueries({
-        queryKey: [PROJECT_CARD_KEY, 'inprogress'],
+        queryKey: [PROJECT_CARD_KEY],
       })
     },
   })

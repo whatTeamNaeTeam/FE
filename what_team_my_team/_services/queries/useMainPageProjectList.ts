@@ -1,7 +1,12 @@
 import { convertSnakeToCamel } from '@/_utils/convertSnakeToCamel'
-import { Project } from '@/_types/project'
+import {
+  InfiniteProject,
+  InfiniteProjectCamel,
+  Project,
+} from '@/_types/project'
 import axiosInstance from '@/_lib/axios'
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 
 const MAIN_PROJECT_CARD = 'project-card'
 
@@ -25,7 +30,13 @@ const getMainPageProjectApi = ({
   return response
 }
 const useMainPageProjectList = ({ keyword }: { keyword: string }) => {
-  const mainPageProjectQuery = useInfiniteQuery({
+  const mainPageProjectQuery = useInfiniteQuery<
+    InfiniteProject,
+    AxiosError,
+    InfiniteData<InfiniteProjectCamel>,
+    string[],
+    string | null
+  >({
     queryFn: ({ pageParam }) => getMainPageProjectApi({ pageParam, keyword }),
     queryKey: [MAIN_PROJECT_CARD],
     initialPageParam: null,
@@ -33,11 +44,13 @@ const useMainPageProjectList = ({ keyword }: { keyword: string }) => {
       return lastPage.next || null
     },
     select: (data) => {
-      const convertedData = data.pages.map((group) =>
-        convertSnakeToCamel(group),
-      )
-      console.log({ ...data, pages: convertedData })
-      return { ...data, pages: convertedData }
+      const selectedData = data.pages.map((group) => {
+        const converted = convertSnakeToCamel(group) as InfiniteProjectCamel
+
+        return converted
+      })
+
+      return { ...data, pages: selectedData }
     },
   })
 
