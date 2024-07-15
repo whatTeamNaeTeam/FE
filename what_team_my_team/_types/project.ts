@@ -15,6 +15,13 @@ export type Project = {
   view: number
   genre: string
 } & Like
+export type PageParam = {
+  next: string
+  previous: string
+}
+export type InfiniteProject = {
+  results: Project[]
+} & PageParam
 export type LeaderInfo = {
   id: number
   name: string
@@ -27,6 +34,7 @@ export type Like = {
 
 export type CategoryCamel = ConvertSnakeToCamel<Category>
 export type ProjectCamel = ConvertSnakeToCamel<Project>
+export type InfiniteProjectCamel = ConvertSnakeToCamel<InfiniteProject>
 export type LeaderInfoCamel = ConvertSnakeToCamel<LeaderInfo>
 export type LikeCamel = ConvertSnakeToCamel<Like>
 
