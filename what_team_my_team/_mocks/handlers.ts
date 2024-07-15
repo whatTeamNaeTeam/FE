@@ -70,4 +70,7 @@ export const handlers = [
     await delay(1000)
     return HttpResponse.json(MainPageProjectListData)
   }),
+  http.delete(`*/auth/logout`, () => {
+    return new HttpResponse(null, { status: 200 })
+  }),
 ]
