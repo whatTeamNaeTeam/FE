@@ -4,7 +4,7 @@ import { isLoggedInState, userState } from '@/_stores/atoms/user'
 import { useSetAtom } from 'jotai'
 
 const logoutApi = async () => {
-  const response = await axiosInstance.post('/auth/logout')
+  const response = await axiosInstance.delete('/auth/logout')
 
   return response
 }
