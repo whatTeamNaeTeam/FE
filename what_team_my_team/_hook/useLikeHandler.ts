@@ -3,6 +3,7 @@ import { LikeCamel } from '@/_types/project'
 import useLikeState, {
   LIKE_STATE_KEY,
 } from '@/_services/mutations/useLikeState'
+import { useEffect, useState } from 'react'
 
 interface UseLikeHandlerProps {
   projectId: number
@@ -12,6 +13,7 @@ interface UseLikeHandlerProps {
 const useLikeHandler = ({ projectId, version }: UseLikeHandlerProps) => {
   const queryClient = useQueryClient()
   const likeMutation = useLikeState()
+  const [isLike, setIsLike] = useState(false)
 
   const toggleLike = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
@@ -22,9 +24,13 @@ const useLikeHandler = ({ projectId, version }: UseLikeHandlerProps) => {
 
   const data = queryClient.getQueryData<LikeCamel>([LIKE_STATE_KEY, projectId])
 
+  useEffect(() => {
+    setIsLike(!!data?.isLike)
+  }, [data])
+
   return {
     toggleLike,
-    isLike: data?.isLike,
+    isLike: isLike,
   }
 }
 
