@@ -18,13 +18,13 @@ const ProfileMenu = ({ user }: ProfileMenuProps) => {
 
   useEffect(() => {
     if (isToggle) {
-      document.addEventListener('mousedown', handleClickOutside)
+      document.addEventListener('click', handleClickOutside)
     } else {
-      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('click', handleClickOutside)
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('click', handleClickOutside)
     }
   }, [isToggle])
 
@@ -69,7 +69,10 @@ const ProfileMenu = ({ user }: ProfileMenuProps) => {
         <ProfileAvatar imgUrl={user?.imageUrl} alt="프로필" size={'x-small'} />
         <div className="flex items-center justify-center gap-1">
           <span className="text-sm">{user.name}</span>
-          <FaChevronDown size={10} />
+          <FaChevronDown
+            size={10}
+            className={`duration-300 ${isToggle ? 'rotate-180' : ''}`}
+          />
         </div>
       </button>
       {isToggle && (
