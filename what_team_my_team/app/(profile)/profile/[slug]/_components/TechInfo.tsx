@@ -3,7 +3,7 @@
 import React from 'react'
 
 interface TechInfoProps {
-  tech: { name: string }[]
+  tech: { name: string }[] | null
 }
 
 const TechInfo = ({ tech }: TechInfoProps) => {
@@ -11,9 +11,7 @@ const TechInfo = ({ tech }: TechInfoProps) => {
     <div>
       <h3 className="text-base mb-2">기술 스택</h3>
       <ul className="flex gap-1 border border-gray-4 rounded-sm py-2 px-2">
-        {tech.length === 0 ? (
-          <span>없음</span>
-        ) : (
+        {tech ? (
           tech.map(({ name }, idx) => (
             <li
               key={`${name}-${idx}}`}
@@ -22,6 +20,8 @@ const TechInfo = ({ tech }: TechInfoProps) => {
               {name}
             </li>
           ))
+        ) : (
+          <span className="text-sm">없음</span>
         )}
       </ul>
     </div>
