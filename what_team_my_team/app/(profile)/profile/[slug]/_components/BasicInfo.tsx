@@ -2,16 +2,16 @@
 
 import ProfileAvatar from '@/_components/ProfileAvatar'
 import Button from '@/_components/ui/Button'
-import { SelectedUserProfile } from '@/_services/queries/useUserProfile'
+import { UserProfileCamel } from '@/_services/queries/useUserProfile'
 import Link from 'next/link'
 import React from 'react'
 
-const BasicInfo = ({ data }: { data: SelectedUserProfile }) => {
+const BasicInfo = ({ data }: { data: UserProfileCamel }) => {
   return (
-    <div className="flex justify-between mb-12">
+    <div className="flex justify-between items-center mb-12">
       <div className="flex gap-4">
         <ProfileAvatar
-          imgUrl={data?.profile.image}
+          imgUrl={data?.profile.imageUrl}
           alt={data.profile.name}
           size={'large'}
         />
@@ -26,9 +26,9 @@ const BasicInfo = ({ data }: { data: SelectedUserProfile }) => {
         </div>
       </div>
       {data.isOwner && (
-        <Button variant={'lined'}>
-          <Link href={`/profile/${data.profile.id}/setting`}>설정</Link>
-        </Button>
+        <Link href={`/profile/${data.profile.id}/setting`}>
+          <Button variant={'lined'}>설정</Button>
+        </Link>
       )}
     </div>
   )
