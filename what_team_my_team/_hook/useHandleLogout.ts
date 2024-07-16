@@ -1,4 +1,4 @@
-import useLogout from '@/_services/queries/useLogout'
+import useLogout from '@/_services/mutations/useLogout'
 import { isLoggedInState, userState } from '@/_stores/atoms/user'
 import { useSetAtom } from 'jotai'
 
