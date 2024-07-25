@@ -36,7 +36,7 @@ const Pagination = ({
           <button
             key={`pagination-${i}`}
             onClick={() => handlePageClick(i)}
-            className={`rounded-full w-10 h-10 ${i === page ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 hover:bg-gray-4'}`}
+            className={`rounded-full w-8 h-8 text-sm ${i === page ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 hover:bg-gray-4'}`}
           >
             {i}
           </button>,
@@ -49,7 +49,7 @@ const Pagination = ({
         <button
           key={`pagination-1`}
           onClick={() => handlePageClick(1)}
-          className={`rounded-full w-10 h-10 ${1 === page ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 hover:bg-gray-4'}`}
+          className={`rounded-full w-8 h-8 text-sm ${1 === page ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 hover:bg-gray-4'}`}
         >
           1
         </button>,
@@ -73,7 +73,7 @@ const Pagination = ({
           <button
             key={`pagination-${i}`}
             onClick={() => handlePageClick(i)}
-            className={`rounded-full w-10 h-10 ${i === page ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 hover:bg-gray-4'}`}
+            className={`rounded-full w-8 h-8 text-sm ${i === page ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 hover:bg-gray-4'}`}
           >
             {i}
           </button>,
@@ -94,7 +94,7 @@ const Pagination = ({
         <button
           key={`pagination-${totalPagesNum}`}
           onClick={() => handlePageClick(totalPages)}
-          className={`rounded-full w-10 h-10 ${totalPages === page ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 hover:bg-gray-4'}`}
+          className={`rounded-full w-8 h-8 text-sm ${totalPages === page ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 hover:bg-gray-4'}`}
         >
           {totalPages}
         </button>,
@@ -105,7 +105,7 @@ const Pagination = ({
   }
 
   return (
-    <div className="flex gap-2 bg-white px-6 py-2 rounded-3xl">
+    <div className="flex justify-center gap-2 bg-white px-6 py-2 rounded-3xl">
       <button
         onClick={() => setPage((prev) => prev - 1)}
         disabled={!isPrev}
