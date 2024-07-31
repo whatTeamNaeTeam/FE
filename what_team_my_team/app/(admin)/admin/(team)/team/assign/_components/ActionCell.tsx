@@ -8,10 +8,9 @@ import { TeamAssignCamel, TeamAssignTableCellProps } from '@/_types/table'
 const ActionCell = ({
   row,
   table,
-  getValue,
 }: TeamAssignTableCellProps<TeamAssignCamel>) => {
-  const meta = table?.options.meta
-  const userId = getValue().toString()
+  const meta = table.options.meta
+  const userId = row.original.id.toString()
 
   const teamAcceptMutation = useTeamAccept()
   const teamRejectMutation = useTeamReject()
@@ -30,7 +29,7 @@ const ActionCell = ({
   }
 
   const handleReject = () => {
-    teamRejectMutation.mutate(userId, {
+    teamRejectMutation.mutate(userId as string, {
       onSuccess: () => {
         removeRow()
       },
