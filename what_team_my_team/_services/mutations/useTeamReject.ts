@@ -1,9 +1,9 @@
 import axiosInstance from '@/_lib/axios'
 import { useMutation } from '@tanstack/react-query'
 
-const teamRejectApi = async (userId: number) => {
+const teamRejectApi = async (userIds: string) => {
   const body = {
-    ids: userId.toLocaleString(),
+    ids: userIds,
   }
 
   const response = await axiosInstance.delete(`/admin/team/manage`, {

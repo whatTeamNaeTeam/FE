@@ -2,9 +2,9 @@ import axiosInstance from '@/_lib/axios'
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 
-const teamAcceptApi = async (id: number) => {
+const teamAcceptApi = async (userIds: string) => {
   const body = {
-    ids: id.toLocaleString(),
+    ids: userIds,
   }
 
   const response = await axiosInstance.patch(`/admin/team/manage`, body)
@@ -13,7 +13,7 @@ const teamAcceptApi = async (id: number) => {
 }
 
 const useTeamAccept = () => {
-  const teamAcceptMutation = useMutation<any, AxiosError, number>({
+  const teamAcceptMutation = useMutation<any, AxiosError, string>({
     mutationFn: teamAcceptApi,
   })
 
