@@ -2,7 +2,6 @@
 
 import Button from '@/_components/ui/Button'
 import useDeleteTeam from '@/_services/mutations/useDeleteTeam'
-import useEntireMemberList from '@/_services/queries/useEntireMemberList'
 import useEntireTeamList from '@/_services/queries/useEntireTeamList'
 import { pageAtom } from '@/_stores/atoms/page'
 import { TeamAssignCamel } from '@/_types/table'
