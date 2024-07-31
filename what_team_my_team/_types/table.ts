@@ -1,7 +1,8 @@
 import { SelectedAssignMember } from '@/_services/queries/useAssignMemberList'
+import { ConvertSnakeToCamel } from '@/_utils/convertSnakeToCamel'
 import { ColumnDef, Row, Table } from '@tanstack/react-table'
 
-export type TableType = EntireData | AssignData
+export type TableType = EntireData | AssignData | TeamAssignCamel
 
 export interface ReactTableProps<T> {
   tableData: T[]
@@ -16,6 +17,11 @@ export interface AssignTableCellProps extends TableCellProps {
 }
 export interface ManageTableCellProps extends TableCellProps {}
 
+export type TeamAssignTableCellProps<T extends TableType> = TableCellProps & {
+  row?: Row<T>
+  table?: Table<T>
+}
+
 export interface AssignData extends SelectedAssignMember {}
 export interface EntireData {
   id: number
@@ -23,3 +29,19 @@ export interface EntireData {
   studentNum: string
   createdAt: string
 }
+
+export interface TeamAssign {
+  id: number
+  title: string
+  genre: string
+  created_at: string
+  leader_info: LeaderInfo
+}
+export type LeaderInfo = {
+  id: number
+  name: string
+  image_url: string
+  student_num: string
+  position: string
+}
+export type TeamAssignCamel = ConvertSnakeToCamel<TeamAssign>
