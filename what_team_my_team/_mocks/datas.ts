@@ -199,6 +199,45 @@ const MainPageProjectListData = {
   })),
 }
 
+const assignTeamListData = [
+  {
+    id: 49,
+    title: '왜적 장호정을 물리쳐라잇',
+    created_at: '2024-07-26T07:42:09.703799',
+    genre: '게임',
+    leader_info: {
+      name: '강태원',
+      id: 1112,
+      image_url: 'https://avatars.githubusercontent.com/u/71972587?v=4',
+      student_num: '201811318',
+      position: '백엔드',
+    },
+  },
+  {
+    id: 50,
+    title: '왓냥 프로젝트',
+    created_at: '2024-07-26T07:42:09.703799',
+    genre: '웹',
+    leader_info: {
+      name: '장호정',
+      id: 1112,
+      image_url: 'https://avatars.githubusercontent.com/u/71972587?v=4',
+      student_num: '201811318',
+      position: '백엔드',
+    },
+  },
+]
+
+const entireTeamData = {
+  count: 101,
+  results: Array.from({ length: 10 }, (_, idx) => ({
+    id: idx,
+    title: 'mock 프로젝트',
+    created_at: new Date().toDateString(),
+    genre: '웹',
+  })),
+}
+
 export {
   AssignData,
   EntireData,
@@ -208,4 +247,6 @@ export {
   InprogressProjectData,
   AccomplishedData,
   MainPageProjectListData,
+  assignTeamListData,
+  entireTeamData,
 }
