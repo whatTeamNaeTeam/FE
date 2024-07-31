@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import MemberManageAccordion from '../app/(admin)/admin/(member)/team/assign/_components/MemberManageAccordion'
+import MemberManageAccordion from '../app/(admin)/admin/(member)/member/assign/_components/MemberManageAccordion'
 import TeamManageAccordion from '@/app/(admin)/admin/(team)/team/assign/_components/TeamManageAccordion'
 
 const AdminSideMenu = () => {
