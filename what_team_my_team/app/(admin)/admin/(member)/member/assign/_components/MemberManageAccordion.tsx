@@ -17,8 +17,8 @@ const memberManageAccordionItem = [
   {
     header: '멤버 관리',
     contents: [
-      { key: 'assign', content: '멤버 승인' },
-      { key: 'entire', content: '멤버 목록' },
+      { key: 'member/assign', content: '멤버 승인' },
+      { key: 'member/entire', content: '멤버 목록' },
     ],
   },
 ]
@@ -26,7 +26,10 @@ const memberManageAccordionItem = [
 const MemberManageAccordion = () => {
   const pathname = usePathname()
   const segments = pathname.split('/')
+
+  const middleSegment = segments[segments.length - 2]
   const lastSegment = segments[segments.length - 1]
+  const path = `${middleSegment}/${lastSegment}`
 
   return (
     <Accordion
@@ -68,15 +71,17 @@ const MemberManageAccordion = () => {
             )}
           >
             {contents.map(({ key, content }, idx) => (
-              <div
-                key={`content-${idx}`}
-                className={cn(
-                  'text-sm py-1 pl-[34px] hover:bg-gray-8',
-                  `${lastSegment === key && 'bg-gray-8'}`,
-                )}
-              >
-                <Link href={`/admin/${key}`}>{content}</Link>
-              </div>
+              <Link href={`/admin/${key}`}>
+                <button
+                  key={`${content}`}
+                  className={cn(
+                    'w-full text-left text-sm py-1 pl-[34px] hover:bg-gray-8',
+                    `${path === key && 'bg-gray-8'}`,
+                  )}
+                >
+                  {content}
+                </button>
+              </Link>
             ))}
           </AccordionContent>
         </AccordionItem>
