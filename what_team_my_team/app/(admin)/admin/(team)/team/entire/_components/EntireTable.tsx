@@ -8,7 +8,7 @@ import {
 } from '@/_components/ui/ReactTable'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { TeamAssignCamel } from '@/_types/table'
-import ManageCell from './ManageCell'
+import ActionCell from './ActionCell'
 import useTable from '@/_hook/useTable'
 import SearchForm from './SearchForm'
 import FooterCell from './FooterCell'
@@ -23,7 +23,7 @@ const columnHelper = createColumnHelper<TeamAssignCamel>()
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const entireTableColumns: ColumnDef<TeamAssignCamel, any>[] = [
   columnHelper.display({
-    id: 'actions',
+    id: 'check',
     header: ({ table }) => {
       return (
         <IndeterminateCheckBox
@@ -64,9 +64,9 @@ export const entireTableColumns: ColumnDef<TeamAssignCamel, any>[] = [
     cell: TableCell,
     size: 60,
   }),
-  columnHelper.accessor('id', {
-    header: '',
-    cell: ManageCell,
+  columnHelper.display({
+    id: 'actions',
+    cell: ActionCell,
     size: 20,
     enableSorting: false,
   }),
