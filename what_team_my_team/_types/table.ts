@@ -15,7 +15,6 @@ export interface AssignTableCellProps extends TableCellProps {
   row?: Row<AssignData>
   table?: Table<AssignData>
 }
-export interface ManageTableCellProps extends TableCellProps {}
 
 export type TeamAssignTableCellProps<T extends TableType> = {
   row: Row<T>
