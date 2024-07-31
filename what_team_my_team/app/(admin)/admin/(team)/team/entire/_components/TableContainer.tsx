@@ -30,7 +30,7 @@ const TableContainer = () => {
   return (
     <>
       {isLoading && <TableLoader />}
-      {tableData && (
+      {data && tableData && (
         <div className="flex flex-col gap-2">
           <EntireTable count={data?.count ?? 0} data={tableData} />
           <Pagination
