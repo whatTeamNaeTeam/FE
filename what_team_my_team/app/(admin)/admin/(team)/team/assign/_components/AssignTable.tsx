@@ -6,7 +6,8 @@ import useTable from '@/_hook/useTable'
 import { TableCell } from '@/_components/ui/ReactTable'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { TeamAssignCamel } from '@/_types/table'
-import AssignCell from './AssignCell'
+import ActionCell from './ActionCell'
+import ProfileAvatar from '@/_components/ProfileAvatar'
 
 interface AssignTableProps {
   data: TeamAssignCamel[]
@@ -18,24 +19,40 @@ const columnHelper = createColumnHelper<TeamAssignCamel>()
 export const assignTableColumns: ColumnDef<TeamAssignCamel, any>[] = [
   columnHelper.accessor('title', {
     header: '제목',
-    cell: TableCell,
-    size: 100,
+    size: 200,
+  }),
+  columnHelper.accessor('leaderInfo', {
+    header: '팀장',
+    cell: ({ row }) => {
+      const leaderName = row.original.leaderInfo.name
+      const leaderAvatar = row.original.leaderInfo.imageUrl
+      return (
+        <div className="flex items-center justify-center gap-2 w-full">
+          <ProfileAvatar
+            size={'small'}
+            imgUrl={leaderAvatar}
+            alt={leaderName}
+          />
+          <span>{leaderName}</span>
+        </div>
+      )
+    },
+    size: 40,
   }),
   columnHelper.accessor('createdAt', {
     header: '신청날짜',
-    cell: TableCell,
-    size: 100,
+    size: 60,
   }),
   columnHelper.accessor('genre', {
     header: '유형',
-    cell: TableCell,
-    size: 120,
+    size: 60,
   }),
-  columnHelper.accessor('id', {
+  columnHelper.display({
+    id: 'actions',
     header: '',
-    cell: AssignCell,
+    cell: ActionCell,
     enableSorting: false,
-    size: 100,
+    size: 20,
   }),
 ]
 
