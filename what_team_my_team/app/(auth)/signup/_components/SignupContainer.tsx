@@ -12,6 +12,7 @@ import StudentNumInput from './StudentNumInput'
 import EmailInput from './EmailInput'
 import ValidTimer from './ValidTimer'
 import { useRouter } from 'next/navigation'
+import PositionInput from './PositionInput'
 
 export type UserRegisterFormValueType = {
   [K in keyof typeof REGISTER_FIELD_NAMES]: string
@@ -20,6 +21,7 @@ export type UserRegisterFormValueType = {
 export const REGISTER_FIELD_NAMES = {
   studentNum: 'studentNum',
   name: 'name',
+  position: 'position',
   email: 'email',
   validCode: 'validCode',
 } as const
@@ -99,6 +101,9 @@ const SignupContainer = () => {
         </div>
         <div className="mb-2">
           <StudentNumInput control={control} />
+        </div>
+        <div className="mb-2">
+          <PositionInput control={control} />
         </div>
         <div className="mb-2">
           <EmailInput

@@ -13,6 +13,7 @@ interface SignupResponse {
 interface SignupVariables {
   studentNum: string
   name: string
+  position: string
   email: string
   validCode: string
 }
@@ -22,6 +23,7 @@ const signup = (data: SignupVariables) => {
     student_num: data.studentNum,
     name: data.name,
     email: data.email,
+    position: data.position,
     code: data.validCode,
   }
 
