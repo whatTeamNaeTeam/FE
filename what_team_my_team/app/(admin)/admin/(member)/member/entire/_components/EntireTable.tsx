@@ -8,7 +8,7 @@ import {
 } from '@/_components/ui/ReactTable'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { EntireData } from '@/_types/table'
-import ManageCell from './ManageCell'
+import ActionCell from './ActionCell'
 import useTable from '@/_hook/useTable'
 import { SelectedEntireMember } from '@/_services/queries/useEntireMemberList'
 import SearchForm from './SearchForm'
@@ -23,7 +23,7 @@ const columnHelper = createColumnHelper<EntireData>()
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const entireTableColumns: ColumnDef<EntireData, any>[] = [
   columnHelper.display({
-    id: 'actions',
+    id: 'check',
     header: ({ table }) => {
       return (
         <IndeterminateCheckBox
@@ -63,9 +63,9 @@ export const entireTableColumns: ColumnDef<EntireData, any>[] = [
     cell: TableCell,
     size: 100,
   }),
-  columnHelper.accessor('id', {
-    header: '',
-    cell: ManageCell,
+  columnHelper.display({
+    id: 'actions',
+    cell: ActionCell,
     enableSorting: false,
   }),
 ]

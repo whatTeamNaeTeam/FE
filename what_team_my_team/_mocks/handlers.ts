@@ -8,6 +8,8 @@ import {
   ProfileData,
   ProjectDetailData,
   MainPageProjectListData,
+  entireTeamData,
+  assignTeamListData,
 } from './datas'
 
 export const handlers = [
@@ -65,6 +67,13 @@ export const handlers = [
       },
       { status: 200 },
     )
+  }),
+  http.get(`*/admin/team/manage`, async () => {
+    return HttpResponse.json(assignTeamListData)
+  }),
+  http.get(`*/admin/team/list`, async () => {
+    await delay(5000)
+    return HttpResponse.json(entireTeamData)
   }),
   http.get(`*/team/*`, async () => {
     await delay(1000)
