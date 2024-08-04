@@ -5,11 +5,11 @@ import ManageDropdown from './ManageDropdown'
 import { Row } from '@tanstack/react-table'
 import { TeamAssignCamel } from '@/_types/table'
 
-interface ManageCellProps {
+interface ActionCellProps {
   row: Row<TeamAssignCamel>
 }
 
-const ManageCell = ({ row }: ManageCellProps) => {
+const ActionCell = ({ row }: ActionCellProps) => {
   const userId = row.original.id.toString()
 
   return (
@@ -19,4 +19,4 @@ const ManageCell = ({ row }: ManageCellProps) => {
   )
 }
 
-export default ManageCell
+export default ActionCell
