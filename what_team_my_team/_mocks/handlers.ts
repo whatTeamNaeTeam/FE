@@ -10,6 +10,7 @@ import {
   MainPageProjectListData,
   entireTeamData,
   assignTeamListData,
+  myTeamData,
 } from './datas'
 
 export const handlers = [
@@ -43,6 +44,9 @@ export const handlers = [
     if (projectKeyword === 'accomplished') {
       return HttpResponse.json(AccomplishedData)
     }
+  }),
+  http.get(`*/user/profile/team-manage/*`, () => {
+    return HttpResponse.json(myTeamData)
   }),
   http.get(`*/user/profile/*`, () => {
     return HttpResponse.json(ProfileData)

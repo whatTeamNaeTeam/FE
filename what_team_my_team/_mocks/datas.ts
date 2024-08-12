@@ -238,6 +238,33 @@ const entireTeamData = {
   })),
 }
 
+const myTeamData = {
+  team: [
+    {
+      id: 45,
+      title: '왜적 장호정을 물리쳐라잇',
+      leader_info: {
+        name: '강태원',
+        id: 1112,
+        image_url: 'https://avatars.githubusercontent.com/u/71972587?v=4',
+        is_leader: true,
+      },
+      member_count: 1,
+    },
+    {
+      id: 44,
+      title: '왜적 장호정을 물리쳐라',
+      leader_info: {
+        name: '김연재',
+        id: 1112,
+        image_url: 'https://avatars.githubusercontent.com/u/71972587?v=4',
+        is_leader: true,
+      },
+      member_count: 1,
+    },
+  ],
+}
+
 export {
   AssignData,
   EntireData,
@@ -249,4 +276,5 @@ export {
   MainPageProjectListData,
   assignTeamListData,
   entireTeamData,
+  myTeamData,
 }
