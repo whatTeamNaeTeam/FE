@@ -1,11 +1,11 @@
 import React from 'react'
-import Container from './_components/Container'
+import TeamListContainer from './_components/TeamListContainer'
 
 const page = ({ params }: { params: { slug: string } }) => {
   const userId = params.slug
   return (
     <div className="w-full">
-      <Container userId={userId} />
+      <TeamListContainer userId={userId} />
     </div>
   )
 }
