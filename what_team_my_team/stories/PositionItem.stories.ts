@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import PositionItem from '@/app/(project)/project/[...slug]/_components/PositionItem'
+import PositionItem from '@/app/(project)/project/[slug]/_components/PositionItem'
 import { Tech } from '@/_services/queries/useProjectDetail'
 
 const meta = {
