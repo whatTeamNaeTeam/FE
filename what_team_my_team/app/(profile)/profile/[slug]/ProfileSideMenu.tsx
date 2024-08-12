@@ -12,7 +12,7 @@ const ProfileSideMenu = ({ userId }: { userId: string }) => {
   const menuItems = [
     { href: `/profile/${userId}`, label: '프로필' },
     { href: `/profile/${userId}/active`, label: '내 활동' },
-    { href: `/profile/${userId}/team`, label: '팀 관리' },
+    { href: `/profile/${userId}/teamManage`, label: '팀 관리' },
   ]
 
   return (
