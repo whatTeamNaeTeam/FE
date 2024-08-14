@@ -265,6 +265,28 @@ const myTeamData = {
   ],
 }
 
+const myTeamDetailData = {
+  title: '왜적 장호정을 물리쳐라잇',
+  leader_info: {
+    name: '일이삼',
+    student_num: '201811318',
+    id: 1112,
+    image_url: 'https://avatars.githubusercontent.com/u/71972587?v=4',
+    position: '백엔드',
+    category: '팀장',
+  },
+  members_info: Array.from({ length: 6 }, (_, idx) => ({
+    name: '장호정',
+    student_num: '2020131313',
+    id: idx,
+    image_url: 'https://avatars.githubusercontent.com/u/71972587?v=4',
+    position: '백엔드',
+    category: '게임 기획',
+  })),
+  member_count: 2,
+  team_id: 49,
+}
+
 export {
   AssignData,
   EntireData,
@@ -277,4 +299,5 @@ export {
   assignTeamListData,
   entireTeamData,
   myTeamData,
+  myTeamDetailData,
 }
