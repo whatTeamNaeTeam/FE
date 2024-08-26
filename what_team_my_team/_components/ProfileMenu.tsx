@@ -55,7 +55,7 @@ const ProfileMenu = ({ user }: ProfileMenuProps) => {
     },
     {
       label: '팀관리',
-      href: `/profile/${user?.id}/team`,
+      href: `/profile/${user?.id}/teamManage`,
       onClick: handleItemClick,
     },
   ]
