@@ -31,7 +31,7 @@ const ProfileSideMenu = ({ userId }: { userId: string }) => {
           </Link>
         ))}
       </div>
-      <button className=" text-left text-xl text-red-6" onClick={handleLogout}>
+      <button className="text-left text-xl text-red-6" onClick={handleLogout}>
         로그아웃
       </button>
     </aside>
