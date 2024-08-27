@@ -286,6 +286,20 @@ const myTeamDetailData = {
   member_count: 2,
   team_id: 49,
 }
+const notApprovedMemberData = Array.from({ length: 4 }, (_, idx) => ({
+  id: idx,
+  team_id: 36,
+  created_at: '2024-04-26T02:24:42.910791',
+  bio: '열심히 하겠습니다!!',
+  tech: '웹',
+  user_info: {
+    id: 127,
+    name: '이경자',
+    image_url:
+      'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/default/thumnail.jpg',
+    position: '디자이너',
+  },
+}))
 
 export {
   AssignData,
@@ -300,4 +314,5 @@ export {
   entireTeamData,
   myTeamData,
   myTeamDetailData,
+  notApprovedMemberData,
 }
