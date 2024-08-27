@@ -1,12 +1,10 @@
-import React from 'react'
 import { Preview } from '@storybook/react'
 import '../styles/global.css'
-import Layout from '../app/layout'
-import {fn} from '@storybook/test'
+import { fn } from '@storybook/test'
 
 const preview: Preview = {
   parameters: {
-    actions: { handleClick: fn()},
+    actions: { handleClick: fn() },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -14,17 +12,9 @@ const preview: Preview = {
       },
     },
     nextjs: {
-      appDirectory: true
+      appDirectory: true,
     },
   },
 }
-
-// export const decorators = [
-//   (Story) => {
-//     return React.createElement(Layout,{
-//       children:React.createElement(Story)
-//     })
-//   }
-// ]
 
 export default preview

@@ -1,4 +1,4 @@
-import ProfileSideMenu from './ProfileSideMenu'
+import ProfileSideMenu from './_components/ProfileSideMenu'
 
 const layout = ({
   children,

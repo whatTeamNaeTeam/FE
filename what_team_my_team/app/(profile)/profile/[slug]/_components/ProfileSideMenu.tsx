@@ -12,7 +12,7 @@ const ProfileSideMenu = ({ userId }: { userId: string }) => {
   const menuItems = [
     { href: `/profile/${userId}`, label: '프로필' },
     { href: `/profile/${userId}/active`, label: '내 활동' },
-    { href: `/profile/${userId}/team`, label: '팀 관리' },
+    { href: `/profile/${userId}/teamManage`, label: '팀 관리' },
   ]
 
   return (
@@ -31,7 +31,7 @@ const ProfileSideMenu = ({ userId }: { userId: string }) => {
           </Link>
         ))}
       </div>
-      <button className=" text-left text-xl text-red-6" onClick={handleLogout}>
+      <button className="text-left text-xl text-red-6" onClick={handleLogout}>
         로그아웃
       </button>
     </aside>

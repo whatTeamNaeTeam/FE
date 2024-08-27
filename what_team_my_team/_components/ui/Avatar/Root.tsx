@@ -14,6 +14,7 @@ const AvatarRootVariants = cva(`inline-flex items-center justify-center`, {
     },
     rounded: {
       full: 'rounded-full',
+      rect: 'rounded-xl',
     },
   },
   defaultVariants: {

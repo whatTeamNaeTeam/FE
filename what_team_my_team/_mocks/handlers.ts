@@ -10,6 +10,9 @@ import {
   MainPageProjectListData,
   entireTeamData,
   assignTeamListData,
+  myTeamData,
+  myTeamDetailData,
+  notApprovedMemberData,
 } from './datas'
 
 export const handlers = [
@@ -44,8 +47,17 @@ export const handlers = [
       return HttpResponse.json(AccomplishedData)
     }
   }),
+  http.get(`*/user/profile/team-manage/detail/*`, () => {
+    return HttpResponse.json(myTeamDetailData)
+  }),
+  http.get(`*/user/profile/team-manage/*`, () => {
+    return HttpResponse.json(myTeamData)
+  }),
   http.get(`*/user/profile/*`, () => {
     return HttpResponse.json(ProfileData)
+  }),
+  http.get(`*/apply/*`, () => {
+    return HttpResponse.json(notApprovedMemberData)
   }),
   http.get(`*/team/detail/*`, () => {
     return HttpResponse.json(ProjectDetailData)

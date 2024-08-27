@@ -37,7 +37,6 @@ const DropdownMenuContent = React.forwardRef<
     <DropdownMenuPrimitive.Content
       className={cn(
         DropdownMenuContentVariants({ colorType, animate, size }),
-        'w-48 md:w-56',
         className,
       )}
       {...props}

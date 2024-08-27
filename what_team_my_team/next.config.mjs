@@ -15,6 +15,15 @@ const nextConfig = {
       },
     ],
   },
+  redirects() {
+    return [
+      {
+        source: '/project/:slug/manage',
+        destination: '/project/:slug/manage/member',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 export default nextConfig

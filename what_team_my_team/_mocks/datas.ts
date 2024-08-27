@@ -238,6 +238,69 @@ const entireTeamData = {
   })),
 }
 
+const myTeamData = {
+  team: [
+    {
+      id: 45,
+      title: '왜적 장호정을 물리쳐라잇',
+      leader_info: {
+        name: '강태원',
+        id: 1112,
+        image_url: 'https://avatars.githubusercontent.com/u/71972587?v=4',
+        is_leader: true,
+      },
+      member_count: 1,
+    },
+    {
+      id: 44,
+      title: '왜적 장호정을 물리쳐라',
+      leader_info: {
+        name: '김연재',
+        id: 1112,
+        image_url: 'https://avatars.githubusercontent.com/u/71972587?v=4',
+        is_leader: true,
+      },
+      member_count: 1,
+    },
+  ],
+}
+
+const myTeamDetailData = {
+  title: '왜적 장호정을 물리쳐라잇',
+  leader_info: {
+    name: '일이삼',
+    student_num: '201811318',
+    id: 1112,
+    image_url: 'https://avatars.githubusercontent.com/u/71972587?v=4',
+    position: '백엔드',
+    category: '팀장',
+  },
+  members_info: Array.from({ length: 6 }, (_, idx) => ({
+    name: '장호정',
+    student_num: '2020131313',
+    id: idx,
+    image_url: 'https://avatars.githubusercontent.com/u/71972587?v=4',
+    position: '백엔드',
+    category: '게임 기획',
+  })),
+  member_count: 2,
+  team_id: 49,
+}
+const notApprovedMemberData = Array.from({ length: 4 }, (_, idx) => ({
+  id: idx,
+  team_id: 36,
+  created_at: '2024-04-26T02:24:42.910791',
+  bio: '열심히 하겠습니다!!',
+  tech: '웹',
+  user_info: {
+    id: 127,
+    name: '이경자',
+    image_url:
+      'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/default/thumnail.jpg',
+    position: '디자이너',
+  },
+}))
+
 export {
   AssignData,
   EntireData,
@@ -249,4 +312,7 @@ export {
   MainPageProjectListData,
   assignTeamListData,
   entireTeamData,
+  myTeamData,
+  myTeamDetailData,
+  notApprovedMemberData,
 }
