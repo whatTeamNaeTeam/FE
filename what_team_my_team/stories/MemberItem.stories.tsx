@@ -16,5 +16,9 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
-  args: { memberData: convertSnakeToCamel(myTeamDetailData.members_info[0]) },
+  args: {
+    memberData: convertSnakeToCamel(myTeamDetailData.members_info[0]),
+    teamId: '1',
+    leaderId: 1,
+  },
 }
