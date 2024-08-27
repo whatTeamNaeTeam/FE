@@ -1,4 +1,4 @@
-import MemberContainer from './_components/MemberContainer'
+import { MemberContainer } from './_components/MemberContainer'
 
 const page = ({ params }: { params: { slug: string } }) => {
   const teamId = params.slug
