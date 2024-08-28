@@ -53,13 +53,13 @@ const ProfileData = {
     name: '강태원',
     student_num: '201811318',
     id: 2,
-    image: 'https://avatars.githubusercontent.com/u/71972587?v=4',
+    image_url: 'https://avatars.githubusercontent.com/u/71972587?v=4',
     is_approved: false,
     is_staff: false,
     position: '백엔드',
     explain: '열심히 하겠습니다!',
   },
-  urls: [
+  url: [
     {
       url: 'https://velog.io/@taegong_s',
     },
