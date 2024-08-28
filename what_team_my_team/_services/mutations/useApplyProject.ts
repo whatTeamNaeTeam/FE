@@ -11,21 +11,18 @@ interface ApplyProjectResponse {
   tech: string
 }
 interface ApplyProjectVariables {
-  projectId: string
+  categoryId: number
   content: string
 }
 
-const applyProject = (data: ApplyProjectVariables) => {
-  const { content, projectId } = data
+const applyProject = async ({ categoryId, content }: ApplyProjectVariables) => {
   const body = {
     bio: content,
   }
 
-  const response = axiosInstance
-    .post(`/team/apply/${projectId}`, body)
-    .then(({ data }) => data)
+  const response = await axiosInstance.post(`/apply/${categoryId}`, body)
 
-  return response
+  return response.data
 }
 
 const useApplyProject = () => {

@@ -15,7 +15,7 @@ const LinkList = ({ urls }: LinkListProps) => {
         {urls.map((url, idx) => (
           <li key={`${url}-${idx}`} className="flex items-center gap-2">
             <LinkAvatar size={'link'} url={url} />
-            <a href={url} className="text-sm ml-2">
+            <a href={url} className="text-sm ml-2" target="_blank">
               {url}
             </a>
           </li>
