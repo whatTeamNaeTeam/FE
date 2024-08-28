@@ -11,7 +11,7 @@ const TechInfo = ({ tech }: TechInfoProps) => {
     <div>
       <h3 className="text-base mb-2">기술 스택</h3>
       <ul className="flex gap-1 border border-gray-4 rounded-sm py-2 px-2">
-        {tech ? (
+        {tech && tech?.length > 0 ? (
           tech.map(({ name }, idx) => (
             <li
               key={`${name}-${idx}}`}
