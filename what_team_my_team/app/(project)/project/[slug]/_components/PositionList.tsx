@@ -1,11 +1,12 @@
 'use client'
 
-import { Tech } from '@/_services/queries/useProjectDetail'
 import React from 'react'
 import PositionItem from './PositionItem'
+import { Category } from '@/_services/queries/useProjectDetail'
+import { ConvertSnakeToCamel } from '@/_utils/convertSnakeToCamel'
 
 interface PositionListProps {
-  positions: Tech[]
+  positions: ConvertSnakeToCamel<Category[]>
 }
 
 const PositionList = ({ positions }: PositionListProps) => {
