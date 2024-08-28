@@ -91,7 +91,13 @@ const FormContainer = () => {
       formData.append('urls', urls)
     }
 
-    mutate(formData)
+    mutate(formData, {
+      onSuccess: (response) => {
+        alert('성공적으로 생성되었습니다. 승인을 기다려주세요.')
+        router.push(`/project/${response.team.id}`)
+      },
+      onError: () => alert('팀 생성에 실패하였습니다.'),
+    })
   }
 
   return (
