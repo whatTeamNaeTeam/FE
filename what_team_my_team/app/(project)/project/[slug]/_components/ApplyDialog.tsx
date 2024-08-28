@@ -6,51 +6,55 @@ import DialogOverlay from '@/_components/ui/Dialog/Overlay'
 import DialogPortal from '@/_components/ui/Dialog/Portal'
 import Dialog from '@/_components/ui/Dialog/Root'
 import useApplyProject from '@/_services/mutations/useApplyProject'
-import useProjectDetail, {
-  PROJECT_DETAIL_KEY,
-} from '@/_services/queries/useProjectDetail'
+import { PROJECT_DETAIL_KEY } from '@/_services/queries/useProjectDetail'
 import { applyDialogAtom } from '@/_stores/atoms/dialog'
+import { selectedPositionIdAtom } from '@/_stores/atoms/position'
 import { getQueryClient } from '@/app/getQueryClient'
 import { useAtom } from 'jotai'
 import React from 'react'
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
 
 interface ApplyDialogProps {
-  projectId: string
+  teamId: string
 }
 interface ApplyFormValueType {
   content: string
 }
 
-const ApplyDialog = ({ projectId }: ApplyDialogProps) => {
+const ApplyDialog = ({ teamId }: ApplyDialogProps) => {
+  const queryClient = getQueryClient()
   const [open, setOpen] = useAtom(applyDialogAtom)
-
+  const [selectedPositionId, setSelectedPositionId] = useAtom(
+    selectedPositionIdAtom,
+  )
   const { handleSubmit, control } = useForm<ApplyFormValueType>()
   const { field } = useController({
     name: 'content',
     control,
     rules: { required: '3자 이상 입력해주세요.' },
   })
-
-  const queryClient = getQueryClient()
   const { mutate, isPending } = useApplyProject()
-  const { refetch } = useProjectDetail(projectId)
 
   const onSubmit: SubmitHandler<ApplyFormValueType> = (data) => {
     const { content } = data
 
+    if (!selectedPositionId) {
+      return
+    }
+
     mutate(
-      { content, projectId },
+      { content, categoryId: selectedPositionId },
       {
         onSuccess: () => {
           alert('성공적으로 지원되었습니다.')
           queryClient.invalidateQueries({
-            queryKey: [PROJECT_DETAIL_KEY, projectId],
+            queryKey: [PROJECT_DETAIL_KEY, teamId],
           })
-          refetch()
+          setSelectedPositionId(null)
           setOpen(false)
         },
-        onError: () => {
+        onError: (err) => {
+          console.log(err)
           alert('알 수 없는 오류로 요청이 실패하였습니다.')
         },
       },
