@@ -17,7 +17,7 @@ export interface UserProfileReturn {
     position: string
     explain: string
   }
-  urls: Url[] | null
+  url: Url[] | null
   tech: { name: string }[] | null
   is_owner: boolean
 }

@@ -25,7 +25,7 @@ const ProfileContainer = ({ userId }: ProfileContainerProps) => {
             <PositionInfo position={data.profile.position} />
             <TechInfo tech={data.tech} />
             <MyExplainInfo explain={data.profile.explain} />
-            <LinkInfo urls={data.urls} />
+            <LinkInfo urls={data.url} />
           </div>
         </div>
       )}
