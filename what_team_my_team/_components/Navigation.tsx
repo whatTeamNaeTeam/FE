@@ -24,15 +24,22 @@ const Navigation = () => {
             height={30}
           />
         </Link>
-        {isLoggedIn && user ? (
-          <ProfileMenu user={user} />
-        ) : (
-          <Link href={'/signin'}>
-            <Button variant={'lined'} size={'sm'}>
-              로그인
-            </Button>
-          </Link>
-        )}
+        <div className="flex items-center gap-2">
+          {isLoggedIn && (
+            <Link href={'/teamAdd'}>
+              <Button size={'sm'}>팀 생성</Button>
+            </Link>
+          )}
+          {isLoggedIn && user ? (
+            <ProfileMenu user={user} />
+          ) : (
+            <Link href={'/signin'}>
+              <Button variant={'lined'} size={'sm'}>
+                로그인
+              </Button>
+            </Link>
+          )}
+        </div>
       </nav>
     </header>
   )
