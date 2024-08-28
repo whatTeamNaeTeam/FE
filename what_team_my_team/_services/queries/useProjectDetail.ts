@@ -1,103 +1,63 @@
 import axiosInstance from '@/_lib/axios'
+import {
+  convertSnakeToCamel,
+  ConvertSnakeToCamel,
+} from '@/_utils/convertSnakeToCamel'
 import { useQuery } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 
 export interface ProjectDetailReturn {
   team: {
     id: number
-    leader_id: number
-    name: string
+    leader_info: {
+      name: string
+      id: number
+      image_url: string
+    }
+    title: string
     explain: string
     genre: string
     like: number
     version: number
-    image: string
-    leader_name: string
+    image_url: string
+    view: number
+    category: Category[]
+    urls: string[]
   }
-  tech: {
-    id: number
-    tech: string
-    need_num: number
-    current_num: number
-  }[]
-  url: []
   is_leader: boolean
+  is_like: boolean
 }
-export interface SelectedProjectDetail {
-  team: Team
-  tech: Tech[]
-  url: []
-  isLeader: boolean
-}
-export interface Team {
-  id: number
-  leaderId: number
-  name: string
-  explain: string
-  genre: string
-  like: number
-  version: number
-  image: string
-  leaderName: string
-}
-export interface Tech {
+
+export type Category = {
   id: number
   tech: string
-  needNum: number
-  currentNum: number
+  need_num: number
+  current_num: number
 }
 
-export const getProjectDetail = (teamId: string) => {
-  const response = axiosInstance
-    .get(`/team/detail/${teamId}`)
-    .then(({ data }) => data)
+export const ProjectDetailApi = async (teamId: string) => {
+  const response = await axiosInstance.get(`/team/detail/${teamId}`)
 
-  return response
+  console.log(response.data)
+  return response.data
 }
 
 export const PROJECT_DETAIL_KEY = 'project-detail'
 
-const useProjectDetail = (teamId: string) => {
+export const useProjectDetail = ({ teamId }: { teamId: string }) => {
   const projectDetailQuery = useQuery<
     ProjectDetailReturn,
     AxiosError,
-    SelectedProjectDetail
+    ConvertSnakeToCamel<ProjectDetailReturn>
   >({
-    queryFn: () => getProjectDetail(teamId),
+    queryFn: () => ProjectDetailApi(teamId),
     queryKey: [PROJECT_DETAIL_KEY, teamId],
     select: (data) => {
-      const selectedTech: Tech[] = data.tech.map(
-        ({ id, tech, need_num, current_num }) => {
-          return {
-            id: id,
-            tech: tech,
-            needNum: need_num,
-            currentNum: current_num,
-          }
-        },
-      )
-      const selectedData: SelectedProjectDetail = {
-        team: {
-          id: data.team.id,
-          leaderId: data.team.leader_id,
-          name: data.team.name,
-          explain: data.team.explain,
-          genre: data.team.genre,
-          like: data.team.like,
-          version: data.team.version,
-          image: data.team.image,
-          leaderName: data.team.leader_name,
-        },
-        tech: selectedTech,
-        url: [...data.url],
-        isLeader: data.is_leader,
-      }
+      const convertedData = convertSnakeToCamel(data)
 
-      return selectedData
+      return convertedData
     },
   })
 
   return projectDetailQuery
 }
-
-export default useProjectDetail
