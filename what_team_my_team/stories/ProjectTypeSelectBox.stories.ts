@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import ProjectTypeSelectBox from '@/app/(profile)/profile/[slug]/active/_components/ProjectTypeSelect'
+import ProjectTypeSelectBox from '@/app/(profile)/profile/[slug]/(profile)/active/_components/ProjectTypeSelect'
 
 const meta = {
   title: 'Components/ProjectTypeSelectBox',

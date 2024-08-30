@@ -1,14 +1,12 @@
 import React from 'react'
 import ProfileContainer from './_components/ProfileContainer'
 import { getQueryClient } from '@/app/getQueryClient'
-import {
-  USER_PROFILE_KEY,
-  UserProfileReturn,
-} from '@/_services/queries/useUserProfile'
 import { dehydrate } from '@tanstack/react-query'
 import Hydrate from '@/_lib/hydrate.client'
 import axios from 'axios'
 import { cookies } from 'next/headers'
+import { GetUserProfileReturn } from '@/_services/type'
+import { USER_PROFILE_KEY } from '@/_hook/queries/profile/useUserProfile'
 
 const ProfilePage = async ({ params }: { params: { slug: string } }) => {
   const userId = params.slug
@@ -16,7 +14,7 @@ const ProfilePage = async ({ params }: { params: { slug: string } }) => {
   const accessCookie = cookieStore.get('access')?.value
 
   const queryClient = getQueryClient()
-  await queryClient.prefetchQuery<UserProfileReturn>({
+  await queryClient.prefetchQuery<GetUserProfileReturn>({
     queryKey: [USER_PROFILE_KEY, userId],
     queryFn: async () => {
       const response = await axios.get(
