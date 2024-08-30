@@ -5,7 +5,7 @@ const page = ({ params }: { params: { slug: string } }) => {
   const userId = params.slug
 
   return (
-    <div className="w-full px-2">
+    <div className="flex justify-center w-full px-2 pt-4">
       <ProfileContainer userId={userId} />
     </div>
   )
