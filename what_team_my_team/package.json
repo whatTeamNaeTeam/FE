@@ -7,7 +7,7 @@
     "dev:start": "node server.js",
     "mock": "npx tsx watch ./_mocks/http.ts",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -H local.whatmeow.shop",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
