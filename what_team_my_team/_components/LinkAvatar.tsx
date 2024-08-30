@@ -6,7 +6,7 @@ import AvatarImage from './ui/Avatar/Image'
 import AvatarFallback from './ui/Avatar/Fallback'
 
 interface ProfileAvatarProps extends AvatarRootProps {
-  url: string
+  url: string | null
 }
 
 const LinkAvatar = ({ url, ...props }: ProfileAvatarProps) => {
@@ -24,19 +24,26 @@ const LinkAvatar = ({ url, ...props }: ProfileAvatarProps) => {
 
     return middleDomain
   }
-  const checkMiddleDomain = (url: string) => {
-    const checkedMiddle = getMiddleDomain(url)
-    if (checkedMiddle.includes('github')) {
-      setAlt('github')
-      return '/assets/github.svg'
-    } else if (checkedMiddle.includes('notion')) {
-      setAlt('notion')
-      return '/assets/notion.svg'
-    } else {
+  const checkMiddleDomain = (url: string | null) => {
+    if (!url) {
       setAlt('link')
       return '/assets/link.svg'
     }
+
+    const checkedMiddle = getMiddleDomain(url)
+
+    if (checkedMiddle.includes('github')) {
+      setAlt('github')
+      return '/assets/github.svg'
+    }
+    if (checkedMiddle.includes('notion')) {
+      setAlt('notion')
+      return '/assets/notion.svg'
+    }
+    setAlt('link')
+    return '/assets/link.svg'
   }
+
   return (
     <AvatarRoot {...props}>
       <AvatarImage src={iconPath} alt={alt} />
