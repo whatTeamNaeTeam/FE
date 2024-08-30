@@ -1,11 +1,11 @@
 'use client'
 
 import LinkAvatar from '@/_components/LinkAvatar'
-import { Url } from '@/_services/queries/useUserProfile'
+import { ConvertedGetUserProfileReturn } from '@/_services/type'
 import React from 'react'
 
 interface LinkInfoProps {
-  urls: Url[] | null
+  urls: ConvertedGetUserProfileReturn['url']
 }
 
 const LinkInfo = ({ urls }: LinkInfoProps) => {

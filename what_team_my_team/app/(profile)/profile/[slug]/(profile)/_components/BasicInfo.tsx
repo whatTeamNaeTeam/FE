@@ -2,11 +2,11 @@
 
 import ProfileAvatar from '@/_components/ProfileAvatar'
 import Button from '@/_components/ui/Button'
-import { UserProfileCamel } from '@/_services/queries/useUserProfile'
+import { type ConvertedGetUserProfileReturn } from '@/_services/type'
 import Link from 'next/link'
 import React from 'react'
 
-const BasicInfo = ({ data }: { data: UserProfileCamel }) => {
+const BasicInfo = ({ data }: { data: ConvertedGetUserProfileReturn }) => {
   return (
     <div className="flex justify-between items-center mb-12">
       <div className="flex gap-4">
