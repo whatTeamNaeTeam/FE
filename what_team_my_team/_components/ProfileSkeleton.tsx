@@ -1,6 +1,6 @@
 export function ProfileSkeleton() {
   return (
-    <div className="w-full rounded-md animate-pulse shadow-sm">
+    <div className="w-full max-w-[1048px] rounded-md animate-pulse shadow-sm">
       <svg
         className="w-32 h-32 text-gray-4 mb-4"
         aria-hidden="true"
@@ -17,7 +17,7 @@ export function ProfileSkeleton() {
         <div className="w-[50%] h-4 bg-gray-4 rounded-full"></div>
         <div className="w-[24%] h-4 bg-gray-4 rounded-full"></div>
         <div className="w-[42%] h-4 bg-gray-4 rounded-full"></div>
-        <div className="w-[67%] h-4 bg-gray-4 rounded-full"></div>
+        <div className="w-[79%] h-4 bg-gray-4 rounded-full"></div>
         <div className="w-[50%] h-4 bg-gray-4 rounded-full"></div>
         <div className="w-[24%] h-4 bg-gray-4 rounded-full"></div>
         <div className="w-[42%] h-4 bg-gray-4 rounded-full"></div>
