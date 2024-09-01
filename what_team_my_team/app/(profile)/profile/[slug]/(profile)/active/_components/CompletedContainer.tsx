@@ -1,8 +1,8 @@
 'use client'
 
-import ProjectCard from '@/_components/ProjectCard'
+import { ProjectCard } from '@/_components/ProjectCard'
 import ProjectCardSkeleton from '@/_components/ProjectCardSkeleton'
-import useProjectCard from '@/_services/queries/useProjectCard'
+import { useActivePageProjectList } from '@/_hook/queries/project/useActivePageProjectList'
 import React from 'react'
 
 interface CompletedContainerProps {
@@ -10,7 +10,10 @@ interface CompletedContainerProps {
 }
 
 const CompletedContainer = ({ userId }: CompletedContainerProps) => {
-  const { data, isLoading } = useProjectCard(userId, 'accomplished')
+  const { data, isLoading } = useActivePageProjectList({
+    userId,
+    keyword: 'accomplished',
+  })
 
   return (
     <div className="w-full">
