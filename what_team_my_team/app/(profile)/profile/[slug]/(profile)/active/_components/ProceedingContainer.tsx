@@ -1,8 +1,8 @@
 'use client'
 
-import ProjectCard from '@/_components/ProjectCard'
+import { ProjectCard } from '@/_components/ProjectCard'
 import ProjectCardSkeleton from '@/_components/ProjectCardSkeleton'
-import useProjectCard from '@/_services/queries/useProjectCard'
+import { useActivePageProjectList } from '@/_hook/queries/project/useActivePageProjectList'
 import React from 'react'
 
 interface ProceedingContainerProps {
@@ -10,7 +10,10 @@ interface ProceedingContainerProps {
 }
 
 const ProceedingContainer = ({ userId }: ProceedingContainerProps) => {
-  const { data, isLoading } = useProjectCard(userId, 'inprogress')
+  const { data, isLoading } = useActivePageProjectList({
+    userId,
+    keyword: 'inprogress',
+  })
 
   return (
     <div className="w-full">

@@ -1,58 +1,28 @@
-import axiosInstance from '@/_lib/axios'
+import { Like } from '@/_types/project'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { AxiosError } from 'axios'
-import { LikeCamel } from '@/_types/project'
 import { convertSnakeToCamel } from '@/_utils/convertSnakeToCamel'
-import { PROJECT_CARD_KEY } from '../queries/useProjectCard'
-
-interface LikeStateResponse {
-  like: {
-    is_like: boolean
-    like_count: number
-  }
-  version: number
-}
-interface LikeStateVariables {
-  projectId: number
-  version: number
-}
+import { updateLikeApi } from '@/_services/like'
+import { PROJECT_CARD_KEY } from '@/_hook/queries/project/useActivePageProjectList'
 
 export const LIKE_STATE_KEY = 'like-info'
 
-const likeState = (projectId: number, version: number) => {
-  const body = {
-    version,
-  }
-
-  const response = axiosInstance
-    .post(`/like/${projectId}`, body)
-    .then(({ data }) => data)
-
-  return response
-}
-
-const useLikeState = () => {
+export function useUpdateLike() {
   const queryClient = useQueryClient()
 
-  const likeMutation = useMutation<
-    LikeStateResponse,
-    AxiosError,
-    LikeStateVariables,
-    { previousData: LikeCamel | undefined }
-  >({
-    mutationFn: ({ projectId, version }) => likeState(projectId, version),
+  const updateLikeMutation = useMutation({
+    mutationFn: updateLikeApi,
     onMutate: async ({ projectId }) => {
       await queryClient.cancelQueries({
         queryKey: [LIKE_STATE_KEY, projectId],
       })
 
-      const previousData = queryClient.getQueryData<LikeCamel>([
+      const previousData = queryClient.getQueryData<Like>([
         LIKE_STATE_KEY,
         projectId,
       ])
 
       if (previousData) {
-        const nextData: LikeCamel = {
+        const nextData: Like = {
           like: previousData.isLike
             ? previousData.like - 1
             : previousData.like + 1,
@@ -66,7 +36,7 @@ const useLikeState = () => {
     },
     onError: (_, { projectId }, context) => {
       if (context?.previousData) {
-        queryClient.setQueryData<LikeCamel>(
+        queryClient.setQueryData<Like>(
           [LIKE_STATE_KEY, projectId],
           context.previousData,
         )
@@ -79,16 +49,13 @@ const useLikeState = () => {
         version,
       } = convertSnakeToCamel(data)
 
-      const successData: LikeCamel = {
+      const successData: Like = {
         like: likeCount,
         isLike: isLike,
         version,
       }
 
-      queryClient.setQueryData<LikeCamel>(
-        [LIKE_STATE_KEY, projectId],
-        successData,
-      )
+      queryClient.setQueryData<Like>([LIKE_STATE_KEY, projectId], successData)
     },
     onSettled: (_, __, { projectId }) => {
       queryClient.invalidateQueries({ queryKey: [LIKE_STATE_KEY, projectId] })
@@ -98,7 +65,5 @@ const useLikeState = () => {
     },
   })
 
-  return likeMutation
+  return updateLikeMutation
 }
-
-export default useLikeState

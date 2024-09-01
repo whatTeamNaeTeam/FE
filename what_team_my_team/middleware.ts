@@ -13,6 +13,8 @@ export async function middleware(req: NextRequest) {
 
   const isAuthenticated = req.cookies.get('access')?.value ? true : false
 
+  console.log(isAuthenticated)
+
   if (isAuthRoute && isAuthenticated) {
     const homeURL = new URL('', req.nextUrl.origin)
     return NextResponse.redirect(homeURL.toString())
@@ -37,4 +39,4 @@ const SIGN_UP_PATH = '/signup'
 const AUTH_PATH = '/oauth'
 
 const authRoutes = [SIGN_IN_PATH, SIGN_UP_PATH, AUTH_PATH]
-const protectedRoutes = ['/setting', '/manage', '/teamAdd', '/teamManage', '']
+const protectedRoutes = ['/setting', '/manage', '/teamAdd', '/teamManage']
