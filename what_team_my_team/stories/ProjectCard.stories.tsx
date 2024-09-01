@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import ProjectCard, { ProjectCardProps } from '@/_components/ProjectCard'
+import { ProjectCard, ProjectCardProps } from '@/_components/ProjectCard'
 import Providers from '@/_lib/Provider'
 
 const meta = {
@@ -34,14 +34,16 @@ const example: ProjectCardProps = {
       },
     ],
     leaderInfo: {
+      imageUrl:
+        'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/test3/image.jpg',
       id: 2,
       name: '강태원',
     },
     like: 1,
     version: 5,
     view: 0,
-    genre: '웹',
     isLike: true,
+    isApproved: false,
   },
 }
 
