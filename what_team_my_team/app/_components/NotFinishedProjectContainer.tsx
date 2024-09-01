@@ -2,10 +2,10 @@
 
 import React, { useRef } from 'react'
 import { useObserver } from '@/_hook/useObserver'
-import useMainPageProjectList from '@/_services/queries/useMainPageProjectList'
-import ProjectCard from '@/_components/ProjectCard'
-import { ProjectCamel } from '@/_types/project'
+import { useMainPageProjectList } from '@/_hook/queries/project/useMainPageProjectList'
+import { ProjectCard } from '@/_components/ProjectCard'
 import { TailSpin } from 'react-loader-spinner'
+import { ConvertedGetMainPageProjectReturn } from '@/_services/type'
 
 const NotFinishedProjectContainer = () => {
   const bottom = useRef<HTMLDivElement | null>(null)
@@ -36,12 +36,16 @@ const NotFinishedProjectContainer = () => {
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {status === 'success' &&
           data.pages.map((group) =>
-            group.results.map((project: ProjectCamel) => (
-              <ProjectCard
-                key={`project-inprogress-${project.id}`}
-                project={project}
-              />
-            )),
+            group.results.map(
+              (
+                project: ConvertedGetMainPageProjectReturn['results'][number],
+              ) => (
+                <ProjectCard
+                  key={`project-inprogress-${project.id}`}
+                  project={project}
+                />
+              ),
+            ),
           )}
       </div>
       <div ref={bottom}></div>
