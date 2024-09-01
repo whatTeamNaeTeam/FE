@@ -1,9 +1,10 @@
 import { useQueryClient } from '@tanstack/react-query'
-import { LikeCamel } from '@/_types/project'
-import useLikeState, {
+import {
   LIKE_STATE_KEY,
-} from '@/_services/mutations/useLikeState'
+  useUpdateLike,
+} from '@/_hook/mutations/like/useUpdateLike'
 import { useEffect, useState } from 'react'
+import { Like } from '@/_types/project'
 
 interface UseLikeHandlerProps {
   projectId: number
@@ -12,7 +13,7 @@ interface UseLikeHandlerProps {
 
 const useLikeHandler = ({ projectId, version }: UseLikeHandlerProps) => {
   const queryClient = useQueryClient()
-  const likeMutation = useLikeState()
+  const likeMutation = useUpdateLike()
   const [isLike, setIsLike] = useState(false)
 
   const toggleLike = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -22,7 +23,7 @@ const useLikeHandler = ({ projectId, version }: UseLikeHandlerProps) => {
     likeMutation.mutate({ projectId, version })
   }
 
-  const data = queryClient.getQueryData<LikeCamel>([LIKE_STATE_KEY, projectId])
+  const data = queryClient.getQueryData<Like>([LIKE_STATE_KEY, projectId])
 
   useEffect(() => {
     setIsLike(!!data?.isLike)

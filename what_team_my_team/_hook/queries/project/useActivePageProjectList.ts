@@ -5,9 +5,9 @@ import { LIKE_STATE_KEY } from '@/_hook/mutations/like/useUpdateLike'
 import {
   ConvertedGetActivePageProjectListReturn,
   GetActivePageProjectListReturn,
-  LikeCamel,
 } from '@/_services/type'
 import { getActivePageProjectListApi } from '@/_services/project'
+import { Like } from '@/_types/project'
 
 export const PROJECT_CARD_KEY = 'project-card'
 
@@ -24,7 +24,7 @@ export function useActivePageProjectList({
     data: ConvertedGetActivePageProjectListReturn['team'],
   ) => {
     data.forEach((team) => {
-      const likeData: LikeCamel = {
+      const likeData: Like = {
         isLike: team.isLike,
         version: team.version,
         like: team.like,
