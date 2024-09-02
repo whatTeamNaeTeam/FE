@@ -7,31 +7,44 @@ import { useEffect, useState } from 'react'
 import { Like } from '@/_types/project'
 
 interface UseLikeHandlerProps {
-  projectId: number
-  version: number
+  projectId: number | string
+  initialData: Like
 }
 
-const useLikeHandler = ({ projectId, version }: UseLikeHandlerProps) => {
+const useLikeHandler = ({ projectId, initialData }: UseLikeHandlerProps) => {
   const queryClient = useQueryClient()
   const likeMutation = useUpdateLike()
-  const [isLike, setIsLike] = useState(false)
+  const [isLike, setIsLike] = useState(initialData.isLike)
+  const [likeCount, setLikeCount] = useState(initialData.like)
+  const [version, setVersion] = useState(initialData.version)
 
   const toggleLike = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
     e.preventDefault()
 
-    likeMutation.mutate({ projectId, version })
+    const likeData = queryClient.getQueryData<Like>([LIKE_STATE_KEY, projectId])
+
+    if (!likeData) {
+      return
+    }
+
+    likeMutation.mutate({ projectId, version: likeData.version })
   }
 
-  const data = queryClient.getQueryData<Like>([LIKE_STATE_KEY, projectId])
-
   useEffect(() => {
-    setIsLike(!!data?.isLike)
-  }, [data])
+    const data = queryClient.getQueryData<Like>([LIKE_STATE_KEY, projectId])
+    if (data) {
+      setIsLike(!!data.isLike)
+      setLikeCount(data.like)
+      setVersion(data.version)
+    }
+  }, [initialData])
 
   return {
     toggleLike,
-    isLike: isLike,
+    isLike,
+    likeCount,
+    version,
   }
 }
 
