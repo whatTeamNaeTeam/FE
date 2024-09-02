@@ -1,4 +1,4 @@
-import { Project } from '@/_types/project'
+import { Project, ProjectDetail } from '@/_types/project'
 import { ConvertSnakeToCamel } from './../_utils/convertSnakeToCamel'
 
 export interface GetUserProfileReturn {
@@ -42,3 +42,10 @@ export interface GetActivePageProjectListReturn {
 }
 export type ConvertedGetActivePageProjectListReturn =
   ConvertSnakeToCamel<GetActivePageProjectListReturn>
+
+export interface GetProjectDetailReturn {
+  team: ProjectDetail
+  is_leader: boolean
+}
+export type ConvertedGetProjectDetailReturn =
+  ConvertSnakeToCamel<GetProjectDetailReturn>
