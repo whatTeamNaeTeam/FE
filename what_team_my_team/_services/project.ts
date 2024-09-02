@@ -27,3 +27,9 @@ export async function getActivePageProjectListApi({
 
   return response.data
 }
+
+export const getProjectDetailApi = async ({ teamId }: { teamId: string }) => {
+  const response = await axiosInstance.get(`/team/detail/${teamId}`)
+
+  return response.data
+}
