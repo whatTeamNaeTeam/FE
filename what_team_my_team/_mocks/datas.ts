@@ -95,8 +95,12 @@ const ProjectDetailData: ProjectDetailReturn = {
     genre: '게임',
     like: 1,
     version: 1,
-    image_url:
-      'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/d7a3677a-87de-4e0d-8b05-d207507c9179/image.jpg',
+    image_url: [
+      'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/208f1ba4-27c6-4cea-97a7-5ed8404b3045/image.jpg',
+      'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/208f1ba4-27c6-4cea-97a7-5ed8404b3045/image.jpg',
+      'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/208f1ba4-27c6-4cea-97a7-5ed8404b3045/image.jpg',
+      'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/208f1ba4-27c6-4cea-97a7-5ed8404b3045/image.jpg',
+    ],
     view: 3,
     category: [
       {
