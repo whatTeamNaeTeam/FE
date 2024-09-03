@@ -5,7 +5,7 @@ import DialogContent from '@/_components/ui/Dialog/Content'
 import DialogOverlay from '@/_components/ui/Dialog/Overlay'
 import DialogPortal from '@/_components/ui/Dialog/Portal'
 import Dialog from '@/_components/ui/Dialog/Root'
-import { PROJECT_DETAIL_KEY } from '@/_hook/queries/project/useProjectDetail'
+import { PROJECT_DETAIL_KEY } from '@/_constants/queryKey'
 import useApplyProject from '@/_services/mutations/useApplyProject'
 import { applyDialogAtom } from '@/_stores/atoms/dialog'
 import { selectedPositionIdAtom } from '@/_stores/atoms/position'
@@ -48,7 +48,7 @@ const ApplyDialog = ({ teamId }: ApplyDialogProps) => {
         onSuccess: () => {
           alert('성공적으로 지원되었습니다.')
           queryClient.invalidateQueries({
-            queryKey: [PROJECT_DETAIL_KEY, teamId],
+            queryKey: [...PROJECT_DETAIL_KEY, teamId],
           })
           setSelectedPositionId(null)
           setOpen(false)

@@ -1,15 +1,14 @@
 'use client'
 
 import Button from '@/_components/ui/Button'
-import { Category } from '@/_services/queries/useProjectDetail'
 import { applyDialogAtom } from '@/_stores/atoms/dialog'
 import { selectedPositionIdAtom } from '@/_stores/atoms/position'
-import { ConvertSnakeToCamel } from '@/_utils/convertSnakeToCamel'
+import { ConvertedProjectDetail } from '@/_types/project'
 import { useSetAtom } from 'jotai'
 import React from 'react'
 
 interface PositionItemProps {
-  position: ConvertSnakeToCamel<Category>
+  position: ConvertedProjectDetail['category'][number]
 }
 
 const PositionItem = ({ position }: PositionItemProps) => {
