@@ -8,8 +8,7 @@ import {
 } from '@/_services/type'
 import { getActivePageProjectListApi } from '@/_services/project'
 import { Like } from '@/_types/project'
-
-export const PROJECT_CARD_KEY = 'project-card'
+import { PROJECT_LIST_KEY } from '@/_constants/queryKey'
 
 export function useActivePageProjectList({
   userId,
@@ -42,7 +41,7 @@ export function useActivePageProjectList({
     ConvertedGetActivePageProjectListReturn
   >({
     queryFn: () => getActivePageProjectListApi({ userId, keyword }),
-    queryKey: [PROJECT_CARD_KEY, keyword],
+    queryKey: [...PROJECT_LIST_KEY, keyword],
     select: (data) => {
       const convertedData = convertSnakeToCamel(data)
 

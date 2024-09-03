@@ -2,11 +2,10 @@
 
 import React from 'react'
 import PositionItem from './PositionItem'
-import { Category } from '@/_services/queries/useProjectDetail'
-import { ConvertSnakeToCamel } from '@/_utils/convertSnakeToCamel'
+import { ConvertedCategory } from '@/_types/project'
 
 interface PositionListProps {
-  positions: ConvertSnakeToCamel<Category[]>
+  positions: ConvertedCategory[]
 }
 
 const PositionList = ({ positions }: PositionListProps) => {

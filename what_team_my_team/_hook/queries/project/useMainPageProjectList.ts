@@ -6,8 +6,7 @@ import {
   GetMainPageProjectListReturn,
   ConvertedGetMainPageProjectReturn,
 } from '@/_services/type'
-
-const MAIN_PROJECT_CARD = 'project-card'
+import { PROJECT_LIST_KEY } from '@/_constants/queryKey'
 
 export function useMainPageProjectList({ keyword }: { keyword: string }) {
   const mainPageProjectListQuery = useInfiniteQuery<
@@ -19,7 +18,7 @@ export function useMainPageProjectList({ keyword }: { keyword: string }) {
   >({
     queryFn: ({ pageParam }) =>
       getMainPageProjectListApi({ pageParam, keyword }),
-    queryKey: [MAIN_PROJECT_CARD],
+    queryKey: [...PROJECT_LIST_KEY],
     initialPageParam: null,
     getNextPageParam: (lastPage) => {
       return lastPage.next || null

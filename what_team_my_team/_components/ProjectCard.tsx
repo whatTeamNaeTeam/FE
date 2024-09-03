@@ -34,8 +34,7 @@ export function ProjectCard({
     >
       <LikeBtn
         projectId={id}
-        version={version}
-        isLike={isLike}
+        initialData={{ like, isLike, version }}
         className="absolute top-2 right-2 z-30"
       />
       <ImageSection image={imageUrl} />

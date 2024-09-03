@@ -44,6 +44,7 @@ const example: ProjectCardProps = {
     view: 0,
     isLike: true,
     isApproved: false,
+    genre: '게임',
   },
 }
 

@@ -9,8 +9,14 @@ export interface Project {
   like: number
   version: number
   view: number
+  genre: string
   is_like: boolean
   is_approved: boolean
+}
+export interface ProjectDetail extends Omit<Project, 'image_url'> {
+  explain: string
+  image_url: string[]
+  urls: string[]
 }
 
 export interface Category {
@@ -32,4 +38,5 @@ export interface Like {
 }
 
 export type ConvertedProject = ConvertSnakeToCamel<Project>
+export type ConvertedProjectDetail = ConvertSnakeToCamel<ProjectDetail>
 export type ConvertedCategory = ConvertSnakeToCamel<Category>

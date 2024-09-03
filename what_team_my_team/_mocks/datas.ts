@@ -1,6 +1,6 @@
 import { AssignMember } from '@/_services/queries/useAssignMemberList'
 import { EntireMember } from '@/_services/queries/useEntireMemberList'
-import { ProjectDetailReturn } from '@/_services/queries/useProjectDetail'
+import { GetProjectDetailReturn } from '@/_services/type'
 
 const AssignData: AssignMember[] = [
   {
@@ -81,7 +81,7 @@ const ProfileData = {
   is_owner: true,
 }
 
-const ProjectDetailData: ProjectDetailReturn = {
+const ProjectDetailData: GetProjectDetailReturn = {
   team: {
     id: 31,
     leader_info: {
@@ -95,8 +95,13 @@ const ProjectDetailData: ProjectDetailReturn = {
     genre: '게임',
     like: 1,
     version: 1,
-    image_url:
-      'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/d7a3677a-87de-4e0d-8b05-d207507c9179/image.jpg',
+    is_like: false,
+    image_url: [
+      'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/208f1ba4-27c6-4cea-97a7-5ed8404b3045/image.jpg',
+      'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/208f1ba4-27c6-4cea-97a7-5ed8404b3045/image.jpg',
+      'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/208f1ba4-27c6-4cea-97a7-5ed8404b3045/image.jpg',
+      'https://wtnt-bucket.s3.ap-northeast-2.amazonaws.com/team/208f1ba4-27c6-4cea-97a7-5ed8404b3045/image.jpg',
+    ],
     view: 3,
     category: [
       {
@@ -113,9 +118,9 @@ const ProjectDetailData: ProjectDetailReturn = {
       },
     ],
     urls: ['www.daum.net', 'https://github.com/fnzksxl123'],
+    is_approved: false,
   },
   is_leader: false,
-  is_like: false,
 }
 const ApplyResponseData = {
   id: 4,
