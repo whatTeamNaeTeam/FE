@@ -2,7 +2,6 @@ import { Like } from '@/_types/project'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { convertSnakeToCamel } from '@/_utils/convertSnakeToCamel'
 import { updateLikeApi } from '@/_services/like'
-import { PROJECT_CARD_KEY } from '@/_hook/queries/project/useActivePageProjectList'
 
 export const LIKE_STATE_KEY = 'like-info'
 
@@ -43,7 +42,6 @@ export function useUpdateLike() {
       }
     },
     onSuccess: (data, { projectId }) => {
-      console.log(data)
       const {
         like: { isLike, likeCount },
         version,
@@ -60,7 +58,7 @@ export function useUpdateLike() {
     onSettled: (_, __, { projectId }) => {
       queryClient.invalidateQueries({ queryKey: [LIKE_STATE_KEY, projectId] })
       queryClient.invalidateQueries({
-        queryKey: [PROJECT_CARD_KEY],
+        queryKey: ['project'],
       })
     },
   })
