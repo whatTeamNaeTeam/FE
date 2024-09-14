@@ -2,8 +2,6 @@ import { HttpResponse, delay, http } from 'msw'
 import {
   AccomplishedData,
   ApplyResponseData,
-  AssignData,
-  EntireData,
   InprogressProjectData,
   ProfileData,
   ProjectDetailData,
@@ -16,21 +14,6 @@ import {
 } from './datas'
 
 export const handlers = [
-  http.get(`*/admin/user/manage`, () => {
-    return HttpResponse.json(AssignData)
-  }),
-  http.patch(`*/admin/user/manage/*`, () => {
-    return HttpResponse.json()
-  }),
-  http.delete(`*/admin/user/manage/*`, () => {
-    return HttpResponse.json()
-  }),
-  http.get(`*/admin/user/list`, () => {
-    return HttpResponse.json(EntireData)
-  }),
-  http.delete(`*/admin/user/list`, () => {
-    return HttpResponse.json({ success: true })
-  }),
   http.get(`*/user/profile/activity/:id`, ({ request }) => {
     const url = new URL(request.url)
 
