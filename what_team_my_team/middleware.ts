@@ -13,8 +13,6 @@ export async function middleware(req: NextRequest) {
 
   const isAuthenticated = req.cookies.get('access')?.value ? true : false
 
-  console.log(isAuthenticated)
-
   if (isAuthRoute && isAuthenticated) {
     const homeURL = new URL('', req.nextUrl.origin)
     return NextResponse.redirect(homeURL.toString())
