@@ -1,16 +1,25 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import Img from './ui/Img'
-import { useAtomValue } from 'jotai'
-import { isLoggedInState, userState } from '@/_stores/atoms/user'
+import { useAtom } from 'jotai'
+import { userState } from '@/_stores/atoms/user'
 import Link from 'next/link'
 import Button from './ui/Button'
 import ProfileMenu from './ProfileMenu'
+import useUser from '@/_hook/queries/auth/useUser'
 
 const Navigation = () => {
-  const isLoggedIn = useAtomValue(isLoggedInState)
-  const user = useAtomValue(userState)
+  const { data } = useUser()
+  const [user, setUser] = useAtom(userState)
+
+  useEffect(() => {
+    if (data?.user) {
+      setUser(data.user)
+    } else {
+      setUser(null)
+    }
+  }, [data])
 
   return (
     <header className="flex justify-center w-full">
@@ -25,12 +34,12 @@ const Navigation = () => {
           />
         </Link>
         <div className="flex items-center gap-2">
-          {isLoggedIn && (
+          {user && (
             <Link href={'/teamAdd'}>
               <Button size={'sm'}>팀 생성</Button>
             </Link>
           )}
-          {isLoggedIn && user ? (
+          {user ? (
             <ProfileMenu user={user} />
           ) : (
             <Link href={'/signin'}>
