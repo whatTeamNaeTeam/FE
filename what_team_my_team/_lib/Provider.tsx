@@ -15,6 +15,10 @@ function Providers({ children }: React.PropsWithChildren) {
           refetchOnMount: false,
           refetchOnReconnect: false,
           refetchOnWindowFocus: false,
+          throwOnError: true,
+        },
+        mutations: {
+          throwOnError: true,
         },
       },
     }),
