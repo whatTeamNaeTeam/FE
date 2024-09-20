@@ -49,3 +49,41 @@ export interface GetProjectDetailReturn {
 }
 export type ConvertedGetProjectDetailReturn =
   ConvertSnakeToCamel<GetProjectDetailReturn>
+
+export interface ApplyProjectReturn {
+  id: number
+  team_id: number
+  user_id: number
+  created_at: string
+  bio: string
+  tech: string
+}
+
+export interface CheckLeaderApiReturn {
+  is_leader: boolean
+}
+export type ConvertedCheckLeaderApiReturn =
+  ConvertSnakeToCamel<CheckLeaderApiReturn>
+
+export interface SocialLoginApiReturn {
+  registered: boolean
+  user: {
+    id: number
+    image_url: string
+    name: string
+    student_num: number
+  }
+}
+export type ConvertedSocialLoginApiReturn =
+  ConvertSnakeToCamel<SocialLoginApiReturn>
+
+export interface getUserReturn {
+  user: {
+    id: number
+    image_url: string
+    name: string
+    student_num: string
+  }
+}
+
+export type ConvertedGetUserReturn = ConvertSnakeToCamel<getUserReturn>
