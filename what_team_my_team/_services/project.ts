@@ -3,6 +3,7 @@ import {
   DuplicatedError,
   ErrorCode,
   HttpError,
+  LimitExceededError,
   NotFoundError,
 } from './../_types/error'
 import axiosInstance from '@/_lib/axios'
@@ -16,11 +17,24 @@ export async function getMainPageProjectListApi({
   pageParam: string | null
   keyword: string
 }) {
-  const response = await axiosInstance.get(
-    pageParam || `/team/list?keyword=${keyword}`,
-  )
+  try {
+    const response = await axiosInstance.get(
+      pageParam || `/team/list?keyword=${keyword}`,
+    )
 
-  return response.data
+    return response.data
+  } catch (error) {
+    if (axios.isAxiosError<CustomErrorResponse>(error) && error.response) {
+      if (error.response) {
+        const httpStatus = error.response.status
+        const { code } = error.response.data
+
+        throw new HttpError(httpStatus, code)
+      } else {
+        throw new CustomError('9999')
+      }
+    }
+  }
 }
 
 export async function getActivePageProjectListApi({
@@ -43,7 +57,6 @@ export async function getProjectDetailApi({ teamId }: { teamId: string }) {
 
     return response.data
   } catch (error) {
-    console.log(error)
     if (axios.isAxiosError<CustomErrorResponse>(error) && error.response) {
       if (error.response) {
         const httpStatus = error.response.status
@@ -77,13 +90,15 @@ export async function applyProjectApi({
 
     return response.data
   } catch (error) {
-    console.log(error)
     if (axios.isAxiosError<CustomErrorResponse>(error) && error.response) {
       if (error.response) {
         const httpStatus = error.response.status
         const { code } = error.response.data
 
-        if (code === ErrorCode.DUPLICATED_POSITION_APPLY) {
+        if (code === ErrorCode.POSITION_IS_FULL) {
+          throw new LimitExceededError(httpStatus, code)
+        }
+        if (code === ErrorCode.POSITION_APPLY_IS_DUPLICATED) {
           throw new DuplicatedError(httpStatus, code)
         }
 
@@ -93,4 +108,16 @@ export async function applyProjectApi({
       }
     }
   }
+}
+
+export async function checkLeaderApi({ teamId }: { teamId: string }) {
+  const response = await axiosInstance.get(`/team/check-leader/${teamId}`)
+
+  return response.data
+}
+
+export async function addProjectApi(data: FormData) {
+  const response = await axiosInstance.post('/team/create', data)
+
+  return response.data
 }
