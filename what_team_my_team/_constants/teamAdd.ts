@@ -5,13 +5,53 @@ export const defaultCategory = {
   memberCount: '1',
 }
 
+export enum Genre {
+  and = '안드로이드',
+  ios = 'IOS',
+  web = '웹',
+  cross = '크로스플랫폼',
+  game = '게임',
+  extra = '기타',
+}
+
 export const GenreData = [
-  { value: '안드로이드' },
-  { value: 'IOS' },
-  { value: '웹' },
-  { value: '게임' },
-  { value: '기타' },
+  { value: Genre.and },
+  { value: Genre.ios },
+  { value: Genre.web },
+  { value: Genre.cross },
+  { value: Genre.extra },
 ]
+
+export enum FrontEndSubCategory {
+  web = '웹',
+  ios = 'IOS',
+  and = '안드로이드',
+  cross = '크로스플랫폼',
+}
+export enum BackEndSubCategory {
+  java = '자바',
+  python = '파이썬',
+  node = '노드',
+}
+export enum ProductionSubCategory {
+  uiux = 'UI/UX 기획',
+  game = '게임 기획',
+  content = '컨텐츠 기획',
+  pm = '프로젝트 매니저',
+}
+export enum GameSubCategory {
+  unity = '유니티',
+  unreal = '언리얼',
+}
+export enum AISubCategory {
+  deep = '딥러닝',
+  machine = '머신러닝',
+  dataEngineer = '데이터 엔지니어',
+}
+export enum DesignSubCategory {
+  game = '게임 그래픽 디자인',
+  uiux = 'UI/UX 디자인',
+}
 
 export const mainCategoryData = [
   '프론트엔드',
@@ -24,25 +64,42 @@ export const mainCategoryData = [
 export const subCategoryData = [
   {
     type: '프론트엔드',
-    tags: ['웹', 'IOS', '안드로이드', '크로스플랫폼'],
+    tags: [
+      FrontEndSubCategory.web,
+      FrontEndSubCategory.ios,
+      FrontEndSubCategory.cross,
+      FrontEndSubCategory.and,
+    ],
   },
   {
     type: '백엔드',
-    tags: ['자바', '파이썬', '노드'],
+    tags: [
+      BackEndSubCategory.java,
+      BackEndSubCategory.node,
+      BackEndSubCategory.python,
+    ],
   },
   {
     type: '기획',
-    tags: ['UI/UX기획', '게임기획', '컨텐츠 기획', '프로젝트 매니저'],
+    tags: [
+      ProductionSubCategory.content,
+      ProductionSubCategory.game,
+      ProductionSubCategory.pm,
+      ProductionSubCategory.uiux,
+    ],
   },
-  { type: '디자인', tags: ['그래픽디자인', 'UI/UX디자인'] },
+  { type: '디자인', tags: [DesignSubCategory.game, DesignSubCategory.uiux] },
 
   {
     type: '게임',
-    tags: ['유니티', '언리얼'],
+    tags: [GameSubCategory.unity, GameSubCategory.unreal],
   },
   {
     type: 'AI',
-    tags: ['딥러닝', '머신러닝', '데이터 엔지니어'],
+    tags: [
+      AISubCategory.dataEngineer,
+      AISubCategory.deep,
+      AISubCategory.machine,
+    ],
   },
-  // { type: '미정', tags: ['미정'] },
 ]
