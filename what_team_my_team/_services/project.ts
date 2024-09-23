@@ -121,3 +121,72 @@ export async function addProjectApi(data: FormData) {
 
   return response.data
 }
+
+export async function acceptMemberApi({ requestId }: { requestId: number }) {
+  const response = await axiosInstance.patch(`/apply/${requestId}`)
+
+  return response.data
+}
+
+export async function rejectMemberApi({ requestId }: { requestId: number }) {
+  const response = await axiosInstance.delete(`/apply/${requestId}`)
+
+  return response.data
+}
+
+export async function exportMemberApi({
+  teamId,
+  userId,
+}: {
+  teamId: string
+  userId: number
+}) {
+  const body = {
+    ban_user: userId,
+  }
+
+  const response = await axiosInstance.delete(
+    `/user/profile/team-manage/detail/${teamId}`,
+    { data: body },
+  )
+
+  return response.data
+}
+
+export async function deleteTeamApi({ teamId }: { teamId: string }) {
+  const response = await axiosInstance.delete(
+    `/user/profile/team-manage/${teamId}`,
+  )
+
+  return response.data
+}
+
+export async function leaveTeamApi({ teamId }: { teamId: string }) {
+  const response = await axiosInstance.patch(
+    `/user/profile/team-manage/${teamId}`,
+  )
+
+  return response.data
+}
+
+export async function getMyTeamApi({ userId }: { userId: string }) {
+  const response = await axiosInstance.get(
+    `/user/profile/team-manage/${userId}`,
+  )
+
+  return response.data
+}
+
+export async function getMyTeamDetailApi({ teamId }: { teamId: string }) {
+  const response = await axiosInstance.get(
+    `/user/profile/team-manage/detail/${teamId}`,
+  )
+
+  return response.data
+}
+
+export async function getNotApprovedMemberApi({ teamId }: { teamId: string }) {
+  const response = await axiosInstance.get(`/apply/${teamId}`)
+
+  return response.data
+}
