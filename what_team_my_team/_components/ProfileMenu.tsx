@@ -4,11 +4,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import ProfileAvatar from './ProfileAvatar'
 import useHandleLogout from '@/_hook/useHandleLogout'
 import { FaChevronDown } from 'react-icons/fa'
-import { UserCamel } from '@/_services/mutations/useSocialLogin'
 import ProfileMenuItem from './ProfileMenuItem'
+import { ConvertedUser } from '@/_types/auth'
 
 interface ProfileMenuProps {
-  user: UserCamel
+  user: ConvertedUser
 }
 
 const ProfileMenu = ({ user }: ProfileMenuProps) => {
