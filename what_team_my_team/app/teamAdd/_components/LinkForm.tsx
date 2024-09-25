@@ -31,9 +31,9 @@ const LinkForm = ({ control }: LinkFormProps) => {
 
   return (
     <div className="w-full">
-      <div className="flex justify-between">
-        <h5 className="mb-2 font-bold">관련 링크</h5>
-        <Button type="button" onClick={handleLinkAdd}>
+      <div className="flex items-center justify-between mb-2">
+        <h5 className="font-bold">관련 링크</h5>
+        <Button type="button" size={'sm'} onClick={handleLinkAdd}>
           추가
         </Button>
       </div>
@@ -45,6 +45,7 @@ const LinkForm = ({ control }: LinkFormProps) => {
               type="button"
               variant={'lined'}
               onClick={() => handleRemove(idx)}
+              className="flex-shrink-0"
             >
               삭제
             </Button>

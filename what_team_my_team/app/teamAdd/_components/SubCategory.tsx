@@ -2,23 +2,36 @@
 
 import React, { MouseEventHandler, useEffect, useState } from 'react'
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuPortal,
-  DropdownMenuTrigger,
-} from '@/_components/ui/DropdownMenu'
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectPortal,
+  SelectTrigger,
+  SelectValue,
+  SelectViewport,
+} from '@/_components/ui/Select'
 import { Control, useController } from 'react-hook-form'
 import { TeamAddFormValueType } from './FormContainer'
-import { subCategoryData } from '@/_constants/teamAdd'
+import {
+  MainCategoryType,
+  subCategoryData,
+  SubCategoryType,
+} from '@/_constants/teamAdd'
+import { cn } from '@/_lib/utils'
+import { SelectItemText } from '@radix-ui/react-select'
 
 interface SubCategoryProps {
   control: Control<TeamAddFormValueType>
   index: number
-  selectedMain: string
+  selectedMain: MainCategoryType
 }
 
-const SubCategory = ({ control, index, selectedMain }: SubCategoryProps) => {
+export function SubCategoryInput({
+  control,
+  index,
+  selectedMain,
+}: SubCategoryProps) {
   const { field } = useController({
     name: `category.${index}.subCategory`,
     control,
@@ -41,46 +54,59 @@ const SubCategory = ({ control, index, selectedMain }: SubCategoryProps) => {
     }
   }, [selectedMain])
 
-  const handleChangeValue: MouseEventHandler<HTMLDivElement> = (e) => {
-    const { textContent } = e.currentTarget
-
-    if (!textContent) {
-      return
-    }
-
-    setSelectedValue(textContent)
-    field.onChange(textContent)
+  const handleChangeValue = (value: string) => {
+    setSelectedValue(value as SubCategoryType<MainCategoryType>)
+    field.onChange(value)
   }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        <div className="w-full p-2 border focus-within:border-gray-6 rounded-md">
-          <input
-            disabled
-            className="outline-none bg-inherit text-sm text-gray-8"
-            value={selectedValue}
-          />
-        </div>
-        {/* <input disabled value={selectedValue} /> */}
-      </DropdownMenuTrigger>
-      <DropdownMenuPortal>
-        <DropdownMenuContent>
-          {subCategoryData
-            .filter((item) => item.type === selectedMain)
-            .map((item) =>
-              item.tags.map((tag, idx) => (
-                <DropdownMenuItem key={idx} onClick={handleChangeValue}>
-                  {tag}
-                </DropdownMenuItem>
-              )),
-            )}
-
-          {/* <DropdownMenuItem onClick={handleChangeValue}>기타</DropdownMenuItem> */}
-        </DropdownMenuContent>
-      </DropdownMenuPortal>
-    </DropdownMenu>
+    <Select
+      defaultValue={field.value}
+      value={field.value}
+      onValueChange={(value) => handleChangeValue(value)}
+    >
+      <SelectTrigger asChild>
+        <button
+          className={cn(
+            'w-full text-left select-none items-center justify-center rounded-md py-2 text-sm font-medium ',
+            'border p-2 text-gray-8',
+            'bg-inherit',
+            'focus:outline-none focus-visible:ring focus-visible:ring-indigo-4 focus-visible:ring-opacity-75',
+            'group',
+            'radix-state-open:bg-gray-5',
+            'radix-state-on:bg-gray-50 ',
+            'radix-state-instant-open:bg-gray-50 radix-state-delayed-open:bg-gray-50',
+          )}
+          type="button"
+        >
+          <SelectValue />
+        </button>
+      </SelectTrigger>
+      <SelectPortal>
+        <SelectContent>
+          <SelectViewport className="bg-white p-2 rounded-lg shadow-lg">
+            <SelectGroup>
+              {subCategoryData
+                .filter((item) => item.type === selectedMain)
+                .map((item) =>
+                  item.tags.map((tag, idx) => (
+                    <SelectItem
+                      value={tag}
+                      key={`${item}${idx}`}
+                      className={cn(
+                        'relative flex items-center px-8 py-2 rounded-md text-sm text-gray-700 font-medium focus:bg-gray-100',
+                        'radix-disabled:opacity-50',
+                        'focus:outline-none select-none',
+                      )}
+                    >
+                      <SelectItemText>{tag}</SelectItemText>
+                    </SelectItem>
+                  )),
+                )}
+            </SelectGroup>
+          </SelectViewport>
+        </SelectContent>
+      </SelectPortal>
+    </Select>
   )
 }
-
-export default SubCategory
