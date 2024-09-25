@@ -2,7 +2,9 @@ import { MswComponent } from '@/_components/MSWComponents'
 import Navigation from '@/_components/Navigation'
 import JotaiProvider from '@/_lib/JotaiProvider'
 import Providers from '@/_lib/Provider'
+import { Toaster } from 'react-hot-toast'
 import '@/styles/global.css'
+import { CommonErrorBoundary } from '@/_components/error/CommonErrorBoundary'
 
 export default function RootLayout({
   children,
@@ -16,7 +18,8 @@ export default function RootLayout({
         <JotaiProvider>
           <body>
             <Navigation />
-            {children}
+            <CommonErrorBoundary>{children}</CommonErrorBoundary>
+            <Toaster position="bottom-right" />
           </body>
         </JotaiProvider>
       </Providers>
