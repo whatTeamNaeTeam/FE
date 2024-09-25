@@ -1,5 +1,6 @@
 'use client'
 
+import NoDataComponent from '@/_components/NoDataComponent'
 import { ProjectCard } from '@/_components/ProjectCard'
 import ProjectCardSkeleton from '@/_components/ProjectCardSkeleton'
 import { useActivePageProjectList } from '@/_hook/queries/project/useActivePageProjectList'
@@ -26,7 +27,10 @@ const CompletedContainer = ({ userId }: CompletedContainerProps) => {
 
       {data &&
         (data.team.length === 0 ? (
-          <div className="w-full h-[200px]">프로젝트가 없습니다.</div>
+          <NoDataComponent
+            title="완료 프로젝트가 없습니다."
+            img={'/assets/stakeholder.png'}
+          />
         ) : (
           <div className="grid gird-cols-1 gap-4 sm:grid-cols-2">
             {data.team.map((project) => (
