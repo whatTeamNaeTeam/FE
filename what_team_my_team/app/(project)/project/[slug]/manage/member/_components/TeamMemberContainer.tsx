@@ -1,10 +1,10 @@
 'use client'
 
-import useMyTeamDetail from '@/_services/queries/useMyTeamDetail'
 import React from 'react'
 import { useAtomValue } from 'jotai'
 import { userState } from '@/_stores/atoms/user'
 import MemberList from './MemberList'
+import { useMyTeamDetail } from '@/_hook/mutations/project/useMyTeamDetail'
 
 interface TeamMemberContainerProps {
   teamId: string
