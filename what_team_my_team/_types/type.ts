@@ -18,7 +18,6 @@ export interface ProjectDetail extends Omit<Project, 'image_url'> {
   image_url: string[]
   urls: string[]
 }
-
 export interface Category {
   id: number
   tech: string
@@ -30,13 +29,28 @@ export interface Leader {
   name: string
   image_url: string
 }
-
 export interface Like {
   like: number
   isLike: boolean
   version: number
 }
+export interface Member {
+  name: string
+  student_num: string
+  id: number
+  image_url: string
+  position: string
+  category: string
+}
+export interface User {
+  id: number
+  image_url: string
+  name: string
+  student_num: string
+}
 
 export type ConvertedProject = ConvertSnakeToCamel<Project>
 export type ConvertedProjectDetail = ConvertSnakeToCamel<ProjectDetail>
 export type ConvertedCategory = ConvertSnakeToCamel<Category>
+export type ConvertedMember = ConvertSnakeToCamel<Member>
+export type ConvertedUser = ConvertSnakeToCamel<User>
