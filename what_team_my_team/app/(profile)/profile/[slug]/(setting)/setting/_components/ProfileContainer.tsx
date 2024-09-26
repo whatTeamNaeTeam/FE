@@ -3,7 +3,7 @@
 import { BasicInfoContainer } from './BasicInfoContainer'
 import { LinkContainer } from './LinkContainer'
 import { TechContainer } from './TechContainer'
-import { ProfileSkeleton } from '@/_components/ProfileSkeleton'
+import { ProfileSkeleton } from '@/_components/loading/ProfileSkeleton'
 import { FaChevronLeft } from 'react-icons/fa'
 import { useRouter } from 'next/navigation'
 import { useUserProfile } from '@/_hook/queries/profile/useUserProfile'
