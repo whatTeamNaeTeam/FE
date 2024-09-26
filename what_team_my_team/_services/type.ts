@@ -1,4 +1,4 @@
-import { Project, ProjectDetail } from '@/_types/project'
+import { Project, ProjectDetail, User } from '@/_types/type'
 import { ConvertSnakeToCamel } from './../_utils/convertSnakeToCamel'
 
 export interface GetUserProfileReturn {
@@ -71,19 +71,14 @@ export interface SocialLoginApiReturn {
     id: number
     image_url: string
     name: string
-    student_num: number
+    student_num: string
   }
 }
 export type ConvertedSocialLoginApiReturn =
   ConvertSnakeToCamel<SocialLoginApiReturn>
 
 export interface getUserReturn {
-  user: {
-    id: number
-    image_url: string
-    name: string
-    student_num: string
-  }
+  user: User
 }
 export type ConvertedGetUserReturn = ConvertSnakeToCamel<getUserReturn>
 
