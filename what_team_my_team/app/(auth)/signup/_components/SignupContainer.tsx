@@ -2,17 +2,17 @@
 
 import React, { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import useSignup from '@/_services/mutations/useSignup'
 import SignupModal from '@/_components/SignupModal'
 import Button from '@/_components/ui/Button'
-import useEmailCode from '@/_services/mutations/useEmailAccess'
 import ValidCodeInput from './ValidCodeInput'
 import NameInput from './NameInput'
 import StudentNumInput from './StudentNumInput'
 import EmailInput from './EmailInput'
 import ValidTimer from './ValidTimer'
-import { useRouter } from 'next/navigation'
 import PositionInput from './PositionInput'
+import { useSignup } from '@/_hook/mutations/auth/useSignup'
+import { useGetEmailCode } from '@/_hook/mutations/auth/useGetEmailCode'
+import { useCheckEmailCode } from '@/_hook/mutations/auth/useCheckEmailCode'
 
 export type UserRegisterFormValueType = {
   [K in keyof typeof REGISTER_FIELD_NAMES]: string
@@ -35,14 +35,13 @@ const SignupContainer = () => {
   const [isValidError, setIsValidError] = useState<boolean>(false)
   const [validErrorMessage, setValidErrorMessage] = useState<string>('')
 
-  const router = useRouter()
   const { control, handleSubmit, watch } = useForm<UserRegisterFormValueType>()
-  const { signupMutation } = useSignup()
-
-  const { getCodeMutation, checkCodeMutation } = useEmailCode()
+  const signupMutation = useSignup()
+  const getEmailCodeQuery = useGetEmailCode()
+  const checkEmailCodeQuery = useCheckEmailCode()
 
   const handleGetEmailValid = (email: string) => {
-    getCodeMutation.mutate(
+    getEmailCodeQuery.mutate(
       { email },
       {
         onSuccess: () => {
@@ -51,18 +50,12 @@ const SignupContainer = () => {
           setIsValidTimer(true)
           setValidTimer(300)
         },
-        onError: (error) => {
-          if (error.response?.status === 401) {
-            alert('로그인이 만료되었습니다.')
-            router.push('/signin')
-          }
-        },
       },
     )
   }
 
   const handleValid = (code: string) => {
-    checkCodeMutation.mutate(
+    checkEmailCodeQuery.mutate(
       { email: watch(REGISTER_FIELD_NAMES.email), code: code },
       {
         onSuccess: () => {
@@ -84,9 +77,6 @@ const SignupContainer = () => {
       onSuccess: () => {
         setIsModalOpen(true)
       },
-      onError: (error) => {
-        console.log(error)
-      },
     })
   }
 
@@ -96,16 +86,10 @@ const SignupContainer = () => {
         className="flex flex-col w-full p-12"
         onSubmit={handleSubmit(handleSignup)}
       >
-        <div className="mb-2">
+        <div className="flex flex-col gap-1">
           <NameInput control={control} />
-        </div>
-        <div className="mb-2">
           <StudentNumInput control={control} />
-        </div>
-        <div className="mb-2">
           <PositionInput control={control} />
-        </div>
-        <div className="mb-2">
           <EmailInput
             control={control}
             handleGetEmailValid={handleGetEmailValid}
