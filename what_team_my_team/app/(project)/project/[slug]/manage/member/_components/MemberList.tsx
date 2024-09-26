@@ -1,14 +1,14 @@
 'use client'
 
-import { MyTeamDetailResponse } from '@/_services/queries/useMyTeamDetail'
-import { ConvertSnakeToCamel } from '@/_utils/convertSnakeToCamel'
 import MemberItem from './MemberItem'
 import { cn } from '@/_lib/utils'
+import NoDataComponent from '@/_components/NoDataComponent'
+import { ConvertedMyTeamDetailReturn } from '@/_services/type'
 
 interface MemberListProps {
   teamId: string
   isLoading: boolean
-  data: ConvertSnakeToCamel<MyTeamDetailResponse> | undefined
+  data: ConvertedMyTeamDetailReturn | undefined
 }
 
 const MemberList = ({ teamId, isLoading, data }: MemberListProps) => {
@@ -18,13 +18,11 @@ const MemberList = ({ teamId, isLoading, data }: MemberListProps) => {
       {isLoading && <div>로딩중...</div>}
       {data &&
         (data.membersInfo.length === 0 ? (
-          <div className="flex flex-col items-center justify-center w-full">
-            <img src="/assets/stakeholder.png" width={200} height={200} />
-            <span className="font-bold text-lg mt-4 text-gray-8">
-              팀원이 없습니다.
-            </span>
-            <p>함께할 팀원들을 구해보아요!</p>
-          </div>
+          <NoDataComponent
+            img={'/assets/stakeholder.png'}
+            title="팀원이 없습니다."
+            content="함께할 팀원들을 구해보아요!"
+          />
         ) : (
           <ul
             className={cn(

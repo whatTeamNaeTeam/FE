@@ -1,13 +1,22 @@
 'use client'
 
 import React from 'react'
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+import {
+  QueryClientProvider,
+  QueryClient,
+  QueryCache,
+} from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ReactQueryStreamedHydration } from '@tanstack/react-query-next-experimental'
+import { useApiError } from '@/_hook/useApiError'
 
 function Providers({ children }: React.PropsWithChildren) {
+  const { handleError } = useApiError()
   const [client] = React.useState(
     new QueryClient({
+      queryCache: new QueryCache({
+        onError: handleError,
+      }),
       defaultOptions: {
         queries: {
           staleTime: 5000,
@@ -15,6 +24,10 @@ function Providers({ children }: React.PropsWithChildren) {
           refetchOnMount: false,
           refetchOnReconnect: false,
           refetchOnWindowFocus: false,
+          throwOnError: true,
+        },
+        mutations: {
+          onError: handleError,
         },
       },
     }),

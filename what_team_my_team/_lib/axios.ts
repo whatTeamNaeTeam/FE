@@ -1,4 +1,9 @@
-import axios from 'axios'
+import { AuthError, CustomErrorResponse } from '@/_types/error'
+import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios'
+
+interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
+  _retry?: boolean
+}
 
 export const baseURL =
   process.env.NEXT_PUBLIC_API_MOCKING === 'enabled'
@@ -9,11 +14,15 @@ const axiosInstance = axios.create({
   baseURL,
 })
 
-const getNewAccessToken = async () => {
+function isRefreshRequest(url: string | undefined) {
+  return url === '/auth/token/refresh'
+}
+
+async function getNewAccessToken() {
   try {
     const response = await axiosInstance.post('/auth/token/refresh')
 
-    return response.data
+    return response
   } catch (error) {
     console.log(error)
     throw error
@@ -23,6 +32,8 @@ const getNewAccessToken = async () => {
 axiosInstance.interceptors.request.use(
   function (config) {
     config.headers['X-from'] = 'web'
+    config.headers['X-admin'] = false
+    config.headers['X-debug'] = true
     config.withCredentials = true
 
     return config
@@ -36,20 +47,36 @@ axiosInstance.interceptors.response.use(
   function (response) {
     return response
   },
-  async function (error) {
-    if (error.config.url === '/auth/token/refresh') {
-      return Promise.reject(error)
-    }
+  async function (error: AxiosError) {
+    const originalRequest: CustomAxiosRequestConfig | undefined = error.config
 
-    if (error.response.status === 401 || error.response.status === 403) {
+    if (
+      error.response?.status === 401 &&
+      !isRefreshRequest(originalRequest?.url) &&
+      originalRequest &&
+      !originalRequest._retry
+    ) {
+      originalRequest._retry = true
       try {
         await getNewAccessToken()
 
-        const originalRequest = error.config
+        try {
+          return await axiosInstance(originalRequest)
+        } catch (newRequestError) {
+          return Promise.reject(newRequestError)
+        }
+      } catch (refreshTokenError) {
+        if (
+          axios.isAxiosError<CustomErrorResponse>(refreshTokenError) &&
+          (refreshTokenError.response?.status === 403 ||
+            refreshTokenError.response?.status === 401)
+        ) {
+          const httpStatus = refreshTokenError.response.status
+          const code = refreshTokenError.response.data.code
+          sessionStorage.clear()
 
-        return await axiosInstance(originalRequest)
-      } catch (oError) {
-        throw oError
+          throw new AuthError(httpStatus, code)
+        }
       }
     }
 

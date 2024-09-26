@@ -7,7 +7,7 @@ interface ProjectExplainProps {
   explain: string
 }
 
-const ProjectExplain = ({ explain }: ProjectExplainProps) => {
+export function ProjectExplain({ explain }: ProjectExplainProps) {
   return (
     <div>
       <h3 className="text-xl font-bold mb-2">프로젝트 설명</h3>
@@ -20,5 +20,3 @@ const ProjectExplain = ({ explain }: ProjectExplainProps) => {
     </div>
   )
 }
-
-export default ProjectExplain

@@ -1,15 +1,14 @@
 'use client'
 
-import {
-  NOT_APPROVED_MEMBER_KEY,
-  useNotApprovedMember,
-} from '@/_services/queries/useNotApprovedMember'
 import ProfileAvatar from '@/_components/ProfileAvatar'
 import Link from 'next/link'
 import Button from '@/_components/ui/Button'
-import { useAcceptMemberWithLeader } from '@/_services/mutations/useAcceptMemberWithLeader'
-import { useRejectMemberWithLeader } from '@/_services/mutations/useRejectMemberWithLeader'
 import { useQueryClient } from '@tanstack/react-query'
+import NoDataComponent from '@/_components/NoDataComponent'
+import { useNotApprovedMember } from '@/_hook/mutations/project/useNotApprovedMember'
+import { useAcceptMember } from '@/_hook/mutations/project/useAcceptMember'
+import { NOT_APPROVED_MEMBER_KEY } from '@/_constants/queryKey'
+import { useRejectMember } from '@/_hook/mutations/project/useRejectMember'
 
 interface MemberContainerProps {
   teamId: string
@@ -22,7 +21,11 @@ export const MemberContainer = ({ teamId }: MemberContainerProps) => {
     <>
       {isLoading && <div>로딩중...</div>}
       {data && data.length === 0 ? (
-        <div>승인 대기 목록이 비어있습니다.</div>
+        <NoDataComponent
+          img="/assets/stakeholder.png"
+          title="승인을 기다리는 인원이 없습니다."
+          content="조금 더 기다리면 지원이 마구 올꺼에요 !"
+        />
       ) : (
         data && (
           <ul className="flex flex-col gap-1">
@@ -59,7 +62,7 @@ const AcceptBtn = ({
   teamId: string
 }) => {
   const queryClient = useQueryClient()
-  const { mutate } = useAcceptMemberWithLeader()
+  const { mutate } = useAcceptMember()
 
   const handleClickBtn = () => {
     mutate(
@@ -68,7 +71,7 @@ const AcceptBtn = ({
         onError: (err) => console.log(err),
         onSuccess: () => {
           queryClient.invalidateQueries({
-            queryKey: [NOT_APPROVED_MEMBER_KEY, teamId],
+            queryKey: [...NOT_APPROVED_MEMBER_KEY, teamId],
           })
           alert('성공')
         },
@@ -92,7 +95,7 @@ const RejectBtn = ({
 }) => {
   const queryClient = useQueryClient()
 
-  const { mutate } = useRejectMemberWithLeader()
+  const { mutate } = useRejectMember()
   const handleClickBtn = () => {
     mutate(
       { requestId },
@@ -100,7 +103,7 @@ const RejectBtn = ({
         onError: () => alert('알 수 없는 에러가 발생하였습니다.'),
         onSuccess: () => {
           queryClient.invalidateQueries({
-            queryKey: [NOT_APPROVED_MEMBER_KEY, teamId],
+            queryKey: [...NOT_APPROVED_MEMBER_KEY, teamId],
           })
           alert('성공적입니다.')
         },

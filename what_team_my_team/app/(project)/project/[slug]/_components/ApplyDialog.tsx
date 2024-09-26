@@ -6,7 +6,7 @@ import DialogOverlay from '@/_components/ui/Dialog/Overlay'
 import DialogPortal from '@/_components/ui/Dialog/Portal'
 import Dialog from '@/_components/ui/Dialog/Root'
 import { PROJECT_DETAIL_KEY } from '@/_constants/queryKey'
-import useApplyProject from '@/_services/mutations/useApplyProject'
+import { useApplyProject } from '@/_hook/mutations/project/useApplyProject'
 import { applyDialogAtom } from '@/_stores/atoms/dialog'
 import { selectedPositionIdAtom } from '@/_stores/atoms/position'
 import { getQueryClient } from '@/app/getQueryClient'
@@ -21,7 +21,7 @@ interface ApplyFormValueType {
   content: string
 }
 
-const ApplyDialog = ({ teamId }: ApplyDialogProps) => {
+export function ApplyDialog({ teamId }: ApplyDialogProps) {
   const queryClient = getQueryClient()
   const [open, setOpen] = useAtom(applyDialogAtom)
   const [selectedPositionId, setSelectedPositionId] = useAtom(
@@ -45,17 +45,15 @@ const ApplyDialog = ({ teamId }: ApplyDialogProps) => {
     mutate(
       { content, categoryId: selectedPositionId },
       {
+        onSettled: () => {
+          setOpen(false)
+          setSelectedPositionId(null)
+        },
         onSuccess: () => {
           alert('성공적으로 지원되었습니다.')
           queryClient.invalidateQueries({
             queryKey: [...PROJECT_DETAIL_KEY, teamId],
           })
-          setSelectedPositionId(null)
-          setOpen(false)
-        },
-        onError: (err) => {
-          console.log(err)
-          alert('알 수 없는 오류로 요청이 실패하였습니다.')
         },
       },
     )
@@ -90,5 +88,3 @@ const ApplyDialog = ({ teamId }: ApplyDialogProps) => {
     </Dialog>
   )
 }
-
-export default ApplyDialog

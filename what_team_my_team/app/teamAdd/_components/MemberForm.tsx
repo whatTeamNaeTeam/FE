@@ -3,11 +3,11 @@
 import React, { useState } from 'react'
 import { Control, useFieldArray } from 'react-hook-form'
 import { TeamAddFormValueType } from './FormContainer'
-import MainCategory from './MainCategory'
-import SubCategory from './SubCategory'
 import Button from '@/_components/ui/Button'
 import MemberCount from './MemberCount'
 import { defaultCategory } from '@/_constants/teamAdd'
+import { MainCategoryInput } from './MainCategory'
+import { SubCategoryInput } from './SubCategory'
 
 interface MemberFormProps {
   control: Control<TeamAddFormValueType>
@@ -40,37 +40,39 @@ const MemberForm = ({ control }: MemberFormProps) => {
   }
 
   return (
-    <div>
-      <div className="flex justify-between items-center">
-        <h5 className="mb-2 font-bold">모집인원 *</h5>
-        <Button onClick={handleAppend} type="button">
+    <div className="w-full">
+      <div className="flex justify-between items-center mb-2 ">
+        <h5 className="font-bold">모집인원 *</h5>
+        <Button onClick={handleAppend} size={'sm'} type="button">
           추가
         </Button>
       </div>
-      <ul className="flex flex-col gap-y-2">
+      <ul className="flex flex-col gap-y-2 w-full">
         {fields.map((item, idx) => {
           return (
-            <li key={item.id} className="flex items-center">
-              <div className="flex gap-x-4">
-                <MainCategory
+            <li key={item.id} className="flex items-center w-full">
+              <div className="flex gap-x-4 w-full ">
+                <MainCategoryInput
                   control={control}
                   index={idx}
                   setSelectedMain={setSelectedMain}
                 />
-                <SubCategory
+                <SubCategoryInput
                   control={control}
                   index={idx}
                   selectedMain={selectedMain[idx]}
                 />
               </div>
-              <MemberCount control={control} index={idx} />
-              <Button
-                variant={'lined'}
-                onClick={() => handleRemove(idx)}
-                type="button"
-              >
-                삭제
-              </Button>
+              <div className="flex flex-shrink-0">
+                <MemberCount control={control} index={idx} />
+                <Button
+                  variant={'lined'}
+                  onClick={() => handleRemove(idx)}
+                  type="button"
+                >
+                  삭제
+                </Button>
+              </div>
             </li>
           )
         })}

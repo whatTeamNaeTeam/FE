@@ -15,14 +15,25 @@ const ProjectTitleForm = ({ control }: ProjectTitleFormProps) => {
   } = useController({
     name: 'title',
     control,
-    rules: { required: '프로젝트 제목을 입력해주세요.' },
+    rules: {
+      required: '프로젝트 제목을 입력해주세요.',
+      minLength: {
+        value: 2,
+        message: '프로젝트 제목은 최소 2자 이상 30자 이하로 작성해야 됩니다.',
+      },
+      maxLength: {
+        value: 30,
+        message: '프로젝트 제목은 최소 2자 이상 30자 이하로 작성해야 됩니다.',
+      },
+    },
   })
+
   return (
     <div>
       <h5 className="mb-2 font-bold">프로젝트명 *</h5>
       <input
         className="border p-2 text-sm rounded-sm w-full"
-        placeholder="3~20자 이내로 입력해주세요."
+        placeholder="2~30자 이내로 입력해주세요."
         value={field.value}
         onChange={field.onChange}
         ref={field.ref}

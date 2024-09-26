@@ -1,14 +1,14 @@
 'use client'
 
 import React from 'react'
-import PositionItem from './PositionItem'
-import { ConvertedCategory } from '@/_types/project'
+import { PositionItem } from './PositionItem'
+import { ConvertedGetProjectDetailReturn } from '@/_services/type'
 
 interface PositionListProps {
-  positions: ConvertedCategory[]
+  positions: ConvertedGetProjectDetailReturn['team']['category']
 }
 
-const PositionList = ({ positions }: PositionListProps) => {
+export function PositionList({ positions }: PositionListProps) {
   return (
     <div>
       <h3 className="text-xl font-bold mb-2">필요 포지션</h3>
@@ -20,5 +20,3 @@ const PositionList = ({ positions }: PositionListProps) => {
     </div>
   )
 }
-
-export default PositionList

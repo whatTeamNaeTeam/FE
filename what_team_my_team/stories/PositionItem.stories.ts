@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import PositionItem from '@/app/(project)/project/[slug]/_components/PositionItem'
+import { PositionItem } from '@/app/(project)/project/[slug]/_components/PositionItem'
 
 const meta = {
   title: 'Components/PositionItem',

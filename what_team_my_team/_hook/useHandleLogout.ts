@@ -1,17 +1,15 @@
-import useLogout from '@/_services/mutations/useLogout'
-import { isLoggedInState, userState } from '@/_stores/atoms/user'
+import { userState } from '@/_stores/atoms/user'
 import { useSetAtom } from 'jotai'
+import { useLogout } from './mutations/auth/useLogout'
 
 const useHandleLogout = () => {
   const setUserState = useSetAtom(userState)
-  const setIsLoggedIn = useSetAtom(isLoggedInState)
   const { mutate, isSuccess } = useLogout()
 
   const handleLogout = () => {
     mutate()
     if (isSuccess) {
       setUserState(null)
-      setIsLoggedIn(false)
     }
   }
 

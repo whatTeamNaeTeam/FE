@@ -2,11 +2,11 @@ import React from 'react'
 import TeamMemberContainer from './_components/TeamMemberContainer'
 import { cookies } from 'next/headers'
 import { getQueryClient } from '@/app/getQueryClient'
-import { MANAGE_MY_TEAM_DETAIL_KEY } from '@/_services/queries/useMyTeamDetail'
 import axios from 'axios'
 import { dehydrate } from '@tanstack/react-query'
 import Hydrate from '@/_lib/hydrate.client'
 import { baseURL } from '@/_lib/axios'
+import { MANAGE_MY_TEAM_DETAIL_KEY } from '@/_constants/queryKey'
 
 const page = async ({ params }: { params: { slug: string } }) => {
   const teamId = params.slug
@@ -15,7 +15,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
 
   const queryClient = getQueryClient()
   await queryClient.prefetchQuery({
-    queryKey: [MANAGE_MY_TEAM_DETAIL_KEY, teamId],
+    queryKey: [...MANAGE_MY_TEAM_DETAIL_KEY, teamId],
     queryFn: async () => {
       const response = await axios.get(
         `${baseURL}/user/profile/team-manage/detail/${teamId}`,

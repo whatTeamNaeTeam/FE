@@ -8,17 +8,16 @@ import {
   DropdownMenuPortal,
   DropdownMenuTrigger,
 } from '@/_components/ui/DropdownMenu'
-import { useBanMemberFromProject } from '@/_services/mutations/useBanMemberFromProject'
-import { Member } from '@/_services/queries/useMyTeamDetail'
+import { useExportMember } from '@/_hook/mutations/project/useExportMember'
 import { userState } from '@/_stores/atoms/user'
-import { ConvertSnakeToCamel } from '@/_utils/convertSnakeToCamel'
+import { ConvertedMember } from '@/_types/type'
 import { useAtomValue } from 'jotai'
 import React from 'react'
 import { FaEllipsisV, FaTrash } from 'react-icons/fa'
 
 interface MemberItemProps {
   teamId: string
-  memberData: ConvertSnakeToCamel<Member>
+  memberData: ConvertedMember
   leaderId: number
 }
 
@@ -65,7 +64,7 @@ const MemberManageDropdown = ({
   teamId,
   userId,
 }: MemberManageDropdownProps) => {
-  const { mutate } = useBanMemberFromProject()
+  const { mutate } = useExportMember()
   const handleBanMember = () => {
     mutate(
       { teamId, userId },

@@ -16,7 +16,17 @@ const ExplainForm = ({ control }: ExplainFormProps) => {
   } = useController({
     name: 'explain',
     control,
-    rules: { required: '프로젝트 설명을 입력해주세요.' },
+    rules: {
+      required: '프로젝트 설명을 입력해주세요.',
+      minLength: {
+        value: 1,
+        message: '프로젝트 설명은 최소 1자 이상 2000자 이하로 작성해야 됩니다.',
+      },
+      maxLength: {
+        value: 2000,
+        message: '프로젝트 설명은 최소 1자 이상 2000자 이하로 작성해야 됩니다.',
+      },
+    },
   })
   return (
     <div className="flex flex-col w-full">
@@ -27,9 +37,9 @@ const ExplainForm = ({ control }: ExplainFormProps) => {
         preview={'edit'}
         value={field.value}
         onChange={field.onChange}
+        data-color-mode="light"
       />
       {error && <p className="text-red-6 text-sm mt-2">{error.message}</p>}
-      {/* <MDEditor.Markdown source={value} style={{ whiteSpace: 'pre-wrap' }} /> */}
     </div>
   )
 }

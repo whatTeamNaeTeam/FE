@@ -1,17 +1,12 @@
-import { UserCamel } from '@/_services/mutations/useSocialLogin'
+import { ConvertedUser } from '@/_types/type'
 import { atomWithStorage, createJSONStorage } from 'jotai/utils'
 
-const userStorage = createJSONStorage<UserCamel | null>(() => sessionStorage)
-const isLoggedInStorage = createJSONStorage<boolean>(() => sessionStorage)
+const userStorage = createJSONStorage<ConvertedUser | null>(
+  () => sessionStorage,
+)
 
-export const userState = atomWithStorage<UserCamel | null>(
+export const userState = atomWithStorage<ConvertedUser | null>(
   'userState',
   null,
   userStorage,
-)
-
-export const isLoggedInState = atomWithStorage(
-  'isLoggedInState',
-  false,
-  isLoggedInStorage,
 )

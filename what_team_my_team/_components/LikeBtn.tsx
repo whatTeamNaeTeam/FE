@@ -2,7 +2,7 @@
 
 import useLikeHandler from '@/_hook/useLikeHandler'
 import { cn } from '@/_lib/utils'
-import { Like } from '@/_types/project'
+import { Like } from '@/_types/type'
 import React, { ButtonHTMLAttributes } from 'react'
 import { FaHeart } from 'react-icons/fa'
 
@@ -11,7 +11,7 @@ interface LikeBtnProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   projectId: number
 }
 
-const LikeBtn = ({ projectId, initialData, className }: LikeBtnProps) => {
+export function LikeBtn({ projectId, initialData, className }: LikeBtnProps) {
   const { toggleLike, isLike } = useLikeHandler({ projectId, initialData })
 
   return (
@@ -20,5 +20,3 @@ const LikeBtn = ({ projectId, initialData, className }: LikeBtnProps) => {
     </button>
   )
 }
-
-export default LikeBtn

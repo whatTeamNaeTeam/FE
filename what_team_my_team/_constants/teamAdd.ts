@@ -1,48 +1,110 @@
-export const defaultLink = { link: '' }
-export const defaultCategory = {
-  mainCategory: '프론트엔드',
-  subCategory: '웹',
-  memberCount: '1',
-}
+export const Genre = {
+  and: '안드로이드',
+  ios: 'IOS',
+  web: '웹',
+  cross: '크로스플랫폼',
+  game: '게임',
+  extra: '기타',
+} as const
 
 export const GenreData = [
-  { value: '안드로이드' },
-  { value: 'IOS' },
-  { value: '웹' },
-  { value: '게임' },
-  { value: '기타' },
-]
+  { value: Genre.and },
+  { value: Genre.ios },
+  { value: Genre.web },
+  { value: Genre.cross },
+  { value: Genre.extra },
+] as const
 
-export const mainCategoryData = [
-  '프론트엔드',
-  '백엔드',
-  '기획',
-  '게임',
-  'AI',
-  '디자인',
-]
+export const FrontEndSubCategory = {
+  web: '웹',
+  ios: 'IOS',
+  and: '안드로이드',
+  cross: '크로스플랫폼',
+} as const
+export const BackEndSubCategory = {
+  java: '자바',
+  python: '파이썬',
+  node: '노드',
+} as const
+export const ProductionSubCategory = {
+  uiux: 'UI/UX 기획',
+  game: '게임 기획',
+  content: '컨텐츠 기획',
+  pm: '프로젝트 매니저',
+} as const
+export const GameSubCategory = {
+  unity: '유니티',
+  unreal: '언리얼',
+} as const
+export const AISubCategory = {
+  deep: '딥러닝',
+  machine: '머신러닝',
+  dataEngineer: '데이터 엔지니어',
+} as const
+export const DesignSubCategory = {
+  game: '게임 그래픽 디자인',
+  uiux: 'UI/UX 디자인',
+} as const
+
+export const MainCategory = {
+  front: '프론트엔드',
+  back: '백엔드',
+  prod: '기획',
+  game: '게임',
+  ai: 'AI',
+  design: '디자인',
+} as const
+export type MainCategoryType = (typeof MainCategory)[keyof typeof MainCategory]
+export const mainCategoryData = Object.values(MainCategory)
+
+export type SubCategoryMap = {
+  [MainCategory.front]: (typeof FrontEndSubCategory)[keyof typeof FrontEndSubCategory]
+  [MainCategory.back]: (typeof BackEndSubCategory)[keyof typeof BackEndSubCategory]
+  [MainCategory.prod]: (typeof ProductionSubCategory)[keyof typeof ProductionSubCategory]
+  [MainCategory.design]: (typeof DesignSubCategory)[keyof typeof DesignSubCategory]
+  [MainCategory.game]: (typeof GameSubCategory)[keyof typeof GameSubCategory]
+  [MainCategory.ai]: (typeof AISubCategory)[keyof typeof AISubCategory]
+}
+export type SubCategoryType<T extends MainCategoryType> =
+  T extends keyof SubCategoryMap ? SubCategoryMap[T] : never
+
 export const subCategoryData = [
   {
-    type: '프론트엔드',
-    tags: ['웹', 'IOS', '안드로이드', '크로스플랫폼'],
+    type: MainCategory.front,
+    tags: Object.values(FrontEndSubCategory),
   },
   {
-    type: '백엔드',
-    tags: ['자바', '파이썬', '노드'],
+    type: MainCategory.back,
+    tags: Object.values(BackEndSubCategory),
   },
   {
-    type: '기획',
-    tags: ['UI/UX기획', '게임기획', '컨텐츠 기획', '프로젝트 매니저'],
+    type: MainCategory.prod,
+    tags: Object.values(ProductionSubCategory),
   },
-  { type: '디자인', tags: ['그래픽디자인', 'UI/UX디자인'] },
+  {
+    type: MainCategory.design,
+    tags: Object.values(DesignSubCategory),
+  },
 
   {
-    type: '게임',
-    tags: ['유니티', '언리얼'],
+    type: MainCategory.game,
+    tags: Object.values(GameSubCategory),
   },
   {
-    type: 'AI',
-    tags: ['딥러닝', '머신러닝', '데이터 엔지니어'],
+    type: MainCategory.ai,
+    tags: Object.values(AISubCategory),
   },
-  // { type: '미정', tags: ['미정'] },
 ]
+
+export const defaultLink = { link: '' }
+
+type DefaultCategory<K extends MainCategoryType> = {
+  mainCategory: MainCategoryType
+  subCategory: SubCategoryMap[K]
+  memberCount: number
+}
+export const defaultCategory: DefaultCategory<'프론트엔드'> = {
+  mainCategory: MainCategory.front,
+  subCategory: FrontEndSubCategory.web,
+  memberCount: 1,
+}

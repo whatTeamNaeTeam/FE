@@ -8,17 +8,40 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import Button from '@/_components/ui/Button'
 import ProjectTitleForm from './ProjectTitleForm'
 import MemberForm from './MemberForm'
-import { defaultCategory, defaultLink } from '@/_constants/teamAdd'
-import useTeamAdd from '@/_services/mutations/useTeamAdd'
-import GenreForm from './GenreForm'
+import {
+  defaultCategory,
+  defaultLink,
+  MainCategoryType,
+  SubCategoryType,
+} from '@/_constants/teamAdd'
+import { GenreForm } from './GenreForm'
 import { useRouter } from 'next/navigation'
+import { useAddProject } from '@/_hook/mutations/project/useAddProject'
+import toast from 'react-hot-toast'
+import axios from 'axios'
+import { CustomErrorResponse, HttpError } from '@/_types/error'
+import {
+  isCategoryMemberValidate,
+  isLinkEmptyError,
+  isNotAllowedCategoryError,
+  isNotAllowedGenreError,
+  isNotAllowedImageType,
+  isProjectExplainValidationError,
+  isProjectTitleDuplicatedError,
+  isProjectTitleValidationError,
+} from '@/_lib/error'
+import { ErrorMessage } from '@/_constants/error'
 
 export interface TeamAddFormValueType {
   title: string
-  genre: string | undefined
+  genre: string
   explain: string
   image: FileList | undefined
-  category: { mainCategory: string; subCategory: string; memberCount: string }[]
+  category: {
+    mainCategory: MainCategoryType
+    subCategory: SubCategoryType<MainCategoryType>
+    memberCount: number
+  }[]
   linkList: { link: string }[]
 }
 
@@ -27,6 +50,7 @@ const FormContainer = () => {
     handleSubmit,
     control,
     setFocus,
+    setError,
     formState: { errors },
   } = useForm<TeamAddFormValueType>({
     defaultValues: {
@@ -35,7 +59,7 @@ const FormContainer = () => {
     },
   })
   const router = useRouter()
-  const { mutate } = useTeamAdd()
+  const { mutate, isPending } = useAddProject()
 
   // 첫번째 오류 필드를 찾아 포커스
   useEffect(() => {
@@ -63,40 +87,80 @@ const FormContainer = () => {
     const formData = new FormData()
 
     formData.append('title', title)
-    if (genre) {
-      formData.append('genre', genre)
-    }
-
+    formData.append('genre', genre)
     formData.append('explain', explain)
+    // 이미지
     if (image) {
       formData.append('image', image[0])
     }
-    // category
+    // 모집분야
     category.forEach((item) => {
       Object.entries(item).forEach(([key, value]) => {
         if (key !== 'mainCategory') {
-          formData.append(key, value)
+          formData.append(key, value.toString())
         }
       })
     })
 
     // 공백인 url은 추가하지 않음
     const urls = linkList
-      .filter((item) => item.link !== '')
+      .filter((item) => item.link.trim() !== '')
       .map((item) => item.link)
       .join(',')
 
     if (urls) {
-      console.log(urls)
       formData.append('urls', urls)
     }
 
     mutate(formData, {
       onSuccess: (response) => {
-        alert('성공적으로 생성되었습니다. 승인을 기다려주세요.')
+        const successMessage =
+          '프로젝트가 성공적으로 생성되었습니다. 관리자 승인을 기다려주세요.'
+        toast.success(successMessage)
         router.push(`/project/${response.team.id}`)
       },
-      onError: () => alert('팀 생성에 실패하였습니다.'),
+      onError: (error) => {
+        if (axios.isAxiosError<CustomErrorResponse>(error)) {
+          if (error.response) {
+            const httpStatus = error.response.status
+            const { code } = error.response.data
+            const errorMessage = ErrorMessage[code]
+
+            if (isProjectTitleValidationError(code)) {
+              setError('title', { type: 'validate', message: errorMessage })
+              setFocus('title')
+            }
+            if (isProjectTitleDuplicatedError(code)) {
+              setError('title', { type: 'duplicated', message: errorMessage })
+              setFocus('title')
+            }
+            if (isProjectExplainValidationError(code)) {
+              setError('explain', { type: 'validate', message: errorMessage })
+              setFocus('explain')
+            }
+            if (isLinkEmptyError(code)) {
+              toast.error(errorMessage)
+            }
+            if (isNotAllowedCategoryError(code)) {
+              toast.error(errorMessage)
+            }
+            if (isCategoryMemberValidate(code)) {
+              toast.error(errorMessage)
+            }
+            if (isNotAllowedGenreError(code)) {
+              setError('genre', { type: 'undefined', message: errorMessage })
+              setFocus('genre')
+            }
+            if (isNotAllowedImageType(code)) {
+              setError('image', { type: 'undefined', message: errorMessage })
+              setFocus('image')
+            }
+
+            throw new HttpError(httpStatus, code)
+          }
+          throw Error
+        }
+      },
     })
   }
 
@@ -115,7 +179,9 @@ const FormContainer = () => {
         <Button type="button" variant={'lined'} onClick={handleExit}>
           나가기
         </Button>
-        <Button type="submit">생성하기</Button>
+        <Button type="submit" disabled={isPending}>
+          생성하기
+        </Button>
       </div>
     </form>
   )
