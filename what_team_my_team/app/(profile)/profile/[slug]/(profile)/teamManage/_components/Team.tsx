@@ -1,16 +1,15 @@
 'use client'
 
-import ProfileAvatar from '@/_components/ProfileAvatar'
-import { TeamCamel } from '@/_services/queries/useMyTeam'
+import { ConvertedGetMyTeamReturn } from '@/_services/type'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 interface TeamProps {
-  item: TeamCamel
+  item: ConvertedGetMyTeamReturn['team'][number]
 }
 
-const Team = ({ item }: TeamProps) => {
+export function Team({ item }: TeamProps) {
   return (
     <li className="flex w-full rounded-2xl hover:shadow-md">
       <button className="w-full">
@@ -29,18 +28,6 @@ const Team = ({ item }: TeamProps) => {
           </div>
         </Link>
       </button>
-      {/* <div className="flex items-center">
-        <span className="flex items-center justify-center">
-          <ProfileAvatar
-            imgUrl={item.leaderInfo.imageUrl}
-            size={'x-small'}
-            alt="프로필"
-          />
-        </span>
-        <span>{item.leaderInfo.name}</span>
-      </div> */}
     </li>
   )
 }
-
-export default Team

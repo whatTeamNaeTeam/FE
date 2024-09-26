@@ -1,14 +1,14 @@
 'use client'
 
 import React from 'react'
-import Team from './Team'
+import { Team } from './Team'
 import { useMyTeam } from '@/_hook/mutations/project/useMyTeam'
 
 interface ContainerProps {
   userId: string
 }
 
-const TeamListContainer = ({ userId }: ContainerProps) => {
+export function TeamListContainer({ userId }: ContainerProps) {
   const { data } = useMyTeam({ userId })
 
   return (
@@ -23,5 +23,3 @@ const TeamListContainer = ({ userId }: ContainerProps) => {
     </div>
   )
 }
-
-export default TeamListContainer
