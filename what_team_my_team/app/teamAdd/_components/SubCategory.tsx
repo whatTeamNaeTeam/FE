@@ -1,6 +1,6 @@
 'use client'
 
-import React, { MouseEventHandler, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import {
   Select,
   SelectContent,
@@ -13,11 +13,7 @@ import {
 } from '@/_components/ui/Select'
 import { Control, useController } from 'react-hook-form'
 import { TeamAddFormValueType } from './FormContainer'
-import {
-  MainCategoryType,
-  subCategoryData,
-  SubCategoryType,
-} from '@/_constants/teamAdd'
+import { MainCategoryType, subCategoryData } from '@/_constants/teamAdd'
 import { cn } from '@/_lib/utils'
 import { SelectItemText } from '@radix-ui/react-select'
 
@@ -38,9 +34,6 @@ export function SubCategoryInput({
     defaultValue: subCategoryData.find((item) => item.type === selectedMain)
       ?.tags[0],
   })
-  const [selectedValue, setSelectedValue] = useState(
-    subCategoryData.find((item) => item.type === selectedMain)?.tags[0],
-  )
 
   useEffect(() => {
     // selectedMain 값이 변경될 때마다 해당 메인 카테고리에 대한 하위 카테고리를 찾아 선택함
@@ -49,13 +42,11 @@ export function SubCategoryInput({
     )
 
     if (categoryData) {
-      setSelectedValue(categoryData.tags[0]) // 첫 번째 하위 카테고리 선택
-      field.onChange(categoryData.tags[0]) // 선택된 카테고리를 input 값으로 설정
+      field.onChange(categoryData.tags[0])
     }
   }, [selectedMain])
 
   const handleChangeValue = (value: string) => {
-    setSelectedValue(value as SubCategoryType<MainCategoryType>)
     field.onChange(value)
   }
 
@@ -69,13 +60,9 @@ export function SubCategoryInput({
         <button
           className={cn(
             'w-full text-left select-none items-center justify-center rounded-md py-2 text-sm font-medium ',
-            'border p-2 text-gray-8',
-            'bg-inherit',
+            'bg-inherit border p-2 text-gray-8',
             'focus:outline-none focus-visible:ring focus-visible:ring-indigo-4 focus-visible:ring-opacity-75',
             'group',
-            'radix-state-open:bg-gray-5',
-            'radix-state-on:bg-gray-50 ',
-            'radix-state-instant-open:bg-gray-50 radix-state-delayed-open:bg-gray-50',
           )}
           type="button"
         >

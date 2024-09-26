@@ -40,7 +40,7 @@ export interface TeamAddFormValueType {
   category: {
     mainCategory: MainCategoryType
     subCategory: SubCategoryType<MainCategoryType>
-    memberCount: string
+    memberCount: number
   }[]
   linkList: { link: string }[]
 }
@@ -97,7 +97,7 @@ const FormContainer = () => {
     category.forEach((item) => {
       Object.entries(item).forEach(([key, value]) => {
         if (key !== 'mainCategory') {
-          formData.append(key, value)
+          formData.append(key, value.toString())
         }
       })
     })

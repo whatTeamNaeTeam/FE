@@ -82,7 +82,7 @@ function SelectTypeForm({ field }: SelectTypeFormProps) {
       <SelectTrigger asChild>
         <button
           className={cn(
-            'inline-flex items-center sm:hidden w-[120px] whitespace-nowrap text-left select-none rounded-md py-2 text-sm font-medium',
+            'inline-flex items-center justify-between sm:hidden w-[120px] whitespace-nowrap text-left select-none rounded-md py-2 text-sm font-medium',
             'bg-inherit border p-2 text-gray-8',
             'focus:outline-none focus-visible:ring focus-visible:ring-indigo-4 focus-visible:ring-opacity-75',
             'group',

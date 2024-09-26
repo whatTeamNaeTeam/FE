@@ -1,10 +1,11 @@
 'use client'
 
-import React, { Dispatch, MouseEventHandler } from 'react'
+import React, { Dispatch } from 'react'
 import { Control, useController } from 'react-hook-form'
 import { TeamAddFormValueType } from './FormContainer'
 import { SetStateAction } from 'jotai'
 import {
+  defaultCategory,
   MainCategory,
   mainCategoryData,
   MainCategoryType,
@@ -36,7 +37,7 @@ export function MainCategoryInput({
   const { field } = useController({
     name: `category.${index}.mainCategory`,
     control,
-    defaultValue: mainCategoryData[0],
+    defaultValue: defaultCategory.mainCategory,
   })
 
   const handleChangeValue = (value: string) => {
@@ -69,17 +70,14 @@ export function MainCategoryInput({
         <button
           className={cn(
             'w-full whitespace-nowrap text-left select-none items-center justify-center rounded-md py-2 text-sm font-medium ',
-            'border p-2 text-gray-8',
-            'bg-inherit',
+            'bg-inherit border p-2 text-gray-8',
             'focus:outline-none focus-visible:ring focus-visible:ring-indigo-4 focus-visible:ring-opacity-75',
             'group',
             'radix-state-open:bg-gray-5',
-            'radix-state-on:bg-gray-50 ',
-            'radix-state-instant-open:bg-gray-50 radix-state-delayed-open:bg-gray-50',
           )}
           type="button"
         >
-          <SelectValue />
+          <SelectValue placeholder={defaultCategory.mainCategory} />
         </button>
       </SelectTrigger>
       <SelectPortal>

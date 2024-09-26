@@ -3,6 +3,7 @@
 import React from 'react'
 import { Control, useController } from 'react-hook-form'
 import { TeamAddFormValueType } from './FormContainer'
+import { defaultCategory } from '@/_constants/teamAdd'
 
 interface MemberCountProps {
   control: Control<TeamAddFormValueType>
@@ -13,27 +14,27 @@ const MemberCount = ({ control, index }: MemberCountProps) => {
   const { field } = useController({
     name: `category.${index}.memberCount`,
     control,
-    defaultValue: '1',
+    defaultValue: defaultCategory.memberCount,
   })
 
   const handleDecrease = () => {
-    const prev = parseInt(field.value)
+    const prev = field.value
     if (prev <= 1) {
       return
     }
 
     const next = prev - 1
-    field.onChange(next.toLocaleString())
+    field.onChange(next)
   }
 
   const handleIncrease = () => {
-    const prev = parseInt(field.value)
+    const prev = field.value
     if (prev >= 10) {
       return
     }
 
     const next = prev + 1
-    field.onChange(next.toLocaleString())
+    field.onChange(next)
   }
 
   return (

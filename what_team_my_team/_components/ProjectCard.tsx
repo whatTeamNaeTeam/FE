@@ -8,8 +8,8 @@ import Link from 'next/link'
 import Img from './ui/Img'
 import useCategoryCounts from '@/_hook/useCategoryCounts'
 import { useQueryClient } from '@tanstack/react-query'
-import { LIKE_STATE_KEY } from '@/_hook/mutations/like/useUpdateLike'
 import { ConvertedGetMainPageProjectReturn } from '@/_services/type'
+import { LIKE_STATE_KEY } from '@/_constants/queryKey'
 
 export interface ProjectCardProps {
   project: ConvertedGetMainPageProjectReturn['results'][number]
@@ -21,9 +21,13 @@ export function ProjectCard({
   const queryClient = useQueryClient()
 
   useEffect(() => {
-    const isLikeCacheData = queryClient.getQueryData([LIKE_STATE_KEY, id])
+    const isLikeCacheData = queryClient.getQueryData([...LIKE_STATE_KEY, id])
     if (!isLikeCacheData) {
-      queryClient.setQueryData([LIKE_STATE_KEY, id], { like, isLike, version })
+      queryClient.setQueryData([...LIKE_STATE_KEY, id], {
+        like,
+        isLike,
+        version,
+      })
     }
   }, [like, isLike, version])
 
