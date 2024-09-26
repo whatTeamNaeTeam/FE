@@ -1,7 +1,6 @@
 import { HttpResponse, delay, http } from 'msw'
 import {
   AccomplishedData,
-  ApplyResponseData,
   InprogressProjectData,
   ProfileData,
   ProjectDetailData,
@@ -44,9 +43,6 @@ export const handlers = [
   }),
   http.get(`*/team/detail/*`, () => {
     return HttpResponse.json(ProjectDetailData)
-  }),
-  http.post(`*/team/apply/*`, () => {
-    return HttpResponse.json(ApplyResponseData)
   }),
   http.post(`*/auth/email`, () => {
     return HttpResponse.json({ detail: 'Success to Send Email' })
