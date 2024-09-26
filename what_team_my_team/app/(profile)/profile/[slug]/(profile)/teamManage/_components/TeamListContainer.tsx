@@ -1,8 +1,8 @@
 'use client'
 
-import useMyTeam from '@/_services/queries/useMyTeam'
 import React from 'react'
 import Team from './Team'
+import { useMyTeam } from '@/_hook/mutations/project/useMyTeam'
 
 interface ContainerProps {
   userId: string
