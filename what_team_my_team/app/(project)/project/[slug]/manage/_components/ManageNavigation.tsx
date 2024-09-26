@@ -2,7 +2,6 @@
 
 import Button from '@/_components/ui/Button'
 import { cn } from '@/_lib/utils'
-import { useCheckLeader } from '@/_services/queries/useCheckLeader'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -13,6 +12,7 @@ import {
   leaveTeamDialogAtom,
 } from '@/_stores/atoms/dialog'
 import DeleteTeamConfirmDialog from './DeleteTeamConfirmDialog'
+import { useCheckLeader } from '@/_hook/queries/project/useCheckLeader'
 
 interface ManageNavigationProps {
   teamId: string
