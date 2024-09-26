@@ -1,14 +1,13 @@
 import { convertSnakeToCamel } from '@/_utils/convertSnakeToCamel'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import { LIKE_STATE_KEY } from '@/_hook/mutations/like/useUpdateLike'
 import {
   ConvertedGetActivePageProjectListReturn,
   GetActivePageProjectListReturn,
 } from '@/_services/type'
 import { getActivePageProjectListApi } from '@/_services/project'
 import { Like } from '@/_types/project'
-import { PROJECT_LIST_KEY } from '@/_constants/queryKey'
+import { LIKE_STATE_KEY, PROJECT_LIST_KEY } from '@/_constants/queryKey'
 
 export function useActivePageProjectList({
   userId,
@@ -29,7 +28,7 @@ export function useActivePageProjectList({
         like: team.like,
       }
 
-      queryClient.setQueryData([LIKE_STATE_KEY, team.id], likeData)
+      queryClient.setQueryData([...LIKE_STATE_KEY, team.id], likeData)
     })
   }
   // Dev Tools에 변환된 데이터 반영
