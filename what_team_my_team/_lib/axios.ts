@@ -1,3 +1,4 @@
+import { AuthError, CustomErrorResponse } from '@/_types/error'
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios'
 
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
@@ -59,16 +60,27 @@ axiosInstance.interceptors.response.use(
       try {
         await getNewAccessToken()
 
-        return await axiosInstance(originalRequest)
-      } catch (error) {
+        try {
+          return await axiosInstance(originalRequest)
+        } catch (newRequestError) {
+          return Promise.reject(newRequestError)
+        }
+      } catch (refreshTokenError) {
         if (
-          error instanceof AxiosError &&
-          (error.response?.status === 403 || error.response?.status === 401)
+          axios.isAxiosError<CustomErrorResponse>(refreshTokenError) &&
+          (refreshTokenError.response?.status === 403 ||
+            refreshTokenError.response?.status === 401)
         ) {
+          const httpStatus = refreshTokenError.response.status
+          const code = refreshTokenError.response.data.code
           sessionStorage.clear()
+
+          throw new AuthError(httpStatus, code)
         }
       }
     }
+
+    return Promise.reject(error)
   },
 )
 
