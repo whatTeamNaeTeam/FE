@@ -1,4 +1,4 @@
-import { ConvertedCategory } from '@/_types/project'
+import { ConvertedCategory } from '@/_types/type'
 import { useEffect, useState } from 'react'
 
 const useCategoryCounts = (categories: ConvertedCategory[]) => {

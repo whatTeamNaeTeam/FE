@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react'
 import ProfileAvatar from './ProfileAvatar'
 import { FaChevronDown } from 'react-icons/fa'
-import LikeBtn from './LikeBtn'
+import { LikeBtn } from './LikeBtn'
 import Link from 'next/link'
 import Img from './ui/Img'
 import useCategoryCounts from '@/_hook/useCategoryCounts'

@@ -1,8 +1,8 @@
-import { Like } from '@/_types/project'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { convertSnakeToCamel } from '@/_utils/convertSnakeToCamel'
 import { updateLikeApi } from '@/_services/like'
 import { LIKE_STATE_KEY } from '@/_constants/queryKey'
+import { Like } from '@/_types/type'
 
 export function useUpdateLike() {
   const queryClient = useQueryClient()

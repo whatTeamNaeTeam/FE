@@ -6,8 +6,8 @@ import {
   GetActivePageProjectListReturn,
 } from '@/_services/type'
 import { getActivePageProjectListApi } from '@/_services/project'
-import { Like } from '@/_types/project'
 import { LIKE_STATE_KEY, PROJECT_LIST_KEY } from '@/_constants/queryKey'
+import { Like } from '@/_types/type'
 
 export function useActivePageProjectList({
   userId,

@@ -1,7 +1,7 @@
+import { ErrorCode } from '@/_constants/error'
 import {
   CustomError,
   DuplicatedError,
-  ErrorCode,
   HttpError,
   LimitExceededError,
   NotFoundError,

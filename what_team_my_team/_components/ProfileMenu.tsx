@@ -5,7 +5,7 @@ import ProfileAvatar from './ProfileAvatar'
 import useHandleLogout from '@/_hook/useHandleLogout'
 import { FaChevronDown } from 'react-icons/fa'
 import ProfileMenuItem from './ProfileMenuItem'
-import { ConvertedUser } from '@/_types/auth'
+import { ConvertedUser } from '@/_types/type'
 
 interface ProfileMenuProps {
   user: ConvertedUser

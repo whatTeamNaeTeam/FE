@@ -1,4 +1,4 @@
-import { ErrorCode } from '@/_types/error'
+import { ErrorCode } from '@/_constants/error'
 
 export function isNotFoundTeamError(errorCode: string) {
   return errorCode === ErrorCode.TEAM_NOT_FOUND
