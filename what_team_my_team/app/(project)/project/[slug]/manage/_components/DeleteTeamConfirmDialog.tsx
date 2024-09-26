@@ -8,10 +8,11 @@ import {
   AlertDialogPortal,
 } from '@/_components/ui/AlertDialog'
 import Button from '@/_components/ui/Button'
-import { useDeleteTeamWithLeader } from '@/_services/mutations/useDeleteTeamWithLeader'
+import { useDeleteTeam } from '@/_hook/mutations/project/useDeleteTeam'
 import { deleteTeamDialogAtom } from '@/_stores/atoms/dialog'
 import { useAtom } from 'jotai'
 import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 
 interface DeleteTeamConfirmDialogProps {
   teamId: string
@@ -20,17 +21,16 @@ interface DeleteTeamConfirmDialogProps {
 const DeleteTeamConfirmDialog = ({ teamId }: DeleteTeamConfirmDialogProps) => {
   const [isOpen, setIsOpen] = useAtom(deleteTeamDialogAtom)
   const router = useRouter()
-  const { mutate } = useDeleteTeamWithLeader()
+  const { mutate } = useDeleteTeam()
 
   const handleActionBtn = () => {
     mutate(
       { teamId },
       {
         onSuccess: () => {
-          alert('팀이 해체되었습니다.')
+          toast.success('팀이 해체되었습니다.')
           router.push('/')
         },
-        onError: (error) => console.log(error),
       },
     )
   }
