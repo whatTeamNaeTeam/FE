@@ -1,10 +1,13 @@
 import { useQueryClient } from '@tanstack/react-query'
-import {
-  LIKE_STATE_KEY,
-  useUpdateLike,
-} from '@/_hook/mutations/like/useUpdateLike'
 import { useEffect, useState } from 'react'
-import { Like } from '@/_types/project'
+import { LIKE_STATE_KEY } from '@/_constants/queryKey'
+import axios from 'axios'
+import { CustomErrorResponse } from '@/_types/error'
+import { isLikeVersionError } from '@/_lib/error'
+import toast from 'react-hot-toast'
+import { useUpdateLike } from './mutations/auth/useUpdateLike'
+import { Like } from '@/_types/type'
+import { ErrorMessage } from '@/_constants/error'
 
 interface UseLikeHandlerProps {
   projectId: number | string
@@ -22,17 +25,44 @@ const useLikeHandler = ({ projectId, initialData }: UseLikeHandlerProps) => {
     e.stopPropagation()
     e.preventDefault()
 
-    const likeData = queryClient.getQueryData<Like>([LIKE_STATE_KEY, projectId])
+    const likeData = queryClient.getQueryData<Like>([
+      ...LIKE_STATE_KEY,
+      projectId,
+    ])
 
     if (!likeData) {
       return
     }
 
-    likeMutation.mutate({ projectId, version: likeData.version })
+    likeMutation.mutate(
+      { projectId, version: likeData.version },
+      {
+        onError: (error, { projectId }, context) => {
+          if (context?.previousData) {
+            queryClient.setQueryData<Like>(
+              [...LIKE_STATE_KEY, projectId],
+              context.previousData,
+            )
+          }
+
+          if (axios.isAxiosError<CustomErrorResponse>(error)) {
+            if (error.response) {
+              const { code } = error.response.data
+              const errorMessage = ErrorMessage[code]
+
+              if (isLikeVersionError(code)) {
+                toast.error(errorMessage)
+                return
+              }
+            }
+          }
+        },
+      },
+    )
   }
 
   useEffect(() => {
-    const data = queryClient.getQueryData<Like>([LIKE_STATE_KEY, projectId])
+    const data = queryClient.getQueryData<Like>([...LIKE_STATE_KEY, projectId])
     if (data) {
       setIsLike(!!data.isLike)
       setLikeCount(data.like)
