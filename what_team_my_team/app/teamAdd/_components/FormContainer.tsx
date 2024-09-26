@@ -21,7 +21,6 @@ import toast from 'react-hot-toast'
 import axios from 'axios'
 import { CustomErrorResponse, HttpError } from '@/_types/error'
 import {
-  ErrorMessage,
   isCategoryMemberValidate,
   isLinkEmptyError,
   isNotAllowedCategoryError,
@@ -31,6 +30,7 @@ import {
   isProjectTitleDuplicatedError,
   isProjectTitleValidationError,
 } from '@/_lib/error'
+import { ErrorMessage } from '@/_constants/error'
 
 export interface TeamAddFormValueType {
   title: string
