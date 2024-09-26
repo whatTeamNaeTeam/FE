@@ -6,5 +6,5 @@ export function useSignup() {
     mutationFn: signupApi,
   })
 
-  return { signupMutation }
+  return signupMutation
 }
