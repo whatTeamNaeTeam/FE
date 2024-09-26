@@ -7,7 +7,7 @@ import MyExplainInfo from './MyExplainInfo'
 import TechInfo from './TechInfo'
 import PositionInfo from './PositionInfo'
 import { useUserProfile } from '@/_hook/queries/profile/useUserProfile'
-import { ProfileSkeleton } from '@/_components/ProfileSkeleton'
+import { ProfileSkeleton } from '@/_components/loading/ProfileSkeleton'
 
 interface ProfileContainerProps {
   userId: string

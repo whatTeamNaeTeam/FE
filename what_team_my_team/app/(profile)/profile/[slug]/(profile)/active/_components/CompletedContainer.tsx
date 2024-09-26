@@ -2,7 +2,7 @@
 
 import NoDataComponent from '@/_components/NoDataComponent'
 import { ProjectCard } from '@/_components/ProjectCard'
-import ProjectCardSkeleton from '@/_components/ProjectCardSkeleton'
+import ProjectCardSkeleton from '@/_components/loading/ProjectCardSkeleton'
 import { useActivePageProjectList } from '@/_hook/queries/project/useActivePageProjectList'
 import React from 'react'
 
