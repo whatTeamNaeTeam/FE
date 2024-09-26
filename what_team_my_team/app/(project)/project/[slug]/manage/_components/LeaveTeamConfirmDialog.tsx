@@ -8,7 +8,7 @@ import {
   AlertDialogPortal,
 } from '@/_components/ui/AlertDialog'
 import Button from '@/_components/ui/Button'
-import { useLeaveTeam } from '@/_services/mutations/useLeaveTeam'
+import { useLeaveTeam } from '@/_hook/mutations/project/useLeaveTeam'
 import { leaveTeamDialogAtom } from '@/_stores/atoms/dialog'
 import { useAtom } from 'jotai'
 
