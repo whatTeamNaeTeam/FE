@@ -3,14 +3,9 @@
 import { CustomError, HttpError } from '@/_types/error'
 import React from 'react'
 import { NotFoundErrorPage } from './NotFoundErrorPage'
-import {
-  ErrorMessage,
-  isDuplicatedPositionApplyError,
-  isForbiddenError,
-  isNotFoundTeamError,
-  isPositionLimitExceededError,
-} from '@/_lib/error'
+import { isForbiddenError, isNotFoundTeamError } from '@/_lib/error'
 import toast from 'react-hot-toast'
+import { ErrorMessage } from '@/_constants/error'
 
 interface Props {
   children: React.ReactNode
@@ -28,7 +23,7 @@ const initialState: State = {
   error: null,
 }
 
-export class ApiErrorBoundary extends React.Component<Props, State> {
+class ApiErrorBoundary extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
     this.state = initialState
@@ -75,13 +70,7 @@ export class ApiErrorBoundary extends React.Component<Props, State> {
 
         return <NotFoundErrorPage title={title} />
       }
-      if (isDuplicatedPositionApplyError(errorCode)) {
-        toast.error(errorMessage)
-      }
       if (isForbiddenError(errorCode)) {
-        toast.error(errorMessage)
-      }
-      if (isPositionLimitExceededError(errorCode)) {
         toast.error(errorMessage)
       }
     }
@@ -91,3 +80,5 @@ export class ApiErrorBoundary extends React.Component<Props, State> {
     }
   }
 }
+
+export default ApiErrorBoundary
