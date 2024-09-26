@@ -13,7 +13,7 @@ interface PrimaryInfoProps {
   isOwner: ConvertedGetProjectDetailReturn['isLeader']
 }
 
-const PrimaryInfo = ({ team, isOwner }: PrimaryInfoProps) => {
+export function PrimaryInfo({ team, isOwner }: PrimaryInfoProps) {
   return (
     <div className="flex justify-between border-b border-gray-4 py-3">
       <div>
@@ -48,5 +48,3 @@ const PrimaryInfo = ({ team, isOwner }: PrimaryInfoProps) => {
     </div>
   )
 }
-
-export default PrimaryInfo

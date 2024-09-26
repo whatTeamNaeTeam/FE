@@ -1,8 +1,8 @@
 'use client'
 
-import { LIKE_STATE_KEY } from '@/_hook/mutations/like/useUpdateLike'
+import { LIKE_STATE_KEY } from '@/_constants/queryKey'
 import useLikeHandler from '@/_hook/useLikeHandler'
-import { Like } from '@/_types/project'
+import { Like } from '@/_types/type'
 import { useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { FaRegStar, FaStar } from 'react-icons/fa'
@@ -15,9 +15,12 @@ interface LikeSectionProps {
 export function LikeSection({ data, teamId }: LikeSectionProps) {
   const queryClient = useQueryClient()
   useEffect(() => {
-    const isLikeCacheData = queryClient.getQueryData([LIKE_STATE_KEY, teamId])
+    const isLikeCacheData = queryClient.getQueryData([
+      ...LIKE_STATE_KEY,
+      teamId,
+    ])
     if (!isLikeCacheData) {
-      queryClient.setQueryData([LIKE_STATE_KEY, teamId], {
+      queryClient.setQueryData([...LIKE_STATE_KEY, teamId], {
         like: data.like,
         isLike: data.isLike,
         version: data.version,

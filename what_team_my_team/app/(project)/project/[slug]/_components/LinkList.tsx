@@ -7,7 +7,7 @@ interface LinkListProps {
   urls: string[]
 }
 
-const LinkList = ({ urls }: LinkListProps) => {
+export function LinkList({ urls }: LinkListProps) {
   return (
     <div>
       <h3 className="text-xl font-bold mb-2">관련 링크</h3>
@@ -24,5 +24,3 @@ const LinkList = ({ urls }: LinkListProps) => {
     </div>
   )
 }
-
-export default LinkList
