@@ -14,9 +14,9 @@ export function useApiError() {
       // 네트워크 에러 구현
       throw Error
     }
-    const { code } = error.response.data
+
     const httpStatus = error.response.status
-    console.log(httpStatus)
+
     if (isTokenExpiredError(httpStatus)) {
       // toast 혹은 confirm dialog 추가 예정
       alert('로그인이 만료되었습니다. 로그인 페이지로 이동합니다.')
