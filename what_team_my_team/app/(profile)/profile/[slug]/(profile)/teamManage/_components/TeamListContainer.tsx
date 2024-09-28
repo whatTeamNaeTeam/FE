@@ -16,7 +16,7 @@ export function TeamListContainer({ userId }: ContainerProps) {
       {data && (
         <ul className="w-full">
           {data.team.map((item) => (
-            <Team item={item} />
+            <Team key={item.id} item={item} />
           ))}
         </ul>
       )}

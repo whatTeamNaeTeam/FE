@@ -19,7 +19,7 @@ export function ImageCarousel({ data }: ImageCarouselProps) {
     <div id="slider-container">
       <Slider {...settings}>
         {data.map((image) => (
-          <div>
+          <div key={image}>
             <div className="flex items-center justify-center border border-gray-4 mx-2">
               <img src={image} className="object-contain" />
             </div>
