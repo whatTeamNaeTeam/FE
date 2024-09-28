@@ -13,26 +13,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
       - name: Configure Git
         run: git config core.ignorecase false
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
+          cache: "pnpm"
 
-      - name: Cache node modules
-        uses: actions/cache@v3
-        id: cache
-        with:
-          path: node_modules
-          key: npm-packages-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            npm-packages-
-
-      - name: Install the project dependencies
-        if: steps.cache.outputs.cache-hit == false
-        run: npm ci
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Build
-        run: npm run build
+        run: pnpm run build
