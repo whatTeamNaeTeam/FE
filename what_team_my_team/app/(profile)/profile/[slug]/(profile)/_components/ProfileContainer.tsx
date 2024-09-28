@@ -14,7 +14,7 @@ interface ProfileContainerProps {
 }
 
 const ProfileContainer = ({ userId }: ProfileContainerProps) => {
-  const { data, isLoading } = useUserProfile({ userId })
+  const { data } = useUserProfile({ userId })
 
   if (!data) {
     return <ProfileSkeleton />
