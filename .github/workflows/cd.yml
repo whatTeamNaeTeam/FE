@@ -54,7 +54,7 @@ jobs:
           aws-region: ${{secrets.AWS_REGION}}
 
       - name: Upload to S3
-        run: aws s3 cp --region ${{secrets.AWS_REGION}} ./wtntservice.zip s3://${{secrets.AWS_BUCKET_NAME}}/wtnt.zip
+        run: aws s3 cp --region ${{secrets.AWS_REGION}} ./wtntservice.zip s3://${{secrets.AWS_BUCKET_NAME}}/wtntservice.zip
 
       - name: Code Deploy # S3에 올라간 zip 파일을 CodeDeploy로 가져옴
         run: aws deploy create-deployment
