@@ -11,6 +11,9 @@ jobs:
     env:
       ENV_PATH: .env
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./what_team_my_team
     strategy:
       matrix:
         node-version: [20.x]
